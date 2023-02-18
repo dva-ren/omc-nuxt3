@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import type { Article, Master, PageInfo, Response } from '~/types'
 import Message from '~/components/Message'
+import { getArticles, getNotes } from '~~/utils/api'
 
-const master = useState<Master>('master')
+const master = useMaster()
 const words = ref('')
-const { data: articleData, pending: articlePending } = await useAsyncData<Response<PageInfo<Article>>>(() => $fetch('http://localhost:4000/article'))
-const { data: noteData, pending: notePending } = await useAsyncData<Response<PageInfo<Article>>>(() => $fetch('http://localhost:4000/note'))
+const { data: articleData, pending: articlePending } = await useAsyncData(() => getArticles())
+const { data: noteData, pending: notePending } = await useAsyncData(() => getNotes())
 
 fetch('https://v1.hitokoto.cn').then((response) => {
   response.json().then((res) => {
@@ -18,11 +18,9 @@ function handleClick() {
 </script>
 
 <template>
-  <div v-if="master" py-20>
+  <div py-20>
     <div v-spring pb-10 flex flex-col items-center justify-center sm="flex-row justify-unset" gap-6>
-      <img
-        :src="master.avatar" h-30 w-30 rounded-full object-cover p-1 bg-gray-2 shadow
-      >
+      <img :src="master?.avatar" h-30 w-30 rounded-full object-cover p-1 bg-gray-2 shadow>
       <div text-center sm:text-left>
         <p text-xl font-bold>
           {{ master?.nickname }}
@@ -61,7 +59,7 @@ function handleClick() {
             <div i-carbon:chevron-right text-lg />
           </NuxtLink>
         </div>
-        <CardList :data="articleData!.data.list" />
+        <CardList :data="articleData?.data.list" />
       </div>
       <div text-white mt-10 text-sm>
         <div flex justify-between items-end class="label">

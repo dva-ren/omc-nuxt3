@@ -1,28 +1,22 @@
 <script lang="ts" setup>
-import type { Article } from '~/types'
-import { formatTime } from '~/composables'
-import { queryArticleList } from '~/api'
+import { dateFns } from '~/composables'
+import { getArticles } from '~/utils/api'
 
-const loading = ref(true)
-const posts = ref<Array<Article>>([])
-
-const getPosts = async () => {
-  const res = await queryArticleList()
-  posts.value = res.data.list
-  loading.value = false
-}
-getPosts()
+const { data: posts, pending } = useAsyncData(async () => {
+  const res = await getArticles()
+  return res.data.list
+})
 </script>
 
 <template>
-  <Layout :loadding="loading">
+  <NuxtLayout v-if="posts" name="post">
     <div v-for="p, idx in posts" :key="p.id" v-spring:delay="idx * 100" class="post-item " pb-8>
       <div>
         <div class="left-label" display-none sm:display-block>
-          {{ formatTime(p.createTime, 'yyyy-MM-dd') }}
+          {{ dateFns(p.createTime).format('yyyy-MM-dd') }}
         </div>
         <div class="left-label" display-block sm:display-none>
-          {{ formatTime(p.createTime, 'MM-dd') }}
+          {{ dateFns(p.createTime).format('MM-dd') }}
         </div>
         <div text-center text-base>
           <router-link :to="`/posts/${p.id}`" hover:text-orange transition>
@@ -41,7 +35,7 @@ getPosts()
         </p>
       </div>
     </div>
-  </Layout>
+  </NuxtLayout>
 </template>
 
 <style scoped>

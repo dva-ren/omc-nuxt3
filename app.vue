@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { Master, Response } from './types'
-
 useHead({
   title: '灰色と青',
   link: [
@@ -10,19 +8,26 @@ useHead({
   ],
 })
 // useState<Master>('master', () => {})
-useFetch<Response<Master>>('http://localhost:4000/master').then((res) => {
-  useState<Master>('master', () => res.data.value!.data)
+// getMaster().then((res) => {
+//   useState<Master>('master', () => res.data)
+// })
+getMaster().then((res) => {
+  const master = useMaster()
+  master.value.avatar = res.data.avatar
+  Object.assign(master, res.data)
 })
-useState('catelog', () => [])
+// useState('catelog', () => [])
 </script>
 
 <template>
+  <NavBar />
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
   <div class="z--1 inset-0 fixed op-80 bg-fixed pointer-events-none transition-opacity duration-500 ease transform-gpu">
     <div class="bg absolute inset-0 transform-gpu" />
   </div>
+  <!-- <Footer /> -->
 </template>
 
 <style>
@@ -39,9 +44,9 @@ html.dark {
 .bg{
   z-index: -1;
   height: 100%;
-  background-image: url('./public/images/background2.png');
+  background-image: url('/images/background2.png');
 }
 .dark .bg{
-  background-image: url('./public/images/background2.png');
+  background-image: url('/images/background2.png');
 }
 </style>

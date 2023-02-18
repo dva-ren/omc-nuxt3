@@ -1,12 +1,16 @@
-<!-- <script lang="ts" setup>
-import type { Article, Master } from '~/types'
+<script lang="ts" setup>
+import type { Master } from '~/types'
 import { formateToLocal } from '~/composables'
 
-const { id } = defineProps<{ id: string }>()
+const route = useRoute()
+const id = computed(() => route.params.id as string)
 const master = useState<Master>('master')
 
-const articleData = ref<Article>()
-const { data, pending } = await queryArticle(id)
+const { data: articleData, pending } = await useAsyncData(async () => {
+  const res = await queryArticle(id.value)
+  console.log(res)
+  return res.data
+})
 
 // watch(pending, () => {
 //   if (!data.value) {
@@ -36,7 +40,7 @@ const { data, pending } = await queryArticle(id)
 </script>
 
 <template>
-  <div :loadding="pending">
+  <NuxtLayout name="post">
     <div v-if="articleData">
       <div w-full>
         <div flex items-center justify-between mb-4>
@@ -70,14 +74,14 @@ const { data, pending } = await queryArticle(id)
           </button>
         </div>
       </div>
-      <Comment v-if="articleData.allowComment && articleData" :ref-id="id" type="posts" />
+      <Comment v-if="articleData.allowComment" :ref-id="id" type="posts" />
     </div>
     <template #sidebar>
       <div sticky top-20 mt-20 text-sm>
         <Catalog />
       </div>
     </template>
-  </div>
+  </NuxtLayout>
 </template>
 
 <style scoped>
@@ -87,12 +91,4 @@ const { data, pending } = await queryArticle(id)
 :deep(.md-editor-dark blockquote) {
   background-color: rgba(224,224,224,0.1) !important;
 }
-</style> -->
-
-<script lang="ts" setup>
-
-</script>
-
-<template>
-  <div> 1111</div>
-</template>
+</style>

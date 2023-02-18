@@ -1,61 +1,31 @@
-import type { _AsyncData } from 'nuxt/dist/app/composables/asyncData'
-// import baseUrl from './baseUrl'
-
 const baseUrl = 'http://localhost:4000'
-// 指定后端返回的基本数据类型
-export interface ResponseConfig {
-  code: number
-  status: number
-  data: any
-  msg: string
-}
-export interface ValueConfig {
-  value: any
+
+interface Options {
+  params?: any
+  body?: any
+  query?: any
+  method?: 'get' | 'post' | 'delete' | 'put'
 }
 
-const fetch = (url: string, options?: any): Promise<any> => {
-  const reqUrl = baseUrl + url
-  return new Promise((resolve, reject) => {
-    useFetch(reqUrl, { ...options }).then(({ data, error }: _AsyncData<any, any>) => {
-      if (error.value) {
-        reject(error.value)
-        return
+export const http = (url: string, options?: Options): Promise<any> => {
+  return $fetch(url, {
+    onRequest: ({ request, options }) => {
+      options.baseURL = options.baseURL === '/' ? baseUrl : options.baseURL
+    },
+    onResponse: ({ request, response, options }) => {
+      const { code, msg } = response._data
+      if (code !== 200) {
+        // eslint-disable-next-line no-console
+        console.log(response._data)
+        throw createError({ statusCode: code, statusMessage: msg })
       }
-      const value = data.value
-      if (!value) {
-        // 这里处理错误回调
-        // reject(value)
-        // $router.replace('/reject/' + value.status)
-      }
-      else if (value.code !== 200) {
-        console.log({
-          message: value.msg,
-          type: 'error',
-        })
-      }
-      else {
-        resolve(ref(value))
-      }
-    }).catch((err: any) => {
-      reject(err)
-    })
+      return response._data
+    },
+    onRequestError: ({ request, options, error }) => {
+      // eslint-disable-next-line no-console
+      console.log('FetchError=>', error)
+      throw createError(error)
+    },
+    ...options,
   })
 }
-
-export default new class Http {
-  get(url: string, params?: any): Promise<any> {
-    return fetch(url, { method: 'get', params })
-  }
-
-  post(url: string, params?: any): Promise<any> {
-    return fetch(url, { method: 'post', params })
-  }
-
-  put(url: string, body?: any): Promise<any> {
-    return fetch(url, { method: 'put', body })
-  }
-
-  delete(url: string, body?: any): Promise<any> {
-    return fetch(url, { method: 'delete', body })
-  }
-}()

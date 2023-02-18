@@ -66,7 +66,12 @@ html.dark {
   /* background: ; */
 }
 
-
+.v-icon{
+  border-radius: 1.25rem;
+  padding: 0 .5em;
+  height: 100%;
+  color: white;
+}
 
 ::-webkit-scrollbar-thumb, ::-webkit-scrollbar-thum:hover {
   background-color: var(--yellow);
