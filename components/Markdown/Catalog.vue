@@ -5,6 +5,8 @@ const { anchor, active, show, parse } = useCatalog()
 const index = ref(0)
 
 onMounted(() => {
+  if (!process.client)
+    return
   parse()
 })
 
@@ -40,6 +42,7 @@ watch(active, () => {
 <style scoped>
 .catalog{
   max-height: 500px;
+  max-width: 16rem;
   overflow-y: scroll;
 }
 .items{

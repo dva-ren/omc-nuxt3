@@ -32,7 +32,7 @@ getNotes()
 </script>
 
 <template>
-  <Layout :loadding="loading">
+  <NuxtLayout :loadding="loading">
     <p text-2xl>
       <TextAnimation text="时间线" />
     </p>
@@ -76,7 +76,7 @@ getNotes()
         </template>
       </ul>
     </div>
-  </Layout>
+  </NuxtLayout>
 </template>
 
 <style scoped>
@@ -113,6 +113,9 @@ getNotes()
   transform: translateY(-90%);
 }
 .link{
+}
+.dark .posts{
+  color: rgba(255, 255, 255, 0.8)
 }
 .link:hover{
   border-bottom: 1px orange solid;

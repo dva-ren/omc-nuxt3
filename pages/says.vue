@@ -1,7 +1,9 @@
 <script lang="ts" setup>
 import type { Say } from '../types'
 import { querySayList } from '~/utils/api'
-
+usePageTitle({
+  title: '言',
+})
 interface SayInfo extends Say {
   color?: string
   delay?: number

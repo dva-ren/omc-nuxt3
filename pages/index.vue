@@ -4,13 +4,22 @@ import { getArticles, getNotes } from '~~/utils/api'
 
 const master = useMaster()
 const words = ref('')
-const { data: articleData, pending: articlePending } = await useAsyncData(() => getArticles())
-const { data: noteData, pending: notePending } = await useAsyncData(() => getNotes())
+const { data: articleData, pending: articlePending } = await useAsyncData(async () => {
+  const res = await getArticles()
+  return res.data.list.slice(0, 4)
+})
+const { data: noteData, pending: notePending } = await useAsyncData(async () => {
+  const res = await getNotes()
+  return res.data.list.slice(0, 4)
+})
 
 fetch('https://v1.hitokoto.cn').then((response) => {
   response.json().then((res) => {
     words.value = words.value = `「 ${res.hitokoto} 」 ——${res.from}`
   })
+})
+useHead({
+  title: '灰色と青，不虚光阴',
 })
 function handleClick() {
   Message.warning('开发中~')
@@ -59,7 +68,7 @@ function handleClick() {
             <div i-carbon:chevron-right text-lg />
           </NuxtLink>
         </div>
-        <CardList :data="articleData?.data.list" />
+        <CardList :data="articleData" />
       </div>
       <div text-white mt-10 text-sm>
         <div flex justify-between items-end class="label">
@@ -73,7 +82,7 @@ function handleClick() {
             <div i-carbon:chevron-right text-lg />
           </router-link>
         </div>
-        <CardList :data="noteData?.data.list.slice(0, 4)" type="notes" />
+        <CardList :data="noteData" type="notes" />
       </div>
       <div text-white mt-10 text-sm>
         <div flex justify-between items-end class="label">
@@ -132,6 +141,9 @@ function handleClick() {
   padding: 0 .5em;
   height: 100%;
   color: white;
+}
+.v-icon{
+  vertical-align: -0.25rem;
 }
 .friends::-webkit-scrollbar-thumb, .friends::-webkit-scrollbar-thum:hover {
   background-color: rgba(0,0,0,0);

@@ -46,14 +46,13 @@ const menus = ref<NavItem[]>([
     ],
   },
 ])
-// useAsyncData(async () => {
-//   const res = await queryCategoryList()
-//   console.log(res)
-//   menus.value[0].children = res.data.map(item => ({
-//     name: item.name,
-//     url: `/category?id=${item.id}`,
-//   }))
-// })
+useAsyncData(async () => {
+  const res = await queryCategoryList()
+  menus.value[0].children = res.data.map(item => ({
+    name: item.name,
+    url: `/category?id=${item.id}`,
+  }))
+})
 
 const handleLike = () => {
   // Message.success('感谢喜欢')
@@ -173,7 +172,7 @@ watch(route, () => {
   background-color: rgba(0,0,0,0.4);
   bottom: .5rem;
   transform: translateX(-50%);
-  left: calc(34px + 68px * var(--idx));
+  left: calc(34px + 72px * var(--idx));
   transition: all .1s;
 }
 .nav:hover::before{

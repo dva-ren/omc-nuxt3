@@ -5,9 +5,10 @@ export const getMaster = (): AsyncResponse<Master> => {
   return http('/master')
 }
 
-export const getArticles = (pageNum = 1, pageSize = 15): AsyncResponse<PageInfo<Article>> => {
+export const getArticles = (category?: string, pageNum = 1, pageSize = 15): AsyncResponse<PageInfo<Article>> => {
   return http('/article', {
     query: {
+      category,
       pageNum,
       pageSize,
     },
@@ -45,7 +46,7 @@ export const addComment = (data: CommentForm) => {
     body: data,
   })
 }
-export const queryCategoryList = (): AsyncResponse<Category> => {
+export const queryCategoryList = (): AsyncResponse<Category[]> => {
   return http('/category')
 }
 

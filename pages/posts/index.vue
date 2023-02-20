@@ -9,11 +9,11 @@ const { data: posts, pending } = useAsyncData(async () => {
 </script>
 
 <template>
-  <NuxtLayout v-if="posts" name="post">
+  <NuxtLayout v-if="posts">
     <div v-for="p, idx in posts" :key="p.id" v-spring:delay="idx * 100" class="post-item " pb-8>
       <div>
         <div class="left-label" display-none sm:display-block>
-          {{ dateFns(p.createTime).format('yyyy-MM-dd') }}
+          {{ dateFns(p.createTime).format('YYYY-MM-DD') }}
         </div>
         <div class="left-label" display-block sm:display-none>
           {{ dateFns(p.createTime).format('MM-dd') }}

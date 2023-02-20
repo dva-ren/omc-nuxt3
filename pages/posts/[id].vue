@@ -6,37 +6,23 @@ const route = useRoute()
 const id = computed(() => route.params.id as string)
 const master = useState<Master>('master')
 
+const headerInfo = useHeaderInfo()
+
 const { data: articleData, pending } = await useAsyncData(async () => {
   const res = await queryArticle(id.value)
-  console.log(res)
+  headerInfo.value.id = res.data.id
+  headerInfo.value.like = 0
+  headerInfo.value.title = res.data.title
+  headerInfo.value.type = '记录生活'
+  usePageTitle({ title: res.data.title })
   return res.data
 })
-
-// watch(pending, () => {
-//   if (!data.value) {
-//     Message.error('数据错误')
-//     return
-//   }
-
-//   const { code, data: articleData, msg } = data.value
-//   if (code === 200) {
-//     useState<HeaderInfo>('headerInfo', () => {
-//       return {
-//         id: articleData.id,
-//         title: articleData.title,
-//         type: articleData.categoryName,
-//       }
-//     })
-//   }
-//   else { Message.error(msg) }
-// })
-// onMounted(() => {
-//   console.log(id)
-// })
-// onBeforeUnmount(() => {
-//   useState('headerInfo', () => {})
-//   useState('catelog', () => [])
-// })
+definePageMeta({
+  layout: false,
+})
+onBeforeUnmount(() => {
+  headerInfo.value.title = ''
+})
 </script>
 
 <template>
@@ -78,7 +64,7 @@ const { data: articleData, pending } = await useAsyncData(async () => {
     </div>
     <template #sidebar>
       <div sticky top-20 mt-20 text-sm>
-        <Catalog />
+        <MarkdownCatalog />
       </div>
     </template>
   </NuxtLayout>

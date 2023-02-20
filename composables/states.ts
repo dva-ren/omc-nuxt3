@@ -1,4 +1,4 @@
-import type { Master } from '~/types'
+import type { HeaderInfo, Master } from '~/types'
 
 export const useMaster = () => useState<Master>('master', () => {
   return {
@@ -8,13 +8,24 @@ export const useMaster = () => useState<Master>('master', () => {
     mail: '',
     username: '',
     nickname: '',
+    socialIds: [],
+    url: '',
+    lastLoginIp: '',
+    lastLoginTime: '',
+    createTime: '',
+    updateTime: '',
   }
 })
-export const useCatelog = () => useState('catelog')
-
-export const useHeaderInfo = () => useState('headerInfo', () => {
+export const useCatelog = () => {
   return {
-    like: undefined,
+    data: useState('catelog', () => []),
+    show: ref(false),
+  }
+}
+
+export const useHeaderInfo = () => useState<HeaderInfo>('headerInfo', () => {
+  return {
+    like: 0,
     title: '',
     id: '',
     type: '',

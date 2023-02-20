@@ -1,22 +1,21 @@
 <script setup lang="ts">
+import { usePlayer } from './hooks'
+
 useHead({
-  title: '灰色と青',
+  title: '灰色と青，不虚光阴',
   link: [
     {
-      rel: 'icon', type: 'image/png', href: '/nuxt.png',
+      rel: 'icon', type: 'image/svg', href: '/logo.svg',
     },
   ],
 })
-// useState<Master>('master', () => {})
-// getMaster().then((res) => {
-//   useState<Master>('master', () => res.data)
-// })
+const loadding = ref(true)
 getMaster().then((res) => {
   const master = useMaster()
-  master.value.avatar = res.data.avatar
-  Object.assign(master, res.data)
+  Object.assign(master.value, res.data)
 })
 // useState('catelog', () => [])
+const { show } = usePlayer()
 </script>
 
 <template>
@@ -27,7 +26,10 @@ getMaster().then((res) => {
   <div class="z--1 inset-0 fixed op-80 bg-fixed pointer-events-none transition-opacity duration-500 ease transform-gpu">
     <div class="bg absolute inset-0 transform-gpu" />
   </div>
-  <!-- <Footer /> -->
+  <LoadMask v-model="loadding" @end="loadding = false" />
+  <ToolsBar />
+  <Player v-if="show" />
+  <Footer />
 </template>
 
 <style>

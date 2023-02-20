@@ -4,9 +4,9 @@ const { to, target = '' } = defineProps<{ to: string; target: string }>()
 
 <template>
   <template v-if="!to.startsWith('http')">
-    <router-link :target="target" :to="to">
+    <nuxt-link :target="target" :to="to">
       <slot />
-    </router-link>
+    </nuxt-link>
   </template>
   <template v-else>
     <a :href="to" target="_blank">

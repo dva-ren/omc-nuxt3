@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { getNotes, queryNote } from '~/utils/api'
 
-const loading = ref(true)
 const route = useRoute()
 const id = computed(() => route.params.id as string)
 
@@ -9,34 +8,22 @@ const { data: notes } = useAsyncData(async () => {
   const res = await getNotes()
   return res.data.list
 })
-
+const headerInfo = useHeaderInfo()
 const { data: note } = useAsyncData(async () => {
-  const noteId = id.value === 'latest' ? notes.value![0] : id.value
-  const res = await queryNote(noteId)
-  // useHeaderInfo({
-  //   id: res.data.id,
-  // })
-  console.log(note.value)
+  const res = await queryNote(id.value)
+  headerInfo.value.id = res.data.id
+  headerInfo.value.like = 0
+  headerInfo.value.title = res.data.title
+  headerInfo.value.type = '记录生活'
+  usePageTitle({
+    title: res.data.title,
+  })
   return res.data
 })
 const index = computed(() => {
   const idx = notes.value?.findIndex(n => n.id === id.value) || 0
   return idx > 0 ? idx : 0
 })
-
-const getNote = async (id: string) => {
-  loading.value = true
-  const res = await queryNote(id)
-  note.value = res.data
-  loading.value = false
-  const headerInfo = useHeaderInfo()
-  Object.assign(headerInfo, {
-    id: res.data.id,
-    title: res.data.title,
-    type: '记录生活',
-    like: 0,
-  })
-}
 
 const weather = () => {
   const { weather } = note.value!
@@ -50,8 +37,11 @@ const weather = () => {
     return 'i-carbon-snow-scattered'
   return 'i-carbon-word-cloud'
 }
+definePageMeta({
+  layout: false,
+})
 onBeforeUnmount(() => {
-
+  headerInfo.value.title = ''
 })
 </script>
 

@@ -1,44 +1,42 @@
 <script lang="ts" setup>
-import type { Article } from '~/types'
-import { formatTime } from '~/composables'
-import { queryArticleList } from '~/api'
-const loading = ref(true)
-const list = ref<Array<Article>>([])
+import { dateFns } from '~/composables'
+import { getArticles } from '~/utils/api'
 const route = useRoute()
 
 const categoryId = computed(() => route.query.id as string)
 const total = ref(0)
 
-const getPosts = async () => {
-  loading.value = true
-  const res = await queryArticleList(categoryId.value)
-  list.value = res.data.list
+const { data: posts, pending, refresh } = useAsyncData(async () => {
+  const res = await getArticles(categoryId.value)
   total.value = res.data.total
-  loading.value = false
-}
+  usePageTitle({
+    title: `分类 - ${res.data.list[0]?.categoryName}`,
+  })
+  return res.data.list
+})
 
 watch(categoryId, () => {
-  getPosts()
+  refresh()
 }, { immediate: true })
 </script>
 
 <template>
-  <Layout :loadding="loading">
+  <Layout v-if="posts" :loadding="pending">
     <p text-2xl>
-      <TextAnimation :text="`分类 - ${list[0]?.categoryName}`" />
+      <TextAnimation :text="`分类 - ${posts[0]?.categoryName}`" />
     </p>
     <p text-gray text="15px" py-1>
-      <TextAnimation :text="`该分类下共有${list.length}篇文章,加油!`" />
+      <TextAnimation :text="`该分类下共有 ${total} 篇文章,加油!`" />
     </p>
     <!-- <Loadding :loadding="loading" /> -->
-    <div v-if="!loading" pl-8 py-4 text-sm>
+    <div pl-8 py-4 text-sm>
       <ul class="posts" text-gray-500>
-        <template v-for="item, idx in list" :key="item.id">
+        <template v-for="item, idx in posts" :key="item.id">
           <li class="item fade_in_up" :style="`--delay:${idx * 0.1}s`" flex items-center tracking-wider>
             <router-link :to="`/posts/${item.id}`" class="link" px-2 text-gray-800>
               {{ item.title }}
             </router-link>
-            <span text="12px gray-600">{{ formatTime(item.createTime, 'MM/dd/yyyy') }}</span>
+            <span text="12px gray-600">{{ dateFns(item.createTime).format('M/D/YYYY') }}</span>
           </li>
         </template>
       </ul>
@@ -80,10 +78,14 @@ watch(categoryId, () => {
   transform: translateY(-90%);
 }
 .link{
+
+}
+.dark .link{
+  color: rgba(255,255,255,0.8);
 }
 .link:hover{
   /* outline: 1px solid orange; */
   /* border-bottom: 1px orange solid; */
-  text-decoration: underline orange;
+  text-decoration: underline rgb(167, 152, 126);
 }
 </style>

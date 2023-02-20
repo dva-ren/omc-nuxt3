@@ -1,16 +1,13 @@
 <script lang="ts" setup>
-import { useCatalog } from './Mardown/catalog'
-import { useMainStore } from '~/store'
+import { usePlayer } from '~/hooks'
 
 const scroll = useWindowScroll()
 const showFlags = reactive({
   main: true,
   scroll: false,
 })
-const mainStore = useMainStore()
-const catalog = computed(() => mainStore.catalog)
-const { show } = useCatalog()
-
+const { show: playerFlag } = usePlayer()
+const { data: catelog, show: catelogFlag } = useCatelog()
 function toTop() {
   document.documentElement.scrollTo({ top: 0, behavior: 'smooth' })
 }
@@ -21,10 +18,10 @@ const watchMain = useThrottleFn((curr, pre) => {
     showFlags.main = true
 }, 200)
 const showPlayer = () => {
-  mainStore.showPlayer = true
+  playerFlag.value = true
 }
 const showCatalog = () => {
-  show.value = true
+  catelogFlag.value = true
 }
 watch(useThrottle(scroll.y, 100), (curr, pre) => {
   if (curr > 500)
@@ -44,7 +41,7 @@ watch(useThrottle(scroll.y, 100), (curr, pre) => {
             <div i-carbon-up-to-top />
           </button>
         </Transition>
-        <button v-if="catalog.length" class="button" @click="showCatalog">
+        <button v-if="catelog.length" class="button" @click="showCatalog">
           <div i-ri-menu-2-fill />
         </button>
         <button class="button" @click="toggleDark()">
