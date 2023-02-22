@@ -4,23 +4,26 @@
   "scripts": {
     "build": "nuxi build",
     "dev": "nuxi dev",
+    "production": "nuxi dev NODE_ENV=production",
     "start": "node .output/server/index.mjs",
     "lint": "eslint .",
     "postinstall": "nuxi prepare",
     "generate": "nuxi generate"
   },
   "dependencies": {
+    "@bytemd/plugin-highlight-ssr": "^1.20.2",
     "@iconify-json/ri": "^1.1.5",
     "@popperjs/core": "^2.11.6",
     "@vueuse/motion": "2.0.0-beta.12",
     "dayjs": "^1.11.7",
-    "js-md5": "^0.7.3"
+    "js-md5": "^0.7.3",
+    "nprogress": "^0.2.0",
+    "vue-lazyload": "3.0.0-rc.2"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.35.1",
     "@bytemd/plugin-gemoji": "^1.20.2",
     "@bytemd/plugin-gfm": "^1.20.2",
-    "@bytemd/plugin-highlight": "^1.20.2",
     "@bytemd/plugin-math": "^1.20.2",
     "@bytemd/plugin-medium-zoom": "^1.20.2",
     "@bytemd/vue-next": "^1.20.2",

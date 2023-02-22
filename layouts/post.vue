@@ -12,7 +12,7 @@ const { full, loadding } = defineProps({
 </script>
 
 <template>
-  <div>
+  <div min-h-full>
     <div v-if="full" v-bind="$attrs">
       <slot />
     </div>
@@ -28,7 +28,6 @@ const { full, loadding } = defineProps({
         <slot name="sidebar" />
       </div>
     </div>
-    <!-- <Footer /> -->
   </div>
 </template>
 

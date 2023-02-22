@@ -1,4 +1,5 @@
-const baseUrl = 'http://localhost:4000'
+const locale = 'http://localhost:4000'
+const production = 'https://287j88r083.goho.co'
 
 interface Options {
   params?: any
@@ -6,11 +7,13 @@ interface Options {
   query?: any
   method?: 'get' | 'post' | 'delete' | 'put'
 }
-
 export const http = (url: string, options?: Options): Promise<any> => {
+  const baseURL = production
+  // if (import.meta.env.MODE === 'production')
+  //   baseURL = production
   return $fetch(url, {
     onRequest: ({ request, options }) => {
-      options.baseURL = options.baseURL === '/' ? baseUrl : options.baseURL
+      options.baseURL = options.baseURL === '/' ? baseURL : options.baseURL
     },
     onResponse: ({ request, response, options }) => {
       const { code, msg } = response._data

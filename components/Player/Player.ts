@@ -8,7 +8,7 @@ const toSecede = (s: number | undefined) => {
   return `${Math.floor(s / 60).toString().padStart(2, '0')}:${Math.floor(s % 60).toString().padStart(2, '0')}`
 }
 
-export class Player {
+export default class Player {
   public playList = ref<SongInfo[]>([])
   public state = ref<PlayState>('pause')
   public current = ref<SongInfo>({

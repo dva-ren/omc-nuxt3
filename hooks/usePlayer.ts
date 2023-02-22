@@ -1,4 +1,4 @@
-import { Player } from '~/components/Player/Player'
+import Player from '~/components/Player/Player'
 let playerInstance: Player
 
 export const usePlayer = () => {
