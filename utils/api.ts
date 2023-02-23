@@ -1,5 +1,5 @@
 import { http } from '~/utils/request'
-import type { Article, AsyncResponse, Category, Comment, CommentForm, Master, Note, PageInfo, Say } from '~/types/api'
+import type { Article, AsyncResponse, Category, Comment, CommentForm, Master, Note, PageInfo, Say, SongInfo } from '~/types/api'
 
 export const getMaster = (): AsyncResponse<Master> => {
   return http('/master')
@@ -50,10 +50,24 @@ export const queryCategoryList = (): AsyncResponse<Category[]> => {
   return http('/category')
 }
 
-export const querySongInfo = (id: string | number): AsyncResponse<Category> => {
-  return http(`/music?id=${id}`)
-}
-
 export const querySayList = (): AsyncResponse<PageInfo<Say>> => {
   return http('/say')
+}
+
+interface Song {
+  name: string
+  artist: string
+  url: string
+  pic: string
+  lrc: string
+}
+
+export const queryPlaylist = (id: number): Promise<SongInfo[]> => {
+  return $fetch(`/meting/?type=playlist&id=${id}`, {
+    baseURL: 'https://api.injahow.cn',
+  })
+}
+
+export const querySongInfo = (id: string | number): AsyncResponse<SongInfo> => {
+  return http(`/music/song?id=${id}`)
 }

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { Playlist } from '~/types'
-import { queryPlaylist } from '~/api'
+import { queryPlaylist } from '~/utils/api'
 
 const alldata = ref<Playlist>()
 const weekdata = ref<Playlist>()
@@ -11,8 +11,8 @@ const getPlaylist = () => {
     alldata.value = {
       id: 100,
       name: 'xxxx',
-      coverImgUrl: res.data[0].pic,
-      data: res.data.slice(0, 15),
+      coverImgUrl: res[0].pic,
+      data: res.slice(0, 15),
       playCount: 0,
     }
   })
@@ -20,8 +20,8 @@ const getPlaylist = () => {
     weekdata.value = {
       id: 100,
       name: 'xxxx',
-      coverImgUrl: res.data[0].pic,
-      data: res.data.slice(0, 15),
+      coverImgUrl: res[0].pic,
+      data: res.slice(0, 15),
       playCount: 0,
     }
   })
@@ -29,17 +29,18 @@ const getPlaylist = () => {
     favoritedata.value = {
       id: 100,
       name: 'xxxx',
-      coverImgUrl: res.data[0].pic,
-      data: res.data.slice(0, 15),
+      coverImgUrl: res[0].pic,
+      data: res.slice(0, 15),
       playCount: 0,
     }
   })
 }
 getPlaylist()
+useHead({ title: '听歌' })
 </script>
 
 <template>
-  <Layout>
+  <div>
     <div>
       <MusicList
         type="年度歌单"
@@ -54,7 +55,7 @@ getPlaylist()
         :playlist="favoritedata"
       />
     </div>
-  </Layout>
+  </div>
 </template>
 
 <style scoped>

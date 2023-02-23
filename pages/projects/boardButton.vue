@@ -337,9 +337,3 @@ body {
     }
 }
 </style>
-
-<route lang="yaml">
-meta:
-  hideHeader: true
-  hideFooter: true
-</route>

@@ -1,10 +1,16 @@
 {
   "private": true,
   "packageManager": "pnpm@7.9.0",
+  "config": {
+    "nuxt": {
+      "host": "0.0.0.0",
+      "port": "8080"
+    }
+  },
   "scripts": {
     "build": "nuxi build",
-    "dev": "nuxi dev",
-    "production": "nuxi dev NODE_ENV=production",
+    "dev": "nuxi dev --port=3000",
+    "production": "nuxi dev --mode prod",
     "start": "node .output/server/index.mjs",
     "lint": "eslint .",
     "postinstall": "nuxi prepare",
@@ -21,22 +27,22 @@
     "vue-lazyload": "3.0.0-rc.2"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.35.1",
+    "@antfu/eslint-config": "^0.35.2",
     "@bytemd/plugin-gemoji": "^1.20.2",
     "@bytemd/plugin-gfm": "^1.20.2",
     "@bytemd/plugin-math": "^1.20.2",
     "@bytemd/plugin-medium-zoom": "^1.20.2",
     "@bytemd/vue-next": "^1.20.2",
-    "@iconify-json/carbon": "^1.1.14",
-    "@iconify-json/twemoji": "^1.1.10",
+    "@iconify-json/carbon": "^1.1.15",
+    "@iconify-json/twemoji": "^1.1.11",
     "@nuxtjs/color-mode": "^3.2.0",
-    "@pinia/nuxt": "^0.4.6",
+    "@pinia/nuxt": "^0.4.7",
     "@types/node": "^18.14.0",
-    "@unocss/nuxt": "^0.49.4",
-    "@vueuse/nuxt": "^9.12.0",
-    "eslint": "^8.33.0",
-    "nuxt": "^3.1.2",
-    "pinia": "^2.0.30",
+    "@unocss/nuxt": "^0.50.0",
+    "@vueuse/nuxt": "^9.13.0",
+    "eslint": "^8.34.0",
+    "nuxt": "^3.2.2",
+    "pinia": "^2.0.32",
     "typescript": "^4.9.5"
   }
 }

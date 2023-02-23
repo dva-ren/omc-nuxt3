@@ -1,17 +1,15 @@
 <script lang="ts" setup>
 import type { Playlist, SongInfo } from '~/types'
 import { usePlayer } from '~/hooks'
-import { useMainStore } from '~/store'
 const { type, playlist } = defineProps<{
   type: string
   playlist: Playlist
 }>()
-const { player, current, process } = usePlayer()
-const mainStore = useMainStore()
+const { player, current, process, show } = usePlayer()
 
 const handleClick = (song: SongInfo) => {
-  if (!mainStore.showPlayer)
-    mainStore.showPlayer = true
+  if (!show.value)
+    show.value = true
   player?.play(song)
 }
 </script>

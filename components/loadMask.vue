@@ -29,6 +29,7 @@ const handleAnimationEnd = (e: AnimationEvent) => {
   align-items: center;
   animation: zoom-out .8s .3s ease-out forwards;
   z-index: 100;
+  pointer-events: none;
 }
 .icon{
   animation: zoom-in .2s ease-out forwards;

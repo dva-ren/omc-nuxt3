@@ -167,9 +167,3 @@ onMounted(() => {
   left: 38px;
 }
 </style>
-
-<route lang="yaml">
-meta:
-  hideHeader: true
-  hideFooter: true
-</route>

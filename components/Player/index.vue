@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { usePlayer } from '~/hooks'
-
 const { player, current, playState, time, process } = usePlayer()
 
 const changeState = () => {
@@ -39,16 +38,15 @@ onBeforeMount(() => {
         </div>
       </div>
     </Transition>
-    <Teleport to="body">
-      <div class="progress-bar" :style="{ width: `${process}%` }" />
-    </Teleport>
+    <div class="progress-bar" :style="{ width: `${process}%` }" />
   </div>
 </template>
 
-<style>
+<style scoped>
 .player {
   width: 100%;
   margin-bottom: 2px;
+  z-index: 10;
 }
 .player:hover .song-info{
   display: block;

@@ -19,7 +19,8 @@ fetch('https://v1.hitokoto.cn').then((response) => {
   })
 })
 useHead({
-  title: '灰色と青，不虚光阴',
+  titleTemplate: '',
+  title: '灰色と青 · 不虚光阴',
 })
 function handleClick() {
   Message.warning('开发中~')

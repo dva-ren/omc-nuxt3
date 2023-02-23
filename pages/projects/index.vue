@@ -1,7 +1,9 @@
 <script lang="ts" setup>
 import projects from './projects.json'
-usePageTitle({
-  title: '项目',
+onMounted(() => {
+  useHead({
+    title: '项目',
+  })
 })
 </script>
 

@@ -156,8 +156,3 @@ onMounted(() => {
   outline: 1px solid gray;
 }
 </style>
-
-<route lang="yaml">
-meta:
-  windowFull: true
-</route>

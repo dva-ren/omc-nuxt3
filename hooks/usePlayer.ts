@@ -1,10 +1,10 @@
-import Player from '~/components/Player/Player'
+import Player from '~~/components/Player/MusicPlayer'
 let playerInstance: Player
-
+const show = ref(false)
 export const usePlayer = () => {
   if (!process.client) {
     return {
-      show: false,
+      show,
     }
   }
   if (!playerInstance) {
@@ -14,7 +14,7 @@ export const usePlayer = () => {
     playerInstance = new Player(audio)
   }
   return {
-    show: ref(false),
+    show,
     player: playerInstance!,
     current: playerInstance.current!,
     playState: playerInstance.state!,

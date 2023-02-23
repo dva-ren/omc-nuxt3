@@ -21,8 +21,7 @@ const showFooter = computed(() => !route.path.includes('projects'))
 <style scoped>
 .footer-img{
   width: 100%;
-  vertical-align: bottom;
-  transform: translateY(2px);
+  margin-bottom: -2px;
 }
 a{
   transition: color .2s;

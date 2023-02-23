@@ -3,21 +3,15 @@ import nprogress from 'nprogress'
 import { usePlayer } from './hooks'
 
 import 'nprogress/nprogress.css'
-
-useHead({
-  title: '灰色と青，不虚光阴',
-  link: [
-    {
-      rel: 'icon', type: 'image/svg', href: '/logo.svg',
-    },
-  ],
-})
 const loadding = ref(true)
-// getMaster().then((res) => {
-//   const master = useMaster()
-//   Object.assign(master.value, res.data)
-// })
+
 // useState('catelog', () => [])
+onMounted(() => {
+  getMaster().then((res) => {
+    const master = useMaster()
+    Object.assign(master.value, res.data)
+  })
+})
 const { show } = usePlayer()
 const router = useRouter()
 
@@ -27,10 +21,18 @@ router.beforeEach(() => {
 router.afterEach(() => {
   nprogress.done()
 })
+useHead({
+  titleTemplate: '%s - 灰色と青 · 不虚光阴',
+  link: [
+    {
+      rel: 'icon', type: 'image/svg', href: '/logo.svg',
+    },
+  ],
+})
 </script>
 
 <template>
-  <!-- <NavBar /> -->
+  <NavBar />
   <NuxtLayout>
     <div min-h-100vh>
       <NuxtPage />
@@ -41,7 +43,7 @@ router.afterEach(() => {
   </div>
   <LoadMask v-model="loadding" @end="loadding = false" />
   <ToolsBar />
-  <Player v-if="show" />
+  <Player v-show="show" />
   <Footer />
 </template>
 

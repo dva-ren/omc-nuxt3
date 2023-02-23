@@ -14,7 +14,10 @@ const { data: articleData, pending } = await useAsyncData(async () => {
   headerInfo.value.like = 0
   headerInfo.value.title = res.data.title
   headerInfo.value.type = '记录生活'
-  usePageTitle({ title: res.data.title })
+  try {
+    useHead({ title: res.data.title })
+  }
+  catch {}
   return res.data
 })
 definePageMeta({

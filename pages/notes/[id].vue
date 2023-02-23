@@ -15,9 +15,10 @@ const { data: note } = useAsyncData(async () => {
   headerInfo.value.like = 0
   headerInfo.value.title = res.data.title
   headerInfo.value.type = '记录生活'
-  usePageTitle({
-    title: res.data.title,
-  })
+  try {
+    useHead({ title: res.data.title })
+  }
+  catch {}
   return res.data
 })
 const index = computed(() => {
@@ -40,9 +41,9 @@ const weather = () => {
 definePageMeta({
   layout: false,
 })
-onBeforeUnmount(() => {
-  headerInfo.value.title = ''
-})
+// onBeforeUnmount(() => {
+//   headerInfo.value.title = ''
+// })
 </script>
 
 <template>

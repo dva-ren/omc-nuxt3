@@ -13,7 +13,7 @@ const songInfo = reactive<SongInfo>({
   time: '',
   lrc: '',
 })
-const { player } = usePlayer()
+const { player, show } = usePlayer()
 const playing = ref(false)
 
 const getInfo = async () => {
@@ -32,8 +32,8 @@ const getInfo = async () => {
 }
 getInfo()
 const handleClick = () => {
-  // if (mainStore.showPlayer === false)
-  //   mainStore.showPlayer = true
+  if (!show.value)
+    show.value = true
   if (!playing.value)
     player.play(songInfo)
   else

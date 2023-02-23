@@ -17,8 +17,8 @@ const watchMain = useThrottleFn((curr, pre) => {
   else
     showFlags.main = true
 }, 200)
-const showPlayer = () => {
-  playerFlag.value = true
+const changePlayerDisplay = () => {
+  playerFlag.value = !playerFlag.value
 }
 const showCatalog = () => {
   catelogFlag.value = true
@@ -47,7 +47,7 @@ watch(useThrottle(scroll.y, 100), (curr, pre) => {
         <button class="button" @click="toggleDark()">
           <div dark:i-carbon-moon i-carbon-sun />
         </button>
-        <button class="button" @click="showPlayer">
+        <button class="button" @click="changePlayerDisplay">
           <div i-ri-netease-cloud-music-line />
         </button>
       </div>

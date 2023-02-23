@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <BaseLayout>
+  <div>
     <div flex justify-center>
       <div v-for="i in 6" :key="i" class="category" :class="{ active: i === 1 }">
         {{ i }}
@@ -12,7 +12,7 @@
     <div flex gap-4 flex-wrap justify-center mt-8>
       <div v-for="i in 10" :key="i" class="img-item" />
     </div>
-  </BaseLayout>
+  </div>
 </template>
 
 <style scoped>

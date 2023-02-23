@@ -1,3 +1,4 @@
+const envScript = process.env.npm_lifecycle_script?.split(' ') || []
 export default defineNuxtConfig({
   modules: [
     '@vueuse/nuxt',
@@ -16,5 +17,8 @@ export default defineNuxtConfig({
   ],
   colorMode: {
     classSuffix: '',
+  },
+  runtimeConfig: {
+    env: envScript[envScript.length - 1],
   },
 })

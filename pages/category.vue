@@ -9,7 +9,7 @@ const total = ref(0)
 const { data: posts, pending, refresh } = useAsyncData(async () => {
   const res = await getArticles(categoryId.value)
   total.value = res.data.total
-  usePageTitle({
+  useHead({
     title: `分类 - ${res.data.list[0]?.categoryName}`,
   })
   return res.data.list
@@ -21,7 +21,7 @@ watch(categoryId, () => {
 </script>
 
 <template>
-  <Layout v-if="posts" :loadding="pending">
+  <div v-if="posts" :loadding="pending">
     <p text-2xl>
       <TextAnimation :text="`分类 - ${posts[0]?.categoryName}`" />
     </p>
@@ -41,7 +41,7 @@ watch(categoryId, () => {
         </template>
       </ul>
     </div>
-  </Layout>
+  </div>
 </template>
 
 <style scoped>

@@ -4,7 +4,7 @@ const { data } = defineProps<{ data: { name: string; descrption: string; icon?: 
 
 <template>
   <div v-spring>
-    <Link :to="data.url" flex items-center px-1 py-3 hover="bg-gray-100 text-gray-800" dark:hover="bg-gray-800 text-gray-100" transition rounded :target="data.target">
+    <ProjectLink link :to="data.url" flex items-center px-1 py-3 hover="bg-gray-100 text-gray-800" dark:hover="bg-gray-800 text-gray-100" transition rounded :target="data.target">
       <div :class="`i-${data.icon ? data.icon : 'ri:emotion-laugh-fill'}`" :style="{ color: data.color }" text-2xl w-10 mx-1 />
       <div flex-1>
         <div py-1>
@@ -14,6 +14,6 @@ const { data } = defineProps<{ data: { name: string; descrption: string; icon?: 
           {{ data.descrption }}
         </div>
       </div>
-    </Link>
+    </ProjectLink>
   </div>
 </template>

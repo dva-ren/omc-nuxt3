@@ -63,10 +63,3 @@ onMounted(() => {
     <canvas ref="canvas" />
   </div>
 </template>
-
-<route lang="yaml">
-meta:
-  hideHeader: true
-  hideFooter: true
-</route>
-
