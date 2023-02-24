@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import type { Say } from '../types'
 import { querySayList } from '~/utils/api'
-usePageTitle({
-  title: '言',
+useHead({
+  title: '说说',
 })
 interface SayInfo extends Say {
   color?: string

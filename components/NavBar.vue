@@ -102,7 +102,7 @@ watch(route, () => {
           </nav>
           <HeaderDrawer :active-index="navIdx" display-flex md-display-none :menus="menus" />
         </div>
-        <div max-w-850px m-auto flex items-center justify-between text-sm h-14>
+        <div max-w-1200px m-auto flex items-center justify-between text-sm h-14>
           <div max-w-8rem md:max-w-unset>
             <div text="12px gray">
               {{ headerInfo.type }}

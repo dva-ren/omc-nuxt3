@@ -1,5 +1,5 @@
 let baseURL = 'http://localhost:4000'
-const production = 'https://287j88r083.goho.co'
+const production = 'https://287j88r083.goho.co/blog'
 
 interface Options {
   params?: any

@@ -8,8 +8,7 @@ const { type, playlist } = defineProps<{
 const { player, current, process, show } = usePlayer()
 
 const handleClick = (song: SongInfo) => {
-  if (!show.value)
-    show.value = true
+  show.value = true
   player?.play(song)
 }
 </script>

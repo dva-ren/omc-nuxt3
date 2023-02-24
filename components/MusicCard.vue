@@ -43,7 +43,7 @@ const handleClick = () => {
 </script>
 
 <template>
-  <div rounded p-2 border flex gap-4 max-w-80 items-center relative shadow hover:shadow-xl transition>
+  <div rounded p-2 border flex gap-4 w-80 items-center relative shadow hover:shadow-xl transition>
     <MyImg :src="songInfo.pic" w-12 h-12 object-fit rounded />
     <div flex-1 overflow-hidden>
       <div>{{ songInfo.name }}</div>

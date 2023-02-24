@@ -1,9 +1,11 @@
 import Player from '~~/components/Player/MusicPlayer'
 let playerInstance: Player
+const init = ref(false)
 const show = ref(false)
 export const usePlayer = () => {
   if (!process.client) {
     return {
+      init,
       show,
     }
   }
@@ -12,8 +14,10 @@ export const usePlayer = () => {
     audio.volume = 0.4
     document.documentElement.appendChild(audio)
     playerInstance = new Player(audio)
+    init.value = true
   }
   return {
+    init,
     show,
     player: playerInstance!,
     current: playerInstance.current!,

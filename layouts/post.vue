@@ -17,7 +17,29 @@ const { full, loadding } = defineProps({
       <slot />
     </div>
     <Loadding :loadding="loadding" />
-    <div v-if="!full && !loadding" v-spring v-bind="$attrs" flex justify-center>
+    <div class="grid grid-cols-12 mx-auto p-4 sm:px-6 lg:max-w-7xl lg:px-8 lg:gap-5">
+      <!-- Left sidebar -->
+      <div class="hidden md:block xs-col-span-1 xl:col-span-2">
+        <div class="sticky top-20">
+          <!-- <SidebarLeft :user="user" @on-tweet="handleOpenTweetModal" @on-logout="handleUserLogout" /> -->
+          <slot name="pre" />
+        </div>
+      </div>
+
+      <!-- Main content -->
+      <main v-spring class="col-span-12 md:col-span-8 xl:col-span-6" v-bind="$attrs">
+        <slot />
+      </main>
+
+      <!-- Right Sidebar -->
+      <div class="hidden col-span-12 md:block xl:col-span-4 md:col-span-3">
+        <div class="sticky top-20">
+          <!-- <SidebarRight /> -->
+          <slot name="sidebar" />
+        </div>
+      </div>
+    </div>
+    <!-- <div v-if="!full && !loadding" v-spring v-bind="$attrs" flex justify-center>
       <div display-none xl:display-block>
         <slot name="pre" />
       </div>
@@ -27,7 +49,7 @@ const { full, loadding } = defineProps({
       <div display-none md:display-block>
         <slot name="sidebar" />
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { usePlayer } from '~/hooks'
-const { player, current, playState, time, process } = usePlayer()
+const { player, show, current, playState, time, process } = usePlayer()
 
 const changeState = () => {
   if (playState.value === 'play')
@@ -17,7 +17,7 @@ onBeforeMount(() => {
 <template>
   <div fixed left-0 bottom-0 rounded max-w-18>
     <Transition>
-      <div rounded class="player" select-none h-16 flex gap-2>
+      <div v-show="show" rounded class="player" select-none h-16 flex gap-2>
         <div relative min-w-16 class="cover-container" @click="changeState">
           <img :src="current?.pic" w-16 h-16 rounded>
           <div class="btn-mask" flex items-center text-xl justify-evenly :class="{ 'btn-pause': playState === 'play' }">

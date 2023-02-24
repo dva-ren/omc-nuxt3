@@ -1,13 +1,14 @@
 <script lang="ts" setup>
 import { usePlayer } from '~/hooks'
+import { useCatalog } from '~/components/Markdown/catalog'
 
 const scroll = useWindowScroll()
 const showFlags = reactive({
   main: true,
   scroll: false,
 })
-const { show: playerFlag } = usePlayer()
-const { data: catelog, show: catelogFlag } = useCatelog()
+const { init, show: playerFlag } = usePlayer()
+const { anchor, show: catelogFlag } = useCatalog()
 function toTop() {
   document.documentElement.scrollTo({ top: 0, behavior: 'smooth' })
 }
@@ -18,6 +19,8 @@ const watchMain = useThrottleFn((curr, pre) => {
     showFlags.main = true
 }, 200)
 const changePlayerDisplay = () => {
+  if (!init.value)
+    init.value = true
   playerFlag.value = !playerFlag.value
 }
 const showCatalog = () => {
@@ -41,7 +44,7 @@ watch(useThrottle(scroll.y, 100), (curr, pre) => {
             <div i-carbon-up-to-top />
           </button>
         </Transition>
-        <button v-if="catelog.length" class="button" @click="showCatalog">
+        <button v-if="anchor.length" class="button" @click="showCatalog">
           <div i-ri-menu-2-fill />
         </button>
         <button class="button" @click="toggleDark()">

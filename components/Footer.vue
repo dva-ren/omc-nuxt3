@@ -1,11 +1,8 @@
 <script lang="ts" setup>
-const route = useRoute()
-
-const showFooter = computed(() => !route.path.includes('projects'))
 </script>
 
 <template>
-  <footer v-if="showFooter" text-sm w-full text-white>
+  <footer text-sm w-full text-white>
     <img class="footer-img" src="/images/footer.png" alt="">
     <div class="content" inline-flex justify-center gap-2 w-full bg="#67ACA0" py-10>
       <p>

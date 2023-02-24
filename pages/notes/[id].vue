@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { getNotes, queryNote } from '~/utils/api'
+import { useCatalog } from '~~/components/Markdown/catalog'
 
 const route = useRoute()
 const id = computed(() => route.params.id as string)
@@ -9,7 +10,9 @@ const { data: notes } = useAsyncData(async () => {
   return res.data.list
 })
 const headerInfo = useHeaderInfo()
-const { data: note } = useAsyncData(async () => {
+const { anchor } = useCatalog()
+
+const { data: note, pending } = useAsyncData(async () => {
   const res = await queryNote(id.value)
   headerInfo.value.id = res.data.id
   headerInfo.value.like = 0
@@ -41,14 +44,15 @@ const weather = () => {
 definePageMeta({
   layout: false,
 })
-// onBeforeUnmount(() => {
-//   headerInfo.value.title = ''
-// })
+onBeforeUnmount(() => {
+  headerInfo.value.title = ''
+  anchor.value = []
+})
 </script>
 
 <template>
   <NuxtLayout name="post">
-    <div v-if="note && notes">
+    <div v-if="note && !pending">
       <div class="info" border p-4 mb-8>
         <p class="left-label">
           {{ formateToLocal(note.createTime) }}
@@ -57,17 +61,17 @@ definePageMeta({
           {{ note.title }}
         </p>
         <div v-if="note.musicId" flex justify-center my-4>
-          <!-- <MusicCard :id="note.musicId" /> -->
+          <MusicCard :id="note.musicId" />
         </div>
         <MarkdownViewer :value="note.content" min-h-100 />
         <div class="line" />
         <div text="center sm">
           <router-link to="/timeLine?type=notes">
             <span pr-1>时间线</span>
-            <div i-ri-time-line inline-block />
+            <div i-ri-time-line inline-block class="font-icon" />
           </router-link>
         </div>
-        <div text-sm flex justify-between>
+        <div v-if="notes" text-sm flex justify-between>
           <div>
             <router-link v-if="index > 0" :to="`/notes/${notes[index - 1]?.id}`">
               <div flex items-center>

@@ -16,12 +16,10 @@ export const useMaster = () => useState<Master>('master', () => {
     updateTime: '',
   }
 })
-export const useCatelog = () => {
-  return {
-    data: useState('catelog', () => []),
-    show: ref(false),
-  }
-}
+// export const useCatelog = () => useState('catelog', () => ({
+//   data: [],
+//   show: false,
+// }))
 
 export const useHeaderInfo = () => useState<HeaderInfo>('headerInfo', () => {
   return {

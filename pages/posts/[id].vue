@@ -1,12 +1,14 @@
 <script lang="ts" setup>
 import type { Master } from '~/types'
 import { formateToLocal } from '~/composables'
+import { useCatalog } from '~~/components/Markdown/catalog'
 
 const route = useRoute()
 const id = computed(() => route.params.id as string)
 const master = useState<Master>('master')
 
 const headerInfo = useHeaderInfo()
+const { anchor } = useCatalog()
 
 const { data: articleData, pending } = await useAsyncData(async () => {
   const res = await queryArticle(id.value)
@@ -25,6 +27,7 @@ definePageMeta({
 })
 onBeforeUnmount(() => {
   headerInfo.value.title = ''
+  anchor.value = []
 })
 </script>
 

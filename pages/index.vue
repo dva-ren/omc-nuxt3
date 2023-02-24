@@ -54,7 +54,7 @@ function handleClick() {
         </div>
       </div>
     </div>
-    <!-- <TextAnimation v-if="words" :text="words" class="text-sm text-gray-400 px-4 pt-4 pb-8" /> -->
+    <TextAnimation min-h-10 min-10 :text="words" class="text-sm text-gray-400 px-4 mb-4" />
     <!-- <Loadding :loadding="loading" /> -->
     <div v-if="!articlePending" v-spring>
       <div text-white text-sm>
@@ -79,9 +79,9 @@ function handleClick() {
             </div>
             <span px-3>记录生活</span>
           </div>
-          <router-link to="/notes/latest" class="icon" bg="#f17666" p-4>
+          <NuxtLink to="/notes/latest" class="icon" bg="#f17666" p-4>
             <div i-carbon:chevron-right text-lg />
-          </router-link>
+          </NuxtLink>
         </div>
         <CardList :data="noteData" type="notes" />
       </div>
@@ -116,12 +116,12 @@ function handleClick() {
             </button> -->
         </div>
         <div grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-8 text-sm>
-          <router-link to="/about">
+          <NuxtLink to="/about">
             <Card text="关于我" title="这里有我的小秘密" />
-          </router-link>
-          <router-link to="/gallery">
+          </NuxtLink>
+          <NuxtLink to="/gallery">
             <Card title="记录美好瞬间" text="相册" />
-          </router-link>
+          </NuxtLink>
           <Card title="你的话对我很重要" text="留言" @click="handleClick" />
         </div>
       </div>
