@@ -26,6 +26,7 @@ const isNewYear = (date: string | Date, idx: number) => {
     return true
   return (new Date(notes.value![idx - 1].createTime).getFullYear() !== new Date(date).getFullYear())
 }
+useHead({ title: '时间线' })
 </script>
 
 <template>

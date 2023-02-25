@@ -16,10 +16,6 @@ const { data: articleData, pending } = useAsyncData(async () => {
   headerInfo.value.like = 0
   headerInfo.value.title = res.data.title
   headerInfo.value.type = '记录生活'
-  try {
-    useHead({ title: res.data.title })
-  }
-  catch {}
   return res.data
 })
 definePageMeta({
@@ -29,6 +25,7 @@ onBeforeUnmount(() => {
   headerInfo.value.title = ''
   anchor.value = []
 })
+useHead({ title: articleData.value?.title })
 </script>
 
 <template>

@@ -2,7 +2,6 @@
 import { queryComment } from '~/utils/api'
 
 const { refId, type } = defineProps<{ refId: string; type: 'note' | 'posts' }>()
-const loadding = ref(false)
 const visible = ref(false)
 const commentRef = ref<HTMLElement>()
 const total = ref(0)
@@ -34,8 +33,8 @@ onMounted(() => {
     <EditComment :ref-id="refId" :type="type" :index="total" @on-send="refresh" />
     <div ref="commentRef" />
     <div v-if="visible">
-      <Loadding v-if="loadding" :loadding="loadding" />
-      <div v-else>
+      <Loadding :loadding="pending" />
+      <div v-if="!pending">
         <div v-if="total" mt-4>
           <template v-for="i, idx in comments" :key="i.id">
             <CommentItem v-if="!i.isWhispers" :data="i" :index="idx" @on-replay="refresh" />

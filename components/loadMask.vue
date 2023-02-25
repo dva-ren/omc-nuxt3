@@ -17,7 +17,7 @@ const handleAnimationEnd = (e: AnimationEvent) => {
 
 <style scoped>
 .load-mask{
-  background-image: url('./images/texture.png');
+  background-image: url('/images/texture.png');
   background-color: #a7a8bd;
   width: 100vw;
   height: 100vh;

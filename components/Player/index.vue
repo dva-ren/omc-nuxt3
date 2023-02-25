@@ -63,11 +63,12 @@ onBeforeMount(() => {
 }
 .btn-mask{
   position: absolute;
-  color: rgb(255, 255, 255);
+  color: white;
   left: 50%;
   top: 50%;
   transform: translate(-50%,-50%);
   transition: .2s;
+  filter: drop-shadow(0 0 6px black);
 }
 .btn-pause{
   left: 75%;

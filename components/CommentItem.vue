@@ -13,7 +13,7 @@ const onReplayed = () => {
 </script>
 
 <template>
-  <div flex gap-4 text-12px p-2>
+  <div v-spring flex gap-4 text-12px p-2>
     <img w-10 h-10 rounded-full :src="`https://cravatar.cn/avatar/${md5(data.mail)}?d=monsterid`" alt="">
     <div flex-1>
       <div>

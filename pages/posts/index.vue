@@ -6,6 +6,7 @@ const { data: posts, pending } = useAsyncData(async () => {
   const res = await getArticles()
   return res.data.list
 })
+useHead({ title: '文章' })
 </script>
 
 <template>

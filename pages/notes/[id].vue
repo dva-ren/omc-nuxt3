@@ -18,12 +18,6 @@ const { data: note, pending } = useAsyncData(async () => {
   headerInfo.value.like = 0
   headerInfo.value.title = res.data.title
   headerInfo.value.type = '记录生活'
-  try {
-    useHead({ title: res.data.title })
-  }
-  catch (e) {
-    console.log(e)
-  }
   return res.data
 })
 const index = computed(() => {
@@ -50,10 +44,14 @@ onBeforeUnmount(() => {
   headerInfo.value.title = ''
   anchor.value = []
 })
+useHead({ title: note.value?.title })
 </script>
 
 <template>
   <NuxtLayout name="post" :loadding="pending">
+    <template #pre>
+      <!-- <div>1111</div> -->
+    </template>
     <div v-if="note && !pending">
       <div class="info" border p-4 mb-8>
         <p class="left-label">

@@ -3,6 +3,7 @@ import { useCatalog } from './catalog'
 
 const { anchor, active, show, parse } = useCatalog()
 const index = ref(0)
+const router = useRouter()
 
 onMounted(() => {
   if (!process.client)
@@ -16,13 +17,18 @@ onBeforeUnmount(() => {
 watch(active, () => {
   index.value = Number(active.value.split('-')[1]) || 0
 })
+const handleClick = (id: string, idx: number) => {
+  router.replace(id)
+}
 </script>
 
 <template>
   <div v-if="anchor.length" class="catalog">
     <div class="items" :style="`--top:${26 * index}px`">
-      <div v-for="i in anchor" :key="i.id" class="catalog-item">
-        <a :href="i.id" :class="{ active: i.id === active }">{{ i.text }}</a>
+      <div v-for="i, idx in anchor" :key="i.id" class="catalog-item">
+        <a :class="{ active: i.id === active }" @click="handleClick(i.id, idx)">
+          {{ i.text }}
+        </a>
       </div>
     </div>
     <!-- 目录 -->
@@ -31,8 +37,10 @@ watch(active, () => {
         目录
       </template>
       <div class="items" :style="`--top:${26 * index}px`" ml-4>
-        <div v-for="i in anchor" :key="i.id" class="catalog-item">
-          <a :href="i.id" :class="{ active: i.id === active }">{{ i.text }}</a>
+        <div v-for="i, idx in anchor" :key="i.id" class="catalog-item">
+          <a :class="{ active: i.id === active }" @click="handleClick(i.id, idx)">
+            {{ i.text }}
+          </a>
         </div>
       </div>
     </Drawer>
@@ -62,6 +70,7 @@ watch(active, () => {
   transform: translateY(var(--top));
 }
 .catalog-item a{
+  cursor: pointer;
   display: block;
   height: 26px;
   padding: 0 2px;
