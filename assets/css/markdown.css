@@ -1,10 +1,27 @@
 :root{
   --text-color: #67492e;
-  --color-1: #845EC2;
+  --color-1: #538DA8;
   --color-2: #B39CD0;
-  --color-3: #FBEAFF;
-  --color-4: #00C9A7;
+  --color-3: #F6E2FD;
+  --color-4: #707C9F;
+  --color-5: rgba(40, 97, 184,0.2);
 }
+/* 
+  #184995 #B17AA1 #F5B6A4
+  #E290BD #4D739A #8A4730
+  #FDD19F #C67120 #12246C
+  #FAA563 #105D67 #2C3113
+  #FBE6D8 #6A95B5 #E68742
+  #F6A441 #02368A #351F21
+  #FAB35B #136885 #7AA4B2
+  #FFC8CB #3C7098 #EC9134
+  #E2DCDD #0F86BE #FB9B57
+  #34718D #A90E10 #184B45
+  #1475BC #B44517 #184B45
+  #538DA8 #FBB98F #7F4722
+  #2861B8 #F6E2FD #707C9F
+
+*/
 .markdown-body {
   min-height: 40vh;
   color: var(--text-color);
@@ -199,7 +216,7 @@
 }
 .markdown-body code {
   color: var(--color-1);
-  background-color: var(--color-3);
+  background-color: var(--color-5);
   padding: 2px 0.4em;
   overflow-x: auto;
   word-break: break-word;
@@ -244,15 +261,16 @@
 .markdown-body pre > code:hover {
   box-shadow: 0 4px 12px #2333;
 }
-.markdown-body pre > code::-webkit-scrollbar {
+/* 代码块滚动条样式 */
+/* .markdown-body pre > code::-webkit-scrollbar {
   height: 6px;
   background-color: var(--color-3);
 }
 .markdown-body pre > code::-webkit-scrollbar-thumb {
-  background-color: #efefef;
+  background-color: var(--color-4);
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
-}
+} */
 .markdown-body hr {
   margin: 2em 0;
   border-top: 1px solid var(--color-1);

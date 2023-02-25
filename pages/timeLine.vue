@@ -1,43 +1,40 @@
 <script lang="ts" setup>
-import type { Note } from '~/types'
 import { dateFns, formateToLocaleHasWeek, getOutOfDate, getOutOfMouth, getOutOfYear } from '~/composables'
-import { getArticles } from '~/utils/api'
-const loading = ref(true)
-const notes = ref<Array<Note>>([])
+import { getNotes } from '~/utils/api'
+const type = computed(() => useRoute().query.type)
 
 const outOfTime = ref<string | number>()
 const total = ref(0)
 
-const getNotes = async () => {
-  let timer: any
-  onMounted(() => {
-    timer = setInterval(() => {
-      outOfTime.value = getOutOfDate(new Date()).toFixed(8)
-    }, 10)
-  })
-  onBeforeMount(() => {
-    clearInterval(timer)
-  })
-  const res = await getArticles()
-  notes.value = res.data.list
+const { data: notes, pending } = useAsyncData(async () => {
+  const res = await getNotes()
   total.value = res.data.total
-  loading.value = false
-}
+  return res.data.list
+})
+let timer: any
+onMounted(() => {
+  timer = setInterval(() => {
+    outOfTime.value = getOutOfDate(new Date()).toFixed(8)
+  }, 10)
+})
+onBeforeMount(() => {
+  clearInterval(timer)
+})
+
 const isNewYear = (date: string | Date, idx: number) => {
   if (idx === 0)
     return true
-  return (new Date(notes.value[idx - 1].createTime).getFullYear() !== new Date(date).getFullYear())
+  return (new Date(notes.value![idx - 1].createTime).getFullYear() !== new Date(date).getFullYear())
 }
-getNotes()
 </script>
 
 <template>
-  <NuxtLayout :loadding="loading">
+  <NuxtLayout>
     <p text-2xl>
       <TextAnimation text="时间线" />
     </p>
     <p text-gray py-1>
-      <TextAnimation :text="`共有${notes.length}篇文章,继续加油`" />
+      <TextAnimation :text="`共有${total}篇文章,继续加油`" />
     </p>
     <div>
       <div text-sm text-gray-600 pt-4>
@@ -54,20 +51,21 @@ getNotes()
         </p>
       </div>
     </div>
-    <!-- <Loadding :loadding="loading" /> -->
-    <div v-if="!loading" pl-8 py-4>
+    <Loadding :loadding="pending" />
+    <div v-if="!pending" pl-8 py-4>
       <ul class="posts" text-gray-500>
         <template v-for="item, idx in notes" :key="item.id">
           <div class="fade_in_up" :style="`--delay:${idx * 0.1}s`">
             <p v-if="isNewYear(item.createTime, idx)" class="left-label" pl-4 py-2>
               {{ new Date(item.createTime).getFullYear() }}
             </p>
-            <li class="item" flex items-center>
+            <li class="item" :class="{ 'new-year': isNewYear(item.createTime, idx) }" flex items-center>
               <span text-sm>{{ dateFns(item.createTime).format('MM/DD') }}</span>
               <router-link :to="`/notes/${item.id}`" class="link" mx-2 text-gray-800 text-sm>
                 {{ item.title }}
               </router-link>
               <span text="12px">
+                {{ item.title }}
                 <span>{{ item.mood }}/</span>
                 <span>{{ item.weather }}</span>
               </span>
@@ -112,7 +110,8 @@ getNotes()
 .posts .item:last-child::after{
   transform: translateY(-90%);
 }
-.link{
+.new-year::after{
+  display: none;
 }
 .dark .posts{
   color: rgba(255, 255, 255, 0.8)

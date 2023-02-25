@@ -6,6 +6,11 @@ export const drawerProps = {
     type: Boolean,
     default: false,
   },
+  // 打开的抽屉尺寸
+  size: {
+    type: String,
+    default: '40%',
+  },
   // 是否显示抽屉头部内容
   isShowHeader: {
     type: Boolean,

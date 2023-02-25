@@ -10,6 +10,7 @@ const showInfo = ref(false)
 const scroll = useWindowScroll()
 const navIdx = ref(-1)
 const headerInfo = useHeaderInfo()
+const liked = ref(false)
 
 const menus = ref<NavItem[]>([
   {
@@ -22,6 +23,10 @@ const menus = ref<NavItem[]>([
     name: '记',
     icon: 'i-ri:quill-pen-line',
     url: '/notes/latest',
+    children: [{
+      name: '时间线',
+      url: '/timeLine?type=notes',
+    }],
   },
   {
     name: '言',
@@ -55,7 +60,9 @@ useAsyncData(async () => {
 })
 
 const handleLike = () => {
+  liked.value = !liked.value
   // Message.success('感谢喜欢')
+  console.log('11')
 }
 const handleShare = () => {
   useShare({
@@ -117,7 +124,7 @@ watch(route, () => {
               <div>分享</div>
             </button>
             <button v-if="headerInfo.like !== undefined" px-2 pr-4 h-9 bg-gray-2 rounded-full flex items-center gap-1 @click="handleLike">
-              <Heart />
+              <Heart v-model="liked" />
               <div>喜欢</div>
             </button>
             <div>

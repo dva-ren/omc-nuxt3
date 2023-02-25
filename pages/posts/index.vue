@@ -9,7 +9,8 @@ const { data: posts, pending } = useAsyncData(async () => {
 </script>
 
 <template>
-  <NuxtLayout v-if="posts">
+  <Loadding v-if="pending" :loadding="pending" />
+  <NuxtLayout v-if="!pending">
     <div v-for="p, idx in posts" :key="p.id" v-spring:delay="idx * 100" class="post-item " pb-8>
       <div>
         <div class="left-label" display-none sm:display-block>

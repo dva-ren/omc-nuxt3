@@ -10,7 +10,7 @@ const master = useState<Master>('master')
 const headerInfo = useHeaderInfo()
 const { anchor } = useCatalog()
 
-const { data: articleData, pending } = await useAsyncData(async () => {
+const { data: articleData, pending } = useAsyncData(async () => {
   const res = await queryArticle(id.value)
   headerInfo.value.id = res.data.id
   headerInfo.value.like = 0
@@ -32,7 +32,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <NuxtLayout name="post">
+  <NuxtLayout name="post" :loadding="pending">
     <div v-if="articleData">
       <div w-full>
         <div flex items-center justify-between mb-4>

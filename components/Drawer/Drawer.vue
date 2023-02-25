@@ -13,7 +13,7 @@ const computedDrawerPosition = computed(() => {
       : '100%',
     height:
     ((props.direction === 'top') || (props.direction === 'bottom'))
-      ? '30%'
+      ? '35%'
       : '100%',
   }
   positionObj[props.direction] = 0

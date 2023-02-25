@@ -55,7 +55,6 @@ function handleClick() {
       </div>
     </div>
     <TextAnimation min-h-10 min-10 :text="words" class="text-sm text-gray-400 px-4 mb-4" />
-    <!-- <Loadding :loadding="loading" /> -->
     <div v-if="!articlePending" v-spring>
       <div text-white text-sm>
         <div flex justify-between items-end class="label">

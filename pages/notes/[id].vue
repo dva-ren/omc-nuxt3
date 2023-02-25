@@ -21,7 +21,9 @@ const { data: note, pending } = useAsyncData(async () => {
   try {
     useHead({ title: res.data.title })
   }
-  catch {}
+  catch (e) {
+    console.log(e)
+  }
   return res.data
 })
 const index = computed(() => {
@@ -51,7 +53,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <NuxtLayout name="post">
+  <NuxtLayout name="post" :loadding="pending">
     <div v-if="note && !pending">
       <div class="info" border p-4 mb-8>
         <p class="left-label">

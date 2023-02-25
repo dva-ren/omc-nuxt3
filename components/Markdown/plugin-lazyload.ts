@@ -26,7 +26,7 @@ function addObserver(el: HTMLElement) {
         return
       img.src = ''
       if (img.getAttribute('lazy') !== 'loading') {
-        img.src = img.dataset.loading || resizeImgUrl(src)
+        img.src = img.dataset.loading || resizeImgUrl(src, 48)
         img.setAttribute('lazy', 'loading')
       }
       if (entry.isIntersecting)

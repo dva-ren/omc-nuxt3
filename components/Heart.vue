@@ -1,6 +1,14 @@
+<script setup lang="ts">
+const props = defineProps<{ modelValue: boolean }>()
+const emits = defineEmits(['update:modelValue'])
+const handelChange = (event: any) => {
+  emits('update:modelValue', Boolean(event.target.value))
+}
+</script>
+
 <template>
   <label class="like" style="--size: 30px;--frames: 62;">
-    <input type="checkbox">
+    <input :checked="props.modelValue" type="checkbox" @change="handelChange">
     <div class="hearth" />
   </label>
 </template>
@@ -27,7 +35,7 @@ input {
 }
 
 .hearth {
-  background-image: url('https://assets.codepen.io/23500/Hashflag-AppleEvent.svg');
+  background-image: url('/images/Hashflag-AppleEvent.svg');
   background-size: calc(var(--size) * var(--frames)) var(--size);
   background-repeat: no-repeat;
   background-position-x: calc(var(--size) * (var(--frames) * -1 + 2));

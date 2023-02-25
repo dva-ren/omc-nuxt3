@@ -26,14 +26,23 @@ const colors = [
   '#f8c387',
   '#f17666',
   '#f8df72',
-  '#ed3333',
+  '#E290BD',
+  '#FDD19F',
+  '#FAA563',
+  '#F6A441',
+  '#FAB35B',
+  '#FFC8CB',
+  '#E2DCDD',
+  '#34718D',
+  '#1475BC',
+  '#538DA8',
 ]
 
 const initList = (data: Say[]) => {
   data.forEach((say, idx) => {
     const s = {
       ...say,
-      color: colors[idx % colors.length],
+      color: colors[randomNumber(0, colors.length)],
       delay: idx * 0.2,
     }
     says.value.push(s)
@@ -59,20 +68,18 @@ getSays()
 </script>
 
 <template>
-  <div max-w-1000px p-4 m-auto>
-    <Loadding :loadding="loadding" />
-    <div v-if="!loadding">
-      <div v-if="!isMini" flex gap-4>
-        <div flex-1>
-          <SayCard v-for="s in list1" :key="s.id" :data="s" :delay="s.delay" />
-        </div>
-        <div flex-1>
-          <SayCard v-for="s in list2" :key="s.id" :data="s" :delay="s.delay" />
-        </div>
+  <Loadding :loadding="loadding" />
+  <div v-if="!loadding">
+    <div v-if="!isMini" flex gap-4>
+      <div flex-1>
+        <SayCard v-for="s in list1" :key="s.id" :data="s" :delay="s.delay" />
       </div>
-      <div v-else>
-        <SayCard v-for="s in says" :key="s.id" :data="s" :delay="s.delay" />
+      <div flex-1>
+        <SayCard v-for="s in list2" :key="s.id" :data="s" :delay="s.delay" />
       </div>
+    </div>
+    <div v-else>
+      <SayCard v-for="s in says" :key="s.id" :data="s" :delay="s.delay" />
     </div>
   </div>
 </template>
