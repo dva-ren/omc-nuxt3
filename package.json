@@ -20,10 +20,13 @@
     "@bytemd/plugin-highlight-ssr": "^1.20.2",
     "@iconify-json/ri": "^1.1.5",
     "@popperjs/core": "^2.11.6",
+    "@uvdream/bytemd-plugin-code-copy": "^0.1.0",
     "@vueuse/motion": "2.0.0-beta.12",
     "dayjs": "^1.11.7",
     "js-md5": "^0.7.3",
     "nprogress": "^0.2.0",
+    "rehype-figure": "^1.0.1",
+    "remark-flexible-containers": "^1.0.3",
     "vue-lazyload": "3.0.0-rc.2"
   },
   "devDependencies": {

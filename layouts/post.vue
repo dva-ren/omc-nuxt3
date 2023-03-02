@@ -27,12 +27,12 @@ const { full, loadding } = defineProps({
       </div>
 
       <!-- Main content -->
-      <main v-spring class="col-span-12 md:col-span-8 xl:col-span-6" v-bind="$attrs">
+      <main v-spring class="col-span-12 md:col-span-7 xl:col-span-7 max-w-50em" v-bind="$attrs">
         <slot />
       </main>
 
       <!-- Right Sidebar -->
-      <div class="hidden col-span-12 md:block xl:col-span-4 md:col-span-3">
+      <div class="hidden col-span-12 md:block xl:col-span-3 md:col-span-3">
         <div class="sticky top-20">
           <!-- <SidebarRight /> -->
           <slot name="sidebar" />

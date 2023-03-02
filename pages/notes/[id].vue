@@ -53,7 +53,7 @@ useHead({ title: note.value?.title })
       <!-- <div>1111</div> -->
     </template>
     <div v-if="note && !pending">
-      <div class="info" border p-4 mb-8>
+      <div class="info" border p-4 md:p-8 mb-8>
         <p class="left-label">
           {{ formateToLocal(note.createTime) }}
         </p>

@@ -26,14 +26,14 @@ const { loadding } = defineProps<{ loadding: boolean }>()
   width: 36px;
   border-radius: 50%;
   background-color: #105D67;
-  animation: loading alternate infinite 0.3s linear;
+  animation: loading alternate infinite 0.6s ease-in;
   transform: scale(0.2);
 }
 @keyframes loading {
   0%{
     transform: translateY(0) scale(0.2);
   }
-  60%{
+  80%{
     transform: translateY(60px) scale(0.4);
   }
   100%{

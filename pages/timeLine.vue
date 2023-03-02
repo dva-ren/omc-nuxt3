@@ -66,7 +66,6 @@ useHead({ title: '时间线' })
                 {{ item.title }}
               </router-link>
               <span text="12px">
-                {{ item.title }}
                 <span>{{ item.mood }}/</span>
                 <span>{{ item.weather }}</span>
               </span>

@@ -1,8 +1,18 @@
 import type { BytemdPlugin } from 'bytemd'
-import { resizeImgUrl } from '~/composables'
+
+interface LazyOptions {
+  resizeWidth?: number
+  loading?: string
+  error?: string
+}
+
+const cache = new Map<string, Promise<HTMLImageElement>>()
 
 async function loadImage(options: { src: string; srcset?: string; sizes?: string }): Promise<HTMLImageElement> {
-  return new Promise((resolve, reject) => {
+  const p = cache.get(options.src)
+  if (p)
+    return p
+  const task = new Promise<HTMLImageElement>((resolve, reject) => {
     const img = new Image()
     const { src, srcset, sizes } = options
 
@@ -15,62 +25,54 @@ async function loadImage(options: { src: string; srcset?: string; sizes?: string
     img.onload = () => resolve(img)
     img.onerror = reject
   })
+  cache.set(options.src, task)
+  return task
 }
-
-function addObserver(el: HTMLElement) {
-  const ob = new IntersectionObserver((elements) => {
-    elements.forEach((entry) => {
-      const img = entry.target as HTMLImageElement
-      const src = img.src
-      if (!src)
-        return
-      img.src = ''
-      if (img.getAttribute('lazy') !== 'loading') {
-        img.src = img.dataset.loading || resizeImgUrl(src, 48)
-        img.setAttribute('lazy', 'loading')
-      }
-      if (entry.isIntersecting)
-        img.src = img.dataset.loading || src
-      loadImage({ src }).then(() => {
-        img.src = src
-        img.setAttribute('lazy', 'loaded')
-      })
-    })
-  })
-  ob.observe(el)
-}
-
-/**
- * @typedef Options
- *   Configuration (required).
- * @property {string} extname
- *   File extension to use (must start with `.`).
- */
-
-/** @type {import('unified').Plugin<[Options]>} */
-export function lazyload() {
-  return function dfs(tree: any) {
-    const nodes = tree.children
-    if (!nodes)
+function lazyload() {
+  return function dfs(tree: any, options: LazyOptions) {
+    if (!tree || !tree.children)
       return
-    nodes.forEach((node) => {
+    tree.children.forEach((node) => {
       if (node.tagName === 'img') {
-        node.properties['data-src'] = resizeImgUrl(node.properties.src, 720)
-        node.properties['data-loading'] = resizeImgUrl(node.properties.src, 48)
-        node.properties.src = ''
+        const src = node.properties.src || ''
+        node.properties = {
+          src: '',
+          dataSrc: resizeImgUrl(src, options.resizeWidth || 720),
+          dataLoading: resizeImgUrl(src, 48),
+        }
       }
-      dfs(node)
+      else {
+        dfs(node, options)
+      }
     })
   }
 }
 
-export default function imageLazyload(): BytemdPlugin {
+export default function imageLazyload(options?: LazyOptions): BytemdPlugin {
   return {
-    // rehype: processor => processor.use(lazyload),
+    rehype: processor => processor.use(lazyload, options),
     viewerEffect({ markdownBody }) {
       const imgs = markdownBody.querySelectorAll('img')
+      const observe = new IntersectionObserver((elements) => {
+        elements.forEach((entry) => {
+          const img = entry.target as HTMLImageElement
+
+          if (img.getAttribute('lazy') !== 'loading') {
+            img.src = img.dataset.loading!
+            img.setAttribute('lazy', 'loading')
+          }
+          if (entry.isIntersecting) {
+            const src = img.dataset.src!
+            loadImage({ src }).then(() => {
+              img.src = src
+              img.setAttribute('lazy', 'loaded')
+              observe.unobserve(img)
+            })
+          }
+        })
+      })
       imgs.forEach((img) => {
-        addObserver(img)
+        observe.observe(img)
       })
     },
   }

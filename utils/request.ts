@@ -1,4 +1,4 @@
-let baseURL = 'https://287j88r083.goho.co/blog'
+let baseURL = 'http://127.0.0.1:4000'
 const production = 'https://287j88r083.goho.co/blog'
 
 interface Options {
@@ -9,10 +9,7 @@ interface Options {
 }
 
 export const http = (url: string, options?: Options): Promise<any> => {
-  const { env } = useRuntimeConfig()
   if (process.client)
-    baseURL = production
-  if (env === 'prod')
     baseURL = production
   return $fetch(url, {
     onRequest: ({ request, options }) => {
