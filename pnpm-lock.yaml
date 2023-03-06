@@ -22,6 +22,7 @@ specifiers:
   dayjs: ^1.11.7
   eslint: ^8.34.0
   js-md5: ^0.7.3
+  lyric-parser: ^1.0.1
   nprogress: ^0.2.0
   nuxt: ^3.2.2
   pinia: ^2.0.32
@@ -38,6 +39,7 @@ dependencies:
   '@vueuse/motion': registry.npmmirror.com/@vueuse/motion/2.0.0-beta.12
   dayjs: registry.npmmirror.com/dayjs/1.11.7
   js-md5: registry.npmmirror.com/js-md5/0.7.3
+  lyric-parser: registry.npmmirror.com/lyric-parser/1.0.1
   nprogress: registry.npmmirror.com/nprogress/0.2.0
   rehype-figure: registry.npmmirror.com/rehype-figure/1.0.1
   remark-flexible-containers: registry.npmmirror.com/remark-flexible-containers/1.0.3
@@ -8390,6 +8392,12 @@ packages:
       '@types/hast': registry.npmmirror.com/@types/hast/2.3.4
       fault: registry.npmmirror.com/fault/2.0.1
       highlight.js: registry.npmmirror.com/highlight.js/11.7.0
+    dev: false
+
+  registry.npmmirror.com/lyric-parser/1.0.1:
+    resolution: {integrity: sha512-klGkA3gsKMyHENefKj1OnbscWRAxvxNsYNuxgmSIQg6KqVx/HnTrfcD/gNP74XBcu7HSh+kGhCjetPlH91OtFA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/lyric-parser/-/lyric-parser-1.0.1.tgz}
+    name: lyric-parser
+    version: 1.0.1
     dev: false
 
   registry.npmmirror.com/markdown-table/3.0.3:

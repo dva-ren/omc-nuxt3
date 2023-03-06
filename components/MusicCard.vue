@@ -15,22 +15,23 @@ const songInfo = reactive<SongInfo>({
 })
 const { player, show } = usePlayer()
 const playing = ref(false)
-
-const getInfo = async () => {
+useLazyAsyncData(async () => {
   const res = await querySongInfo(props.id)
   try {
-    const artists = JSON.parse(res.data.artist).map((i: any) => i.name) as Array<String>
+    const artists = res.songs[0].ar.map((i: any) => i.name) as Array<String>
     songInfo.artist = artists.join(',')
   }
   catch {
   }
-  songInfo.name = res.data.name
-  songInfo.pic = res.data.pic
-  songInfo.lrc = res.data.lrc
-  songInfo.time = res.data.time
-  songInfo.url = res.data.url
-}
-getInfo()
+  songInfo.name = res.songs[0].al.name
+  songInfo.pic = res.songs[0].al.picUrl
+  useLazyAsyncData(async () => {
+    const urlRes = await querySongurl(props.id)
+    songInfo.time = urlRes.data[0].time
+    songInfo.url = urlRes.data[0].url
+  })
+})
+
 const handleClick = () => {
   if (!show.value)
     show.value = true

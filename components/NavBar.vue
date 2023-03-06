@@ -51,7 +51,7 @@ const menus = ref<NavItem[]>([
     ],
   },
 ])
-useAsyncData(async () => {
+useLazyAsyncData(async () => {
   const res = await queryCategoryList()
   menus.value[0].children = res.data.map(item => ({
     name: item.name,
@@ -62,7 +62,7 @@ useAsyncData(async () => {
 const handleLike = () => {
   liked.value = !liked.value
   // Message.success('感谢喜欢')
-  console.log('11')
+  console.log('like')
 }
 const handleShare = () => {
   useShare({

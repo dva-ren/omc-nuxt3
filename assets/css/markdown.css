@@ -172,7 +172,7 @@
   color: var(--color-1);
 }
 .markdown-body img {
-  /* width: 100%; */
+  width: 100%;
   display: block;
   margin: 0 auto;
   transition: all .5s;
@@ -275,7 +275,7 @@
   border-radius: 2px;
   scroll-behavior: smooth;
   /* box-shadow: 0 0 8px #f7f2f4; */
-  transition: box-shadow .1s;
+  transition: box-shadow .3s;
   /* background-color: white; */
 }
 
@@ -292,6 +292,7 @@
 .dark .markdown-body pre > code{
   color: white;
   /* background-color: #333; */
+  transition: all .3s;
 }
 .markdown-body pre > code:hover {
   box-shadow: 0 4px 12px #2333;
@@ -349,6 +350,7 @@
   user-select: none;
   opacity: 0.6;
   transition: opacity 0.3s;
+  background-color: whitesmoke;
   border-bottom: 1px solid var(--text-color);
 }
 .markdown-body .operate-btn .copy-btn:hover{

@@ -54,6 +54,17 @@ export const querySayList = (): AsyncResponse<PageInfo<Say>> => {
   return http('/say')
 }
 
+export const queryTop = (size: number): AsyncResponse<PageInfo<{
+  posts: Array<Article>
+  notes: Array<Note>
+}>> => {
+  return http('/top', {
+    params: {
+      size,
+    },
+  })
+}
+
 interface Song {
   name: string
   artist: string
@@ -68,6 +79,18 @@ export const queryPlaylist = (id: number): Promise<SongInfo[]> => {
   })
 }
 
-export const querySongInfo = (id: string | number): AsyncResponse<SongInfo> => {
-  return http(`/music/song?id=${id}`)
+export const querySongInfo = (id: string | number): AsyncResponse<any> => {
+  return $fetch(`/song/detail?ids=${id}`, {
+    baseURL: 'https://service-007vg0f5-1257026645.cd.apigw.tencentcs.com/release/',
+  })
+}
+export const querySongurl = (id: string | number): AsyncResponse<any> => {
+  return $fetch(`/song/url/v1?id=${id}&level=exhigh`, {
+    baseURL: 'https://service-007vg0f5-1257026645.cd.apigw.tencentcs.com/release/',
+  })
+}
+export const queryLyric = (id: string | number): AsyncResponse<any> => {
+  return $fetch(`/lyric?id=${id}`, {
+    baseURL: 'https://service-007vg0f5-1257026645.cd.apigw.tencentcs.com/release/',
+  })
 }

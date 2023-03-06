@@ -1,4 +1,4 @@
-let baseURL = 'http://127.0.0.1:4000'
+const baseURL = 'http://127.0.0.1:4000'
 const production = 'https://287j88r083.goho.co/blog'
 
 interface Options {
