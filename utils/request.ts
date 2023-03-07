@@ -9,11 +9,12 @@ interface Options {
 }
 
 export const http = (url: string, options?: Options): Promise<any> => {
+  let base = baseURL
   if (process.client)
-    baseURL = production
+    base = production
   return $fetch(url, {
     onRequest: ({ request, options }) => {
-      options.baseURL = options.baseURL === '/' ? baseURL : options.baseURL
+      options.baseURL = options.baseURL === '/' ? base : options.baseURL
     },
     onResponse: ({ request, response, options }) => {
       const { code, msg } = response._data

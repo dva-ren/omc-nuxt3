@@ -1,16 +1,12 @@
 <script lang="ts" setup>
 import Message from '~/components/Message'
-import { getArticles, getNotes } from '~~/utils/api'
+import { queryTop } from '~/utils/api'
 
 const master = useMaster()
 const words = ref('')
-const { data: articleData, pending: articlePending } = await useAsyncData(async () => {
-  const res = await getArticles()
-  return res.data.list.slice(0, 4)
-})
-const { data: noteData, pending: notePending } = await useAsyncData(async () => {
-  const res = await getNotes()
-  return res.data.list.slice(0, 4)
+const { data: topData, pending } = useAsyncData(async () => {
+  const res = await queryTop(4)
+  return res.data
 })
 
 fetch('https://v1.hitokoto.cn').then((response) => {
@@ -55,7 +51,7 @@ function handleClick() {
       </div>
     </div>
     <TextAnimation min-h-10 min-10 :text="words" class="text-sm text-gray-400 px-4 mb-4" />
-    <div v-if="!articlePending" v-spring>
+    <div v-if="!pending" v-spring>
       <div text-white text-sm>
         <div flex justify-between items-end class="label">
           <div class="title" flex bg="#74759b">
@@ -68,7 +64,7 @@ function handleClick() {
             <div i-carbon:chevron-right text-lg />
           </NuxtLink>
         </div>
-        <CardList :data="articleData" />
+        <CardList :data="topData?.posts" />
       </div>
       <div text-white mt-10 text-sm>
         <div flex justify-between items-end class="label">
@@ -82,7 +78,7 @@ function handleClick() {
             <div i-carbon:chevron-right text-lg />
           </NuxtLink>
         </div>
-        <CardList :data="noteData" type="notes" />
+        <CardList :data="topData?.notes" type="notes" />
       </div>
       <div text-white mt-10 text-sm>
         <div flex justify-between items-end class="label">
@@ -97,9 +93,9 @@ function handleClick() {
           </router-link>
         </div>
         <div class="friends" flex gap-10 px-10 overflow-x-auto w-full>
-          <img shrink-0 shadow w-25 h-25 rounded-full object-cover src="https://image.dvaren.xyz/images/unsplash/bulksplash-veloradio-FGCtVVph7PU.jpg" alt="">
-          <img shrink-0 shadow w-25 h-25 rounded-full object-cover src="https://image.dvaren.xyz/images/unsplash/bulksplash-filipp_roman_photography-lUq5LSBaYtU.jpg" alt="">
-          <img shrink-0 shadow w-25 h-25 rounded-full object-cover src="https://image.dvaren.xyz/images/unsplash/bulksplash-flpschi-s_1ayiZ_rnA.jpg" alt="">
+          <img shrink-0 shadow w-25 h-25 rounded-full object-cover src="https://image.dvaren.xyz/images/unsplash/bulksplash-jon_photos-RM5jjBIh8Hw.jpg" alt="">
+          <img shrink-0 shadow w-25 h-25 rounded-full object-cover src="https://image.dvaren.xyz/images/unsplash/173814.jpg" alt="">
+          <img shrink-0 shadow w-25 h-25 rounded-full object-cover src="https://image.dvaren.xyz/images/unsplash/bulksplash-tomofficials-WODiUmUDWGQ.jpg" alt="">
         </div>
       </div>
       <div text-white mt-10 text-sm>

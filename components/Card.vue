@@ -23,14 +23,14 @@ const imgApis = ref([
 
 function getImageUrl() {
   // const api = imgApis.value[2]
-  // return `${api}${api.includes('?') ? '&' : '?'}time=${useUnionNumber()}`
-  return imgs[randomNumber(0, imgs.length)]
+  // return `${api}${api.includes('?') ? '&' : '?'}time=${Math.random()}`
+  return imgs.ai[randomNumber(0, imgs.ai.length)]
 }
 </script>
 
 <template>
   <div class="card" h-30 rounded-xl>
-    <img :src="getImageUrl()" loading="../assets/img-bg.webp" w-full class="bg-img">
+    <img :src="props.bg ? props.bg : getImageUrl()" loading="../assets/img-bg.webp" w-full class="bg-img">
     <div class="card-title">
       <span rounded-xl>{{ props.title }}</span>
     </div>
