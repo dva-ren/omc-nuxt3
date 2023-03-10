@@ -101,6 +101,9 @@ onMounted(() => {
   start()
   window.onresize = repaint
 })
+definePageMeta({
+  layout: false,
+})
 </script>
 
 <template>

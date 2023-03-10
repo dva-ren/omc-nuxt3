@@ -29,15 +29,15 @@ async function loadImage(options: { src: string; srcset?: string; sizes?: string
   return task
 }
 function lazyload() {
-  return function dfs(tree: any, options: LazyOptions) {
+  return function dfs(tree: any, options?: LazyOptions) {
     if (!tree || !tree.children)
       return
-    tree.children.forEach((node) => {
+    tree.children.forEach((node: any) => {
       if (node.tagName === 'img') {
         const src = node.properties.src || ''
         node.properties = {
           src: '',
-          dataSrc: resizeImgUrl(src, options.resizeWidth || 720),
+          dataSrc: resizeImgUrl(src, options?.resizeWidth || 720),
           dataLoading: resizeImgUrl(src, 48),
         }
       }

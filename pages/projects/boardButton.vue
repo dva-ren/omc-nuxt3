@@ -1,3 +1,9 @@
+<script lang="ts" setup>
+definePageMeta({
+  layout: false,
+})
+</script>
+
 <template>
   <div flex items-center justify-center h-120>
     <a class="button button--bird">

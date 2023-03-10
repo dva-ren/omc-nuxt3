@@ -28,6 +28,10 @@ onMounted(() => {
   }
   update()
 })
+
+definePageMeta({
+  layout: false,
+})
 </script>
 
 <template>

@@ -5,9 +5,14 @@ const canvas = $ref<HTMLCanvasElement>()
 const numArray = ref<number[]>([])
 const totalX = ref(0)
 const totalY = ref(0)
+const clientWidth = ref(0)
+const clientHeight = ref(0)
 
-const clientWidth = document.body.offsetWidth
-const clientHeight = document.body.offsetHeight
+onMounted(() => {
+  clientWidth.value = document.body.offsetWidth
+  clientHeight.value = document.body.offsetHeight
+})
+
 const speed = ref(20)
 let timer: any = null
 function getRandomChar() {
@@ -25,8 +30,8 @@ function start() {
   canvas.width = clientWidth
   canvas.height = clientHeight
   adaptDPR(canvas, ctx)
-  totalX.value = Math.round(clientWidth / gap) + 2
-  totalY.value = Math.round(clientHeight / gap)
+  totalX.value = Math.round(clientWidth.value / gap) + 2
+  totalY.value = Math.round(clientHeight.value / gap)
   numArray.value = new Array(totalX.value).fill(1)
   timer = setInterval(() => {
     draw(ctx)
@@ -41,7 +46,7 @@ function start() {
 
 function draw(ctx: CanvasRenderingContext2D) {
   ctx.fillStyle = 'rgba(238,238,238,.1)'
-  ctx.fillRect(0, 0, clientWidth, clientHeight)
+  ctx.fillRect(0, 0, clientWidth.value, clientHeight.value)
   ctx.font = '16px arial'
   ctx.fillStyle = `${getRandomColor()}`
   for (let i = 0; i < numArray.value.length - 1; i++) {
@@ -54,6 +59,9 @@ function draw(ctx: CanvasRenderingContext2D) {
 }
 onMounted(() => {
   start()
+})
+definePageMeta({
+  layout: false,
 })
 </script>
 

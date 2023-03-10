@@ -48,6 +48,9 @@ onMounted(() => {
   }
   start()
 })
+definePageMeta({
+  layout: false,
+})
 </script>
 
 <template>

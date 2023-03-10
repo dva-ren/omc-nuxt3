@@ -159,3 +159,24 @@ export interface Netease {
   weekdata: Playlist
   alldata: Playlist
 }
+
+/**
+ * 图片
+ */
+export interface Picture {
+  id: string
+  url: string
+  nickname?: string
+  position?: string
+  labels?: string
+  description?: string
+  createTime: string
+  updateTime: string
+  isDelete: number
+}
+
+export interface PictureParams {
+  pageNum?: number
+  pageSize?: number
+  labels?: string
+}
