@@ -54,10 +54,10 @@ export const querySayList = (): AsyncResponse<PageInfo<Say>> => {
   return http('/say')
 }
 
-export const queryTop = (size: number): AsyncResponse<PageInfo<{
+export const queryTop = (size?: number): AsyncResponse<{
   posts: Array<Article>
   notes: Array<Note>
-}>> => {
+}> => {
   return http('/top', {
     params: {
       size,
