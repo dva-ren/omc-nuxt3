@@ -22,7 +22,11 @@ router.afterEach(() => {
   nprogress.done()
 })
 useHead({
-  titleTemplate: '%s - 灰色と青 · 不虚光阴',
+  titleTemplate: (s) => {
+    if (s && s.length > 6)
+      s = `${s.slice(0, 6)}...`
+    return `${s}- 灰色と青 · 不虚光阴`
+  },
   link: [
     {
       rel: 'icon', type: 'image/svg', href: '/logo.svg',

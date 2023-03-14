@@ -20,7 +20,7 @@ const { full, loadding } = defineProps({
     <div v-if="!loadding" class="grid grid-cols-12 mx-auto p-4 sm:px-6 lg:max-w-7xl lg:px-8 lg:gap-5">
       <!-- Left sidebar -->
       <div class="hidden md:block xs-col-span-1 xl:col-span-2">
-        <div class="sticky top-20">
+        <div min-h-100vh h-full>
           <!-- <SidebarLeft :user="user" @on-tweet="handleOpenTweetModal" @on-logout="handleUserLogout" /> -->
           <slot name="pre" />
         </div>

@@ -15,9 +15,6 @@ const list2 = ref<Array<SayInfo>>([])
 const windowSize = useWindowSize()
 
 const isMini = ref(windowSize.width.value < 600)
-const loadding = ref(true)
-
-const says = ref<Array<SayInfo>>([])
 
 const colors = [
   '#eba0b3',
@@ -38,38 +35,33 @@ const colors = [
   '#538DA8',
 ]
 
-const initList = (data: Say[]) => {
-  data.forEach((say, idx) => {
+const { data, pending } = useAsyncData(async () => {
+  const res = await querySayList()
+  const says = res.data.list.map((say, idx) => {
     const s = {
       ...say,
       color: colors[randomNumber(0, colors.length)],
       delay: idx * 0.2,
     }
-    says.value.push(s)
     if (idx % 2 === 0)
       list1.value.push(s)
     else
       list2.value.push(s)
+    return s
   })
-}
+  return says
+})
 
-const getSays = async () => {
-  const res = await querySayList()
-  initList(res.data.list)
-  loadding.value = false
-}
 watch(useDebounce(windowSize.width, 500), () => {
   if (windowSize.width.value < 600)
     isMini.value = true
   else
     isMini.value = false
 })
-getSays()
 </script>
 
 <template>
-  <Loadding :loadding="loadding" />
-  <div v-if="!loadding">
+  <NuxtLayout :loading="pending">
     <div v-if="!isMini" flex gap-4>
       <div flex-1>
         <SayCard v-for="s in list1" :key="s.id" :data="s" :delay="s.delay" />
@@ -79,9 +71,9 @@ getSays()
       </div>
     </div>
     <div v-else>
-      <SayCard v-for="s in says" :key="s.id" :data="s" :delay="s.delay" />
+      <SayCard v-for="s in data" :key="s.id" :data="s" :delay="s.delay" />
     </div>
-  </div>
+  </NuxtLayout>
 </template>
 
 <style scoped>

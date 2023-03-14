@@ -50,7 +50,7 @@ function handleClick() {
         </div>
       </div>
     </div>
-    <TextAnimation min-h-10 min-10 :text="words" class="text-sm text-gray-400 px-4 mb-4" />
+    <TextAnimation min-h-10 :text="words" class="text-sm text-gray-400 px-4 mb-4" />
     <div v-if="!pending" v-spring>
       <div text-white text-sm>
         <div flex justify-between items-end class="label">

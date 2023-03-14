@@ -1,17 +1,11 @@
 <script lang="ts" setup>
-import { getNotes, queryNote } from '~/utils/api'
+import { getNotes } from '~/utils/api'
 import { useCatalog } from '~~/components/Markdown/catalog'
 
+const headerInfo = useHeaderInfo()
 const route = useRoute()
 const id = computed(() => route.params.id as string)
-
-const { data: notes } = useAsyncData(async () => {
-  const res = await getNotes()
-  return res.data.list
-})
-const headerInfo = useHeaderInfo()
 const { anchor } = useCatalog()
-
 const { data: note, pending } = useAsyncData(async () => {
   const res = await queryNote(id.value)
   headerInfo.value.id = res.data.id
@@ -20,11 +14,17 @@ const { data: note, pending } = useAsyncData(async () => {
   headerInfo.value.type = '记录生活'
   return res.data
 })
+const { data: notes, pending: notesPending } = useLazyAsyncData(async () => {
+  const res = await getNotes()
+  // const idx = res.data.list.findIndex(i => i.id === note.value?.id)
+  // list.value = res.data.list.slice(idx - 4, idx + 4)
+  // console.log('idx', idx)
+  return res.data.list
+})
 const index = computed(() => {
   const idx = notes.value?.findIndex(n => n.id === id.value) || 0
   return idx > 0 ? idx : 0
 })
-
 const weather = () => {
   const { weather } = note.value!
   if (weather.includes('晴'))
@@ -37,96 +37,88 @@ const weather = () => {
     return 'i-carbon-snow-scattered'
   return 'i-carbon-word-cloud'
 }
-definePageMeta({
-  layout: false,
-})
 onBeforeUnmount(() => {
   headerInfo.value.title = ''
   anchor.value = []
 })
-useHead({ title: note.value?.title })
+const title = computed(() => {
+  if (pending.value)
+    return '记录生活'
+  return note.value?.title || '记录生活'
+})
+useHead({ title })
 </script>
 
 <template>
-  <NuxtLayout name="post" :loadding="pending">
-    <template #pre>
-      <!-- <div>1111</div> -->
-    </template>
-    <div v-if="note && !pending">
-      <div class="info" border p-4 md:p-8 mb-8>
-        <p class="left-label">
-          {{ formateToLocal(note.createTime) }}
-        </p>
-        <p text-center p-4 text="16.8px" mb-8>
-          {{ note.title }}
-        </p>
-        <div v-if="note.musicId" flex justify-center my-4>
-          <MusicCard :id="note.musicId" />
-        </div>
-        <MarkdownViewer :value="note.content" min-h-100 />
-        <div class="line" />
-        <div text="center sm">
-          <router-link to="/timeLine?type=notes">
-            <span pr-1>时间线</span>
-            <div i-ri-time-line inline-block class="font-icon" />
+  <div v-if="note && !pending" v-spring>
+    <div class="info" border p-4 md:p-8 mb-8>
+      <p class="left-label">
+        {{ formateToLocal(note.createTime) }}
+      </p>
+      <p text-center p-4 text="16.8px" mb-8>
+        {{ note.title }}
+      </p>
+      <div v-if="note.musicId" flex justify-center my-4>
+        <MusicCard :id="note.musicId" />
+      </div>
+      <MarkdownViewer :value="note.content" min-h-100 />
+      <div class="line" />
+      <div text="center sm">
+        <router-link to="/timeLine?type=notes">
+          <span pr-1>时间线</span>
+          <div i-ri-time-line inline-block class="font-icon" />
+        </router-link>
+      </div>
+      <div v-if="notes" text-sm flex justify-between>
+        <div>
+          <router-link v-if="index > 0" :to="`/notes/${notes[index - 1]?.id}`">
+            <div flex items-center>
+              <div text-xl i-ri-arrow-drop-left-line />
+              <span>上一篇</span>
+            </div>
+            <div pl-5 max->
+              {{ notes[index - 1]?.title }}
+            </div>
           </router-link>
         </div>
-        <div v-if="notes" text-sm flex justify-between>
-          <div>
-            <router-link v-if="index > 0" :to="`/notes/${notes[index - 1]?.id}`">
-              <div flex items-center>
-                <div text-xl i-ri-arrow-drop-left-line />
-                <span>上一篇</span>
-              </div>
-              <div pl-5 max->
-                {{ notes[index - 1]?.title }}
-              </div>
-            </router-link>
-          </div>
-          <div>
-            <router-link v-if="index < notes.length - 1" :to="`/notes/${notes[index + 1]?.id}`">
-              <div flex items-center>
-                <span>下一篇</span>
-                <div text-xl i-ri-arrow-drop-right-line />
-              </div>
-              <div>
-                {{ notes[index + 1]?.title }}
-              </div>
-            </router-link>
-          </div>
-        </div>
-        <div text-sm flex justify-between mt-4>
-          <div flex items-center gap-4>
-            <div v-if="note.weather" flex items-center gap-1>
-              <div :class="weather()" />
-              <div>{{ note.weather }}</div>
+        <div>
+          <router-link v-if="index < notes.length - 1" :to="`/notes/${notes[index + 1]?.id}`">
+            <div flex items-center>
+              <span>下一篇</span>
+              <div text-xl i-ri-arrow-drop-right-line />
             </div>
-            <div display-none>
-              <div i-carbon-sun />
-              <div i-carbon-rain-heavy />
-              <div i-carbon-cloud />
-              <div i-carbon-snow-scattered />
-              <div i-carbon-word-cloud />
+            <div>
+              {{ notes[index + 1]?.title }}
             </div>
-            <div flex items-center gap-1>
-              <div i-ri-calendar-todo-line />
-              <div>{{ dateFns(note.createTime).fromNow() }}</div>
-            </div>
-          </div>
-          <div flex items-center gap-2px>
-            <div i-ri-heart-3-fill />
-            <div>0</div>
-          </div>
+          </router-link>
         </div>
       </div>
-      <Comment v-if="note.allowComment" :ref-id="id === 'latest' ? notes[0].id : id" type="note" />
+      <div text-sm flex justify-between mt-4>
+        <div flex items-center gap-4>
+          <div v-if="note.weather" flex items-center gap-1>
+            <div :class="weather()" />
+            <div>{{ note.weather }}</div>
+          </div>
+          <div display-none>
+            <div i-carbon-sun />
+            <div i-carbon-rain-heavy />
+            <div i-carbon-cloud />
+            <div i-carbon-snow-scattered />
+            <div i-carbon-word-cloud />
+          </div>
+          <div flex items-center gap-1>
+            <div i-ri-calendar-todo-line />
+            <div>{{ dateFns(note.createTime).fromNow() }}</div>
+          </div>
+        </div>
+        <div flex items-center gap-2px>
+          <div i-ri-heart-3-fill />
+          <div>0</div>
+        </div>
+      </div>
     </div>
-    <template #sidebar>
-      <div sticky top-20 mt-20 text-sm>
-        <MarkdownCatalog />
-      </div>
-    </template>
-  </NuxtLayout>
+    <Comment v-if="note.allowComment" :ref-id="note.id" type="note" />
+  </div>
 </template>
 
 <style scoped>

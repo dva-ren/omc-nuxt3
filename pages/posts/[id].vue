@@ -25,7 +25,12 @@ onBeforeUnmount(() => {
   headerInfo.value.title = ''
   anchor.value = []
 })
-useHead({ title: articleData.value?.title })
+const title = computed(() => {
+  if (pending.value)
+    return '文章详情'
+  return articleData.value?.title || '文章详情'
+})
+useHead({ title })
 </script>
 
 <template>

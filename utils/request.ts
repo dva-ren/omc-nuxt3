@@ -1,5 +1,5 @@
-let baseURL = 'http://127.0.0.1:4000'
-const production = 'https://287j88r083.goho.co/blog'
+const baseURL = 'http://127.0.0.1:4000'
+const production = 'https://api.dvaren.xyz/blog'
 
 interface Options {
   params?: any
@@ -9,8 +9,9 @@ interface Options {
 }
 
 export const http = (url: string, options?: Options): Promise<any> => {
+  let base = baseURL
   if (process.client)
-    baseURL = production
+    base = production
   return $fetch(url, {
     onRequest: ({ request, options }) => {
       options.baseURL = options.baseURL === '/' ? base : options.baseURL
