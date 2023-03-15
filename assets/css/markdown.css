@@ -175,20 +175,19 @@
   width: 100%;
   display: block;
   margin: 0 auto;
-  transition: all .5s;
-  user-select: none;
-  /* margin: 1em 0; */
-  transition: transform 0.2s ease 0s;
-  background-color: #f8f5ff;
+  transition: all 0.2s ease-in,filter 0.2s linear 0.3s !important;
   box-shadow: 0 0 10px #2333;
   border-radius: 0.5rem;
+  opacity: 1;
 }
 .markdown-body img[lazy="loading"]{
-  opacity: 1;
   filter: blur(10px);
+  border: 1px solid #2333;
+  opacity: 1;
 }
 .markdown-body img[lazy="loaded"]{
   opacity: 1;
+  filter: none;
 }
 /**
 图片

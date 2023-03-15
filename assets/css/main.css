@@ -101,3 +101,8 @@ html.dark {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+img[src=''],
+img:not([src]) {
+  opacity: 0;
+}

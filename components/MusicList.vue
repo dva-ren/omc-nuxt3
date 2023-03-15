@@ -17,7 +17,9 @@ const handleClick = (song: SongInfo) => {
   <Loadding :loadding="!playlist" />
   <div flex gap-4 flex-col sm:flex-row pb-8>
     <div>
-      <MyImg m-auto :src="playlist?.coverImgUrl" w-30 h-30 rounded-full static top-10 />
+      <ClientOnly>
+        <ImageLoad m-auto :src="playlist?.coverImgUrl" w-30 h-30 rounded-full static top-10 />
+      </ClientOnly>
       <div py-2 text="center">
         {{ type }}
       </div>

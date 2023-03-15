@@ -14,7 +14,10 @@ const onReplayed = () => {
 
 <template>
   <div v-spring flex gap-4 text-12px p-2>
-    <img w-10 h-10 rounded-full :src="`https://cravatar.cn/avatar/${md5(data.mail)}?d=monsterid`" alt="">
+    <ClientOnly>
+      <ImageLoad w-10 h-10 rounded-full :src="`https://cravatar.cn/avatar/${md5(data.mail)}?d=monsterid`" />
+    </ClientOnly>
+    <!-- <img w-10 h-10 rounded-full :src="`https://cravatar.cn/avatar/${md5(data.mail)}?d=monsterid`" alt=""> -->
     <div flex-1>
       <div>
         <a v-if="data.url" class="link" :href="data.url" target="_blank" rel="noopener noreferrer">{{ data.author }}</a>

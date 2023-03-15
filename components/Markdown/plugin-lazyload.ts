@@ -38,6 +38,7 @@ function lazyload() {
         node.properties = {
           src: '',
           dataSrc: resizeImgUrl(src, options?.resizeWidth || 720),
+          dataZoomSrc: src,
           dataLoading: resizeImgUrl(src, 48),
         }
       }
