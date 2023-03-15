@@ -6,7 +6,7 @@
     <img class="footer-img" src="/images/footer.png" alt="">
     <div class="content" text-center w-full bg="#67ACA0" py-10>
       <p>
-        <span pr-2>© 2020-2023</span>
+        <span pr-2>© 2022-2023</span>
         <a href="https://github.com/dva-ren">dvaren</a>
         <span>. Stay hungry</span>
         <span>. Stay foolish.</span>

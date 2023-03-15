@@ -9,8 +9,8 @@
   },
   "scripts": {
     "build": "nuxi build",
-    "dev": "nuxi dev --port=3000",
-    "production": "nuxi dev --mode prod",
+    "dev": "nuxi dev --port=3000 --mode dev",
+    "production": "nuxi dev --port=3000 --mode prod",
     "start": "node .output/server/index.mjs",
     "lint": "eslint .",
     "postinstall": "nuxi prepare",

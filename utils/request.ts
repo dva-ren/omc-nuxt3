@@ -1,6 +1,3 @@
-const baseURL = 'http://127.0.0.1:4000'
-const production = 'https://api.dvaren.xyz/blog'
-
 interface Options {
   params?: any
   body?: any
@@ -9,12 +6,11 @@ interface Options {
 }
 
 export const http = (url: string, options?: Options): Promise<any> => {
-  let base = baseURL
-  if (process.client)
-    base = production
+  const env = useRuntimeConfig()
+  const baseUrl = env.public.VITE_REQUEST_BASE_URL
   return $fetch(url, {
     onRequest: ({ request, options }) => {
-      options.baseURL = options.baseURL === '/' ? base : options.baseURL
+      options.baseURL = options.baseURL === '/' ? baseUrl : options.baseURL
     },
     onResponse: ({ request, response, options }) => {
       const { code, msg } = response._data

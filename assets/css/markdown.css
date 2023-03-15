@@ -38,7 +38,7 @@
 }
 .dark .markdown-body{
   color: rgb(223, 215, 215);
-  background-color: #000;
+  background-color: #222;
 }
 .markdown-body ::selection {
   color: #fff;
@@ -291,7 +291,7 @@
 
 .dark .markdown-body pre > code{
   color: white;
-  /* background-color: #333; */
+  background-color: #333;
   transition: all .3s;
 }
 .markdown-body pre > code:hover {
