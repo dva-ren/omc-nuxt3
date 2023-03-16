@@ -35,11 +35,13 @@ function lazyload() {
     tree.children.forEach((node: any) => {
       if (node.tagName === 'img') {
         const src = node.properties.src || ''
+        const size = getImageSizeFromUrl(src)
         node.properties = {
           src: '',
           dataSrc: resizeImgUrl(src, options?.resizeWidth || 720),
           dataZoomSrc: src,
           dataLoading: resizeImgUrl(src, 48),
+          style: `${size ? (`width:${size.width}px;aspect-ratio:${size.width / size.height}`) : ''}`,
         }
       }
       else {
