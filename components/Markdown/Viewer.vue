@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import type { BytemdPlugin } from 'bytemd'
-
 import { Viewer } from '@bytemd/vue-next'
 import gfm from '@bytemd/plugin-gfm'
 import math from '@bytemd/plugin-math'
@@ -8,19 +6,13 @@ import highlight from '@bytemd/plugin-highlight-ssr'
 import gemoji from '@bytemd/plugin-gemoji'
 import mediumZoom from '@bytemd/plugin-medium-zoom'
 import codeCopy from '@uvdream/bytemd-plugin-code-copy'
-import flexibleContainers from 'remark-flexible-containers'
 import Message from '../Message'
 import lazyload from './plugin-lazyload'
-import figure from './plugin-figure'
+import { clearEffect } from './plugin-figure'
+import { imgGroup } from './plugin-img-group'
 import 'highlight.js/styles/atom-one-light.css'
 
 const { value } = defineProps<{ value: string }>()
-
-function container(): BytemdPlugin {
-  return {
-    remark: processor => processor.use(flexibleContainers),
-  }
-}
 
 const plugins = [
   gfm(),
@@ -33,7 +25,7 @@ const plugins = [
     copyText: 'COPY',
     copyIcon: 'copyLight',
     copySuccess: (text: string) => {
-      Message.success('COPYED')
+      Message.success('COPIED')
       return text
     },
     copyError: () => {
@@ -41,10 +33,13 @@ const plugins = [
       return {}
     },
   }),
-  figure(),
-  // container(),
+  // mdFigure(),
+  imgGroup(),
   lazyload(),
 ]
+onBeforeUnmount(() => {
+  clearEffect()
+})
 </script>
 
 <template>

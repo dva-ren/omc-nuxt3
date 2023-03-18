@@ -1,19 +1,25 @@
 import type { BytemdPlugin } from 'bytemd'
-import figure from 'rehype-figure'
+import flexibleContainers from 'remark-flexible-containers'
 import './styles/figure.css'
 
 const intervalIds: any[] = []
 
 function looper(container: Element, pointsContainer: HTMLElement) {
+  console.log(container)
   const currentIdx = ref(0)
   const imageWidth = container.children[0].clientWidth
+  setTimeout(() => {
+    console.log('container.children[0].clientWidth', container.children[0].clientWidth)
+  }, 5000)
+  console.log('imageWidth', imageWidth)
   const len = container.children.length
   pointsContainer.addEventListener('click', (e: MouseEvent) => {
     const idx = e.target?.dataset?.index
+    console.log('idx', idx)
     if (idx) {
       currentIdx.value = idx
       container.scrollTo({
-        left: idx * (imageWidth),
+        left: idx * imageWidth,
         behavior: 'smooth',
       })
     }
@@ -23,7 +29,7 @@ function looper(container: Element, pointsContainer: HTMLElement) {
     if (currentIdx.value >= len)
       currentIdx.value = 0
     container.scrollTo({
-      left: currentIdx.value * (imageWidth),
+      left: currentIdx.value * imageWidth,
       behavior: 'smooth',
     })
   }, 5000)
@@ -40,15 +46,15 @@ export function clearEffect() {
   intervalIds.forEach(id => clearInterval(id))
 }
 
-export function mdFigure(): BytemdPlugin {
+export function imgGroup(): BytemdPlugin {
   return {
-    rehype: processor => processor.use(figure),
+    remark: processor => processor.use(flexibleContainers),
     viewerEffect(ctx) {
-      const list = ctx.markdownBody.querySelectorAll('.rehype-figure-container')
+      const list = ctx.markdownBody.querySelectorAll('.rehype-group-container')
       if (list.length <= 0)
         return
       list.forEach((container) => {
-        const len = container.children.length
+        const len = container.children[0].children.length
         const div = document.createElement('div')
         div.classList.add('switch-container')
         for (let i = 0; i < len; i++) {
@@ -57,7 +63,7 @@ export function mdFigure(): BytemdPlugin {
           point.dataset.index = `${i}`
           div.appendChild(point)
         }
-        looper(container, div)
+        looper(container.children[0], div)
         container.appendChild(div)
       })
     },

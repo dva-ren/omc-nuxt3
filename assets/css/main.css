@@ -14,6 +14,7 @@ html.dark {
   --light-color: #67492e;
   --dark-brown: #b4b4b4;
   --delay: 0;
+  --bg-opacity: #ffffffb8;
 }
 
 .markdown-body {

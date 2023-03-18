@@ -175,7 +175,7 @@
   width: 100%;
   display: block;
   margin: 0 auto;
-  transition: all 0.2s ease-in,filter 0.2s linear 0.3s !important;
+  /* transition: all 0.2s ease-in,filter 0.2s linear 0.3s !important; */
   box-shadow: 0 0 10px #2333;
   border-radius: 0.5rem;
   opacity: 1;
@@ -219,7 +219,7 @@
 }
 .markdown-body img:hover {
   box-shadow: 0 0 20px #2333;
-  transform: translateY(-1px);
+  /* transform: translateY(-1px); */
 }
 .markdown-body blockquote {
   padding: 0.5em 1em;
@@ -356,54 +356,11 @@
   opacity: 1;
   font-weight: 800;
 }
-
-/* 图片容器 */
-.markdown-body .rehype-figure-container figcaption{
-  display: none;
-}
-
-.markdown-body .rehype-figure{
-  display: block;
-  scroll-snap-stop: always;
-  min-width:calc(100% - 60px);
-}
-.markdown-body
-.rehype-figure-container
-.rehype-figure{
-  margin: 0;
-}
-
-.markdown-body .rehype-figure-container{
-  position: relative;
-  border-radius: .8em;
-  margin: 1em 0;
-  box-sizing: border-box;
-  display: flex;
-  width: 100%;
-  gap: 2em;
-  scroll-snap-type: x mandatory;
-  overflow-x: scroll;
-}
-.markdown-body .rehype-figure-container img{
-  object-fit: cover;
-  background-color: gray;
-  border-radius: .8em;
-  width: 100%;
-  max-height: 440px;
-  vertical-align: bottom;
-}
-.markdown-body .rehype-figure-container::before{
-  content: '';
-  display: block;
-  width: 80px;
-  position: absolute;
-  left: 50%;
-  bottom: 1em;
-}
 .medium-zoom-overlay{
   z-index: 24;
 }
 .medium-zoom-image--opened{
+  width: auto !important;
   z-index: 25;
 }
 @media (max-width: 720px) {

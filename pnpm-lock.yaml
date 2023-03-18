@@ -21,6 +21,7 @@ specifiers:
   '@vueuse/nuxt': ^9.13.0
   dayjs: ^1.11.7
   eslint: ^8.34.0
+  hastscript: ^7.2.0
   js-md5: ^0.7.3
   lyric-parser: ^1.0.1
   nprogress: ^0.2.0
@@ -29,6 +30,7 @@ specifiers:
   rehype-figure: ^1.0.1
   remark-flexible-containers: ^1.0.3
   typescript: ^4.9.5
+  unist-util-visit: ^4.1.2
   vue-lazyload: 3.0.0-rc.2
 
 dependencies:
@@ -38,11 +40,13 @@ dependencies:
   '@uvdream/bytemd-plugin-code-copy': registry.npmmirror.com/@uvdream/bytemd-plugin-code-copy/0.1.0
   '@vueuse/motion': registry.npmmirror.com/@vueuse/motion/2.0.0-beta.12
   dayjs: registry.npmmirror.com/dayjs/1.11.7
+  hastscript: registry.npmmirror.com/hastscript/7.2.0
   js-md5: registry.npmmirror.com/js-md5/0.7.3
   lyric-parser: registry.npmmirror.com/lyric-parser/1.0.1
   nprogress: registry.npmmirror.com/nprogress/0.2.0
   rehype-figure: registry.npmmirror.com/rehype-figure/1.0.1
   remark-flexible-containers: registry.npmmirror.com/remark-flexible-containers/1.0.3
+  unist-util-visit: registry.npmmirror.com/unist-util-visit/4.1.2
   vue-lazyload: registry.npmmirror.com/vue-lazyload/3.0.0-rc.2
 
 devDependencies:
@@ -8054,7 +8058,6 @@ packages:
     resolution: {integrity: sha512-Fu4hJdvzeylCfQPp9SGWidpzrMs7tTrlu6Vb8XGaRGck8QSNZJJp538Wrb60Lax4fPwR64ViY468OIUTbRlGZg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/comma-separated-tokens/-/comma-separated-tokens-2.0.3.tgz}
     name: comma-separated-tokens
     version: 2.0.3
-    dev: true
 
   registry.npmmirror.com/commander/8.3.0:
     resolution: {integrity: sha512-OkTL9umf+He2DZkUq8f8J9of7yL6RJKI24dVITBmNfZBmri9zYZQrKkuXiKhyfPSu8tUhnVBB1iKXevvnlR4Ww==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/commander/-/commander-8.3.0.tgz}
@@ -8204,7 +8207,6 @@ packages:
     version: 3.1.1
     dependencies:
       '@types/hast': registry.npmmirror.com/@types/hast/2.3.4
-    dev: true
 
   registry.npmmirror.com/hast-util-raw/7.2.3:
     resolution: {integrity: sha512-RujVQfVsOrxzPOPSzZFiwofMArbQke6DJjnFfceiEbFh7S05CbPt0cYN+A5YeD3pso0JQk6O1aHBnx9+Pm2uqg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/hast-util-raw/-/hast-util-raw-7.2.3.tgz}
@@ -8302,7 +8304,6 @@ packages:
       hast-util-parse-selector: registry.npmmirror.com/hast-util-parse-selector/3.1.1
       property-information: registry.npmmirror.com/property-information/6.2.0
       space-separated-tokens: registry.npmmirror.com/space-separated-tokens/2.0.2
-    dev: true
 
   registry.npmmirror.com/hey-listen/1.0.8:
     resolution: {integrity: sha512-COpmrF2NOg4TBWUJ5UVyaCU2A88wEMkUPK4hNqyCkqHbxT92BbvfjoSozkAIIm6XhicGlJHhFdullInrdhwU8Q==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/hey-listen/-/hey-listen-1.0.8.tgz}
@@ -8946,7 +8947,6 @@ packages:
     resolution: {integrity: sha512-kma4U7AFCTwpqq5twzC1YVIDXSqg6qQK6JN0smOw8fgRy1OkMi0CYSzFmsy6dnqSenamAtj0CyXMUJ1Mf6oROg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/property-information/-/property-information-6.2.0.tgz}
     name: property-information
     version: 6.2.0
-    dev: true
 
   registry.npmmirror.com/regenerator-runtime/0.13.11:
     resolution: {integrity: sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/regenerator-runtime/-/regenerator-runtime-0.13.11.tgz}
@@ -9099,7 +9099,6 @@ packages:
     resolution: {integrity: sha512-PEGlAwrG8yXGXRjW32fGbg66JAlOAwbObuqVoJpv/mRgoWDQfgH1wDPvtzWyUSNAXBGSk8h755YDbbcEy3SH2Q==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/space-separated-tokens/-/space-separated-tokens-2.0.2.tgz}
     name: space-separated-tokens
     version: 2.0.2
-    dev: true
 
   registry.npmmirror.com/stringify-entities/4.0.3:
     resolution: {integrity: sha512-BP9nNHMhhfcMbiuQKCqMjhDP5yBCAxsPu4pHFFzJ6Alo9dZgY4VLDPutXqIjpRiMoKdp7Av85Gr73Q5uH9k7+g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/stringify-entities/-/stringify-entities-4.0.3.tgz}
