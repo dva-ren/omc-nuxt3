@@ -27,7 +27,7 @@ const { full, loadding } = defineProps({
       </div>
 
       <!-- Main content -->
-      <main v-spring class="col-span-12 md:col-span-7 xl:col-span-7 max-w-50em" v-bind="$attrs">
+      <main class="spring col-span-12 md:col-span-7 xl:col-span-7 max-w-50em" v-bind="$attrs">
         <slot />
       </main>
 

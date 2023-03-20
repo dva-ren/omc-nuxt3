@@ -50,7 +50,7 @@ useHead({ title })
 </script>
 
 <template>
-  <div v-if="note && !pending" v-spring>
+  <div v-if="note && !pending" class="spring">
     <div class="info" border p-4 md:p-8 mb-8>
       <p class="left-label">
         {{ formateToLocal(note.createTime) }}

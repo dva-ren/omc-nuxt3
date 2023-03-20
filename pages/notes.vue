@@ -25,26 +25,28 @@ definePageMeta({
 </script>
 
 <template>
-  <NuxtLayout name="post">
-    <template #pre>
-      <div class="list-container">
-        <ul class="note-list">
-          <li v-for="i, idx in notes" :key="i.id" class="item" :class="{ active: idx === index }">
-            <div v-if="idx === index" i-ri:record-circle-line text-base text-pink class="point" />
-            <NuxtLink :to="`/notes/${i.id}`">
-              {{ i.title }}
-            </NuxtLink>
-          </li>
-        </ul>
-      </div>
-    </template>
-    <NuxtPage :page-key="id" />
-    <template #sidebar>
-      <div sticky top-20 mt-20 text-sm>
-        <MarkdownCatalog />
-      </div>
-    </template>
-  </NuxtLayout>
+  <ClientOnly>
+    <NuxtLayout name="post">
+      <template #pre>
+        <div class="list-container">
+          <ul class="note-list">
+            <li v-for="i, idx in notes" :key="i.id" class="item" :class="{ active: idx === index }">
+              <div v-if="idx === index" i-ri:record-circle-line text-base text-pink class="point" />
+              <NuxtLink :to="`/notes/${i.id}`">
+                {{ i.title }}
+              </NuxtLink>
+            </li>
+          </ul>
+        </div>
+      </template>
+      <NuxtPage :page-key="id" />
+      <template #sidebar>
+        <div sticky top-20 mt-20 text-sm>
+          <MarkdownCatalog />
+        </div>
+      </template>
+    </NuxtLayout>
+  </ClientOnly>
 </template>
 
 <style scoped>

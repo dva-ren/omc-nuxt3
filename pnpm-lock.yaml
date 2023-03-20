@@ -20,6 +20,7 @@ specifiers:
   '@vueuse/motion': 2.0.0-beta.12
   '@vueuse/nuxt': ^9.13.0
   VS: link:D:/Code/VS
+  css-spring: ^4.1.0
   dayjs: ^1.11.7
   eslint: ^8.34.0
   hastscript: ^7.2.0
@@ -43,6 +44,7 @@ dependencies:
   '@uvdream/bytemd-plugin-code-copy': registry.npmmirror.com/@uvdream/bytemd-plugin-code-copy/0.1.0
   '@vueuse/motion': registry.npmmirror.com/@vueuse/motion/2.0.0-beta.12
   VS: link:../../VS
+  css-spring: registry.npmmirror.com/css-spring/4.1.0
   dayjs: registry.npmmirror.com/dayjs/1.11.7
   hastscript: registry.npmmirror.com/hastscript/7.2.0
   js-md5: registry.npmmirror.com/js-md5/0.7.3
@@ -3143,7 +3145,7 @@ packages:
       indent-string: 4.0.0
       is-builtin-module: 3.2.0
       jsesc: 3.0.2
-      lodash: 4.17.21
+      lodash: registry.npmmirror.com/lodash/4.17.21
       pluralize: 8.0.0
       read-pkg-up: 7.0.1
       regexp-tree: 0.1.24
@@ -3194,7 +3196,7 @@ packages:
     dependencies:
       debug: 4.3.4
       eslint: 8.34.0
-      lodash: 4.17.21
+      lodash: registry.npmmirror.com/lodash/4.17.21
       natural-compare: 1.4.0
       yaml-eslint-parser: 1.1.0
     transitivePeerDependencies:
@@ -3949,7 +3951,7 @@ packages:
       cli-width: 4.0.0
       external-editor: 3.1.0
       figures: 5.0.0
-      lodash: 4.17.21
+      lodash: registry.npmmirror.com/lodash/4.17.21
       mute-stream: 0.0.8
       ora: 6.1.2
       run-async: 2.4.1
@@ -4406,10 +4408,6 @@ packages:
 
   /lodash.uniq/4.5.0:
     resolution: {integrity: sha512-xfBaXQd9ryd9dlSDvnvI0lvxfLJlYAZzXomUYzLKtUeOQvOP5piqAWuGtrhWeqaXK9hhoM/iyJc5AV+XfsX3HQ==}
-    dev: true
-
-  /lodash/4.17.21:
-    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
     dev: true
 
   /log-symbols/5.1.0:
@@ -6660,7 +6658,7 @@ packages:
       eslint-visitor-keys: 3.3.0
       espree: 9.4.0
       esquery: 1.4.0
-      lodash: 4.17.21
+      lodash: registry.npmmirror.com/lodash/4.17.21
       semver: 7.3.8
     transitivePeerDependencies:
       - supports-color
@@ -6811,7 +6809,7 @@ packages:
     engines: {node: ^14.17.0 || >=16.0.0}
     dependencies:
       eslint-visitor-keys: 3.3.0
-      lodash: 4.17.21
+      lodash: registry.npmmirror.com/lodash/4.17.21
       yaml: 2.1.1
     dev: true
 
@@ -9240,6 +9238,14 @@ packages:
       shebang-command: registry.npmmirror.com/shebang-command/2.0.0
       which: registry.npmmirror.com/which/2.0.2
 
+  registry.npmmirror.com/css-spring/4.1.0:
+    resolution: {integrity: sha512-RdA4NuRNk2xChTSo+52P2jlfr+rUgNY94mV7uHrCeDPvaUtFZgW6LMoCy4xEX3HphZ7LLkCHiUY5PBSegFBE3A==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/css-spring/-/css-spring-4.1.0.tgz}
+    name: css-spring
+    version: 4.1.0
+    dependencies:
+      lodash: registry.npmmirror.com/lodash/4.17.21
+    dev: false
+
   registry.npmmirror.com/cssesc/3.0.0:
     resolution: {integrity: sha512-/Tb/JcjK111nNScGob5MNtsntNM1aCNUDipB/TkwZFhyDrrE47SOx/18wF2bbjgc3ZzCSKW1T5nt5EbFoAz/Vg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/cssesc/-/cssesc-3.0.0.tgz}
     name: cssesc
@@ -11331,7 +11337,6 @@ packages:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/lodash/-/lodash-4.17.21.tgz}
     name: lodash
     version: 4.17.21
-    dev: false
 
   registry.npmmirror.com/log-update/4.0.0:
     resolution: {integrity: sha512-9fkkDevMefjg0mmzWFBW8YkFP91OrizzkW3diF7CpG+S2EYdy4+TVfGwz1zeF8x7hCx1ovSPTOE9Ngib74qqUg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/log-update/-/log-update-4.0.0.tgz}

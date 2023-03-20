@@ -25,7 +25,7 @@ function handleClick() {
 
 <template>
   <div py-10 md:py-20>
-    <div v-spring pb-10 flex flex-col items-center justify-center sm="flex-row justify-unset" gap-6>
+    <div pb-10 flex flex-col items-center sm="flex-row justify-unset items-unset" gap-6>
       <img :src="master?.avatar" h-30 w-30 rounded-full object-cover p-1 bg-gray-2 shadow>
       <div text-center sm:text-left>
         <p text-xl font-bold>
@@ -34,7 +34,7 @@ function handleClick() {
         <p text="sm gray-6" py-4>
           {{ master?.introduce }}
         </p>
-        <div v-spring:delay="100" text-gray-1>
+        <div class="spring" text-gray-1>
           <a href="https://github.com/dva-ren" target="_blank" class="circle-icon" bg-blue-400>
             <div i-carbon:logo-github class="v-icon" inline-block />
           </a>
@@ -51,7 +51,7 @@ function handleClick() {
       </div>
     </div>
     <TextAnimation min-h-10 :text="words" class="text-sm text-gray-400 px-4 mb-4" />
-    <div v-if="!pending" v-spring>
+    <div v-if="!pending" class="spring">
       <div text-white text-sm>
         <div flex justify-between items-end class="label">
           <div class="title" flex bg="#74759b">
@@ -106,9 +106,6 @@ function handleClick() {
             </div>
             <span px-3>了解更多</span>
           </div>
-          <!-- <button class="icon" bg="#2376b7" p-4 @click="Message.warning('没有更多了')">
-              <div i-carbon:chevron-right text-lg />
-            </button> -->
         </div>
         <div grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-8 text-sm>
           <NuxtLink to="/about">

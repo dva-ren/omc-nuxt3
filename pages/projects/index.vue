@@ -15,7 +15,7 @@ onMounted(() => {
     <div text-sm text-gray-400 py-4>
       一些代码片段和好玩的项目
     </div>
-    <div v-spring class="project-grid py-2 -mx-3 gap-2">
+    <div class="spring project-grid py-2 -mx-3 gap-2">
       <Project v-for="(p, idx) in projects" :key="idx" :data="p" />
     </div>
     <div display-none>

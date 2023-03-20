@@ -27,7 +27,7 @@ const handleAnimationEnd = (e: AnimationEvent) => {
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: zoom-out .8s .3s ease-out forwards;
+  animation: zoom-out .8s .3s linear forwards;
   z-index: 100;
   pointer-events: none;
 }

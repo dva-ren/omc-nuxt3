@@ -12,7 +12,7 @@ useHead({ title: '文章' })
 <template>
   <Loadding v-if="pending" :loadding="pending" />
   <NuxtLayout v-if="!pending">
-    <div v-for="p, idx in posts" :key="p.id" v-spring:delay="idx * 100" class="post-item " pb-8>
+    <div v-for="p, idx in posts" :key="p.id" :style="generateSpringText({ delay: idx * 100 })" class="post-item " pb-8>
       <div>
         <div class="left-label" display-none sm:display-block>
           {{ dateFns(p.createTime).format('YYYY-MM-DD') }}

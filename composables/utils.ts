@@ -34,3 +34,12 @@ export function getImageSizeFromUrl(url: string) {
     return null
   }
 }
+interface options {
+  name?: string
+  time?: number
+  delay?: number
+}
+export function generateSpringText(options?: options) {
+  const { name = 'bottom-up-spring', time = 1000, delay = 0 } = options || {}
+  return ` animation: ${name} ${time}ms ${delay ? `${delay}ms` : ''} linear both;opacity: 1`
+}

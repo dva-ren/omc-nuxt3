@@ -30,51 +30,54 @@ useHead({ title: '时间线' })
 </script>
 
 <template>
-  <NuxtLayout>
-    <p text-2xl>
-      <TextAnimation text="时间线" />
-    </p>
-    <p text-gray py-1>
-      <TextAnimation :text="`共有${total}篇文章,继续加油`" />
-    </p>
-    <div>
-      <div text-sm text-gray-600 pt-4>
-        <p py-1>
-          今天是：{{ formateToLocaleHasWeek(new Date()) }}
-        </p>
-        <p>今年已过: {{ getOutOfYear(new Date()) }}%</p>
-        <p py-1>
-          本月已过: {{ getOutOfMouth(new Date()) }}%
-        </p>
-        <p>今日已过: {{ outOfTime }}%</p>
-        <p py-1>
-          珍惜时间，享受当下！
-        </p>
+  <ClientOnly>
+    <NuxtLayout :loading="pending">
+      <p text-2xl>
+        <TextAnimation text="时间线" />
+      </p>
+      <p text-gray py-1>
+        <ClientOnly>
+          <TextAnimation :text="`共有${total}篇文章,继续加油`" />
+        </ClientOnly>
+      </p>
+      <div>
+        <div text-sm text-gray-600 pt-4>
+          <p py-1>
+            今天是：{{ formateToLocaleHasWeek(new Date()) }}
+          </p>
+          <p>今年已过: {{ getOutOfYear(new Date()) }}%</p>
+          <p py-1>
+            本月已过: {{ getOutOfMouth(new Date()) }}%
+          </p>
+          <p>今日已过: {{ outOfTime }}%</p>
+          <p py-1>
+            珍惜时间，享受当下！
+          </p>
+        </div>
       </div>
-    </div>
-    <Loadding :loadding="pending" />
-    <div v-if="!pending" pl-8 py-4>
-      <ul class="posts" text-gray-500>
-        <template v-for="item, idx in notes" :key="item.id">
-          <div class="fade_in_up" :style="`--delay:${idx * 0.1}s`">
-            <p v-if="isNewYear(item.createTime, idx)" class="left-label" pl-4 py-2>
-              {{ new Date(item.createTime).getFullYear() }}
-            </p>
-            <li class="item" :class="{ 'new-year': isNewYear(item.createTime, idx) }" flex items-center>
-              <span text-sm>{{ dateFns(item.createTime).format('MM/DD') }}</span>
-              <router-link :to="`/notes/${item.id}`" class="link" mx-2 text-gray-800 text-sm>
-                {{ item.title }}
-              </router-link>
-              <span text="12px">
-                <span>{{ item.mood }}/</span>
-                <span>{{ item.weather }}</span>
-              </span>
-            </li>
-          </div>
-        </template>
-      </ul>
-    </div>
-  </NuxtLayout>
+      <div pl-8 py-4>
+        <ul class="posts" text-gray-500>
+          <template v-for="item, idx in notes" :key="item.id">
+            <div class="fade_in_up" :style="`--delay:${idx * 0.1}s`">
+              <p v-if="isNewYear(item.createTime, idx)" class="left-label" pl-4 py-2>
+                {{ new Date(item.createTime).getFullYear() }}
+              </p>
+              <li class="item" :class="{ 'new-year': isNewYear(item.createTime, idx) }" flex items-center>
+                <span text-sm>{{ dateFns(item.createTime).format('MM/DD') }}</span>
+                <router-link :to="`/notes/${item.id}`" class="link" mx-2 text-gray-800 text-sm>
+                  {{ item.title }}
+                </router-link>
+                <span text="12px">
+                  <span>{{ item.mood }}/</span>
+                  <span>{{ item.weather }}</span>
+                </span>
+              </li>
+            </div>
+          </template>
+        </ul>
+      </div>
+    </NuxtLayout>
+  </ClientOnly>
 </template>
 
 <style scoped>

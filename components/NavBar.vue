@@ -51,7 +51,7 @@ const menus = ref<NavItem[]>([
     ],
   },
 ])
-useLazyAsyncData(async () => {
+useAsyncData(async () => {
   const res = await queryCategoryList()
   menus.value[0].children = res.data.map(item => ({
     name: item.name,
