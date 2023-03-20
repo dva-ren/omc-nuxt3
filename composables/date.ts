@@ -33,5 +33,5 @@ export function getOutOfYear(date: Date | string) {
   return (d.dayOfYear() / (d.isLeapYear() ? 366 : 365) * 100).toFixed(6)
 }
 export function formateToLocaleHasWeek(date: Date | string) {
-  return dayjs(date).format('YYYY 年 M 月 d 日 dddd')
+  return dayjs(date).format('YYYY 年 M 月 D 日 dddd')
 }

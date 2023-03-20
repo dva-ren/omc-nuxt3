@@ -40,7 +40,7 @@ useHead({ title: '时间线' })
     <div>
       <div text-sm text-gray-600 pt-4>
         <p py-1>
-          今天是：{{ formateToLocaleHasWeek(new Date().toDateString()) }}
+          今天是：{{ formateToLocaleHasWeek(new Date()) }}
         </p>
         <p>今年已过: {{ getOutOfYear(new Date()) }}%</p>
         <p py-1>
