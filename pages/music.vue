@@ -43,16 +43,16 @@ useHead({ title: '听歌' })
   <div>
     <div>
       <MusicList
-        type="年度歌单"
-        :playlist="alldata"
-      />
-      <MusicList
         type="中文歌"
         :playlist="weekdata"
       />
       <MusicList
         type="英文歌"
         :playlist="favoritedata"
+      />
+      <MusicList
+        type="年度歌单"
+        :playlist="alldata"
       />
     </div>
   </div>

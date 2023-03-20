@@ -105,5 +105,6 @@ html.dark {
 
 img[src=''],
 img:not([src]) {
-  opacity: 0;
+  background-color: #2333;
+  border:none;
 }

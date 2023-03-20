@@ -4,7 +4,7 @@
   overflow: hidden;
 }
 
-.markdown-body .gallery p{
+.markdown-body .image-group{
   position: relative;
   box-sizing: border-box;
   border-radius: .8em;
@@ -15,28 +15,24 @@
   overflow-x: scroll;
 }
 
-.markdown-body .gallery img{
-  object-fit: cover;
-  background-color: gray;
-  border-radius: .8em;
-  width:calc(100% - 60px);
-  /* width: 582px; */
-  height: 436px;
-  vertical-align: bottom;
-}
-
-.markdown-body .gallery .switch-container{
+.markdown-body .image-group-container .switch-container{
   position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.35s;
   background-color: var(--bg-opacity);
   display: flex;
   gap: .3em;
-  bottom: 1em;
+  bottom: 2em;
   left: 50%;
-  padding: 1em 1em;
+  padding: 1em 1.5em;
   border-radius: 2em;
   transform: translateX(-50%);
 }
-
+.markdown-body .image-group-container:hover .switch-container{
+  opacity: 1;
+  visibility:visible
+}
 .switch-container .switch-point{
   height: .5em;
   width: .5em;
@@ -50,37 +46,37 @@
 
 @media (max-width: 720px) {
   .markdown-body .gallery img{
-    height: 220px;
   }
 }
 /* 图片容器 */
-.markdown-body .gallery figcaption{
+.markdown-body .image-group figcaption{
   display: none;
 }
 
-.markdown-body .gallery{
-  display: block;
-  scroll-snap-stop: always;
-}
-.markdown-body
-.gallery
-.rehype-figure{
-  margin: 0;
-}
-
-.markdown-body .gallery p::-webkit-scrollbar-thumb, .markdown-body .gallery p::-webkit-scrollbar-thum:hover {
+.markdown-body .image-group::-webkit-scrollbar-thumb, .markdown-body .image-group::-webkit-scrollbar-thum:hover {
   display: none;
   background-color: var(--yellow);
   border: 4px solid var(--border-color);
   padding-right: 2px;
   border-radius: 5px;
 }
-
-.markdown-body .rehype-group-container .rehype-group{
-  display: flex;
-  flex-wrap: nowrap;
-  
+.markdown-body .image-group-container {
+  position: relative;
+  overflow-x: auto;
 }
-.markdown-body .rehype-group-container .rehype-group figure{
-  width: 100%;
+.markdown-body .image-group-container .image-group{
+  display: flex;
+  gap: 16px;
+  flex-wrap: nowrap;
+}
+.markdown-body .image-group-container .image-group .image-container{
+  flex-shrink: 0;
+  margin: 0;
+  width: calc(100% - 30px);
+}
+.markdown-body img{
+  aspect-ratio: var(--aspect-ratio);
+}
+.image-group img{
+  object-fit: cover;
 }

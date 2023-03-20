@@ -1,7 +1,5 @@
 import type { BytemdPlugin } from 'bytemd'
-import { visit } from 'unist-util-visit'
-import { h } from 'hastscript'
-
+import rehypeImageGroup from 'rehype-image-group'
 interface LazyOptions {
   resizeWidth?: number
   loading?: string
@@ -29,51 +27,6 @@ async function loadImage(options: { src: string; srcset?: string; sizes?: string
   })
   cache.set(options.src, task)
   return task
-}
-
-function rehypeImageGroup(option) {
-  const className = (option && option.className) || 'rehype-group'
-
-  function buildFigure({ properties }) {
-    const src = properties.src
-    const size = getImageSizeFromUrl(src)
-    const figure = h('figure', {
-      class: 'image-container',
-      // style: `${size ? (`width:${size.width}px;aspect-ratio:${size.width / size.height}`) : ''}`,
-      style: `${size ? (`--aspect-ratio:${size.width / size.height}`) : ''}`,
-    }, [
-      h('img', {
-        ...properties,
-        src: '',
-        dataSrc: resizeImgUrl(src, 720),
-        dataLoading: resizeImgUrl(src, 48),
-      }),
-      properties.alt && properties.alt.trim().length > 0
-        ? h('figcaption', properties.alt)
-        : '',
-    ])
-    return figure
-  }
-  return function (tree) {
-    visit(tree, { tagName: 'p' }, (node, index) => {
-      const images = node.children
-        .filter(n => n.tagName === 'img')
-        .map(img => buildFigure(img))
-
-      if (images.length === 0)
-        return
-
-      tree.children[index]
-        = images.length === 1
-          ? images[0]
-          : (tree.children[index] = h(
-              'div',
-              { class: `${className}-container` }, [
-                h('div', { class: className }, images),
-              ],
-            ))
-    })
-  }
 }
 
 export default function imageLazyload(): BytemdPlugin {

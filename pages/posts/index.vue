@@ -18,7 +18,7 @@ useHead({ title: '文章' })
           {{ dateFns(p.createTime).format('YYYY-MM-DD') }}
         </div>
         <div class="left-label" display-block sm:display-none>
-          {{ dateFns(p.createTime).format('MM-dd') }}
+          {{ dateFns(p.createTime).format('MM-DD') }}
         </div>
         <div text-center text-base>
           <router-link :to="`/posts/${p.id}`" hover:text-orange transition>

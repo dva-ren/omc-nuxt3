@@ -98,10 +98,11 @@ onBeforeMount(() => {
   white-space: nowrap;
   max-width: 10rem;
 }
-v-enter-active,
-v-leave-active{
-  transition: transform 0.2s;
+.v-enter-active,
+.v-leave-active {
+  transition: transform 0.5s ease;
 }
+
 .v-enter-from,
 .v-leave-to {
   transform: translateX(-100%);

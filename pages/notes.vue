@@ -1,20 +1,15 @@
 <script lang="ts" setup>
 import { getNotes } from '~/utils/api'
-import { useCatalog } from '~~/components/Markdown/catalog'
-import type { Note } from '~~/types'
+import { useCatalog } from '~/components/Markdown/catalog'
 
 const route = useRoute()
 const id = computed(() => route.params.id as string)
 
 const { anchor } = useCatalog()
 
-const list = ref<Array<Note>>([])
-
 const { data: notes, pending: notesPending } = useLazyAsyncData(async () => {
   const res = await getNotes()
   const idx = res.data.list.findIndex(i => i.id === id.value)
-  // list.value = res.data.list.slice(idx - 4, idx + 4)
-  list.value = res.data.list
   return res.data.list
 })
 const index = computed(() => {
@@ -34,8 +29,8 @@ definePageMeta({
     <template #pre>
       <div class="list-container">
         <ul class="note-list">
-          <li v-for="i, idx in list" :key="i.id" class="item" :class="{ active: idx === index }">
-            <div v-if="idx === index" i-ri:record-circle-line text-pink class="point" />
+          <li v-for="i, idx in notes" :key="i.id" class="item" :class="{ active: idx === index }">
+            <div v-if="idx === index" i-ri:record-circle-line text-base text-pink class="point" />
             <NuxtLink :to="`/notes/${i.id}`">
               {{ i.title }}
             </NuxtLink>

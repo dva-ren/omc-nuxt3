@@ -3,6 +3,7 @@ import nprogress from 'nprogress'
 import { usePlayer } from './hooks'
 
 import 'nprogress/nprogress.css'
+nprogress.configure({ showSpinner: false })
 const loadding = ref(true)
 
 // useState('catelog', () => [])
@@ -69,5 +70,8 @@ html.dark {
 }
 .dark .bg{
   background-image: url('/images/background2.png');
+}
+#nprogress .bar {
+  background: #ed556a !important;
 }
 </style>

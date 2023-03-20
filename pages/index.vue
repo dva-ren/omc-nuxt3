@@ -24,7 +24,7 @@ function handleClick() {
 </script>
 
 <template>
-  <div py-20>
+  <div py-10 md:py-20>
     <div v-spring pb-10 flex flex-col items-center justify-center sm="flex-row justify-unset" gap-6>
       <img :src="master?.avatar" h-30 w-30 rounded-full object-cover p-1 bg-gray-2 shadow>
       <div text-center sm:text-left>

@@ -66,7 +66,7 @@ const handleClick = (song: SongInfo) => {
   content: '';
   height: 100%;
   width: var(--process);
-  transition: width 1s;
+  transition: width 1s linear;
   background-color: antiquewhite;
 }
 </style>

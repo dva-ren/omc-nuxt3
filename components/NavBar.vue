@@ -62,6 +62,7 @@ useLazyAsyncData(async () => {
 const handleLike = () => {
   liked.value = !liked.value
   // Message.success('感谢喜欢')
+  // eslint-disable-next-line no-console
   console.log('like')
 }
 const handleShare = () => {
@@ -150,6 +151,7 @@ watch(route, () => {
 .header::before{
   opacity: 0;
   height: 100%;
+  width: 100%;
   position: absolute;
   top: 0;
   right: 0;

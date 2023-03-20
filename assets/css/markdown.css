@@ -180,12 +180,16 @@
   border-radius: 0.5rem;
   opacity: 1;
 }
-.markdown-body img[lazy="loading"]{
+.markdown-body .image-container {
+  transition: filter 0.2s;
+}
+.markdown-body .image-container:has(img[lazy="loading"]){
   filter: blur(10px);
   border: 1px solid #2333;
+  background-color: #2333;
   opacity: 1;
 }
-.markdown-body img[lazy="loaded"]{
+.markdown-body .image-container:has(img[lazy="loaded"]){
   opacity: 1;
   filter: none;
 }

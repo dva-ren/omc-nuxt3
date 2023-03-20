@@ -8,9 +8,9 @@ import mediumZoom from '@bytemd/plugin-medium-zoom'
 import codeCopy from '@uvdream/bytemd-plugin-code-copy'
 import Message from '../Message'
 import lazyload from './plugin-lazyload'
-import { clearEffect } from './plugin-figure'
-import { imgGroup } from './plugin-img-group'
 import 'highlight.js/styles/atom-one-light.css'
+import './styles/figure.css'
+import { clearEffect, init } from './looper'
 
 const { value } = defineProps<{ value: string }>()
 
@@ -33,10 +33,11 @@ const plugins = [
       return {}
     },
   }),
-  // mdFigure(),
-  imgGroup(),
   lazyload(),
 ]
+onMounted(() => {
+  init()
+})
 onBeforeUnmount(() => {
   clearEffect()
 })
