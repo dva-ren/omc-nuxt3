@@ -16,8 +16,8 @@ export const http = (url: string, options?: Options): Promise<any> => {
       const { code, msg } = response._data
       if (code !== 200) {
         // eslint-disable-next-line no-console
-        console.log(response._data)
-        throw createError({ statusCode: code, statusMessage: msg })
+        console.log(url, request, response._data)
+        // throw createError({ statusCode: code, statusMessage: msg })
       }
       return response._data
     },

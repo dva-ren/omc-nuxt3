@@ -37,8 +37,8 @@ useHead({
 </script>
 
 <template>
-  <CommonLoadMask v-model="loadding" @end="loadding = false" />
   <NavWidget />
+  <CommonLoadMask v-model="loadding" @end="loadding = false" />
   <div min-h-full>
     <NuxtLayout>
       <NuxtPage />

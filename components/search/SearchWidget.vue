@@ -1,20 +1,20 @@
 <script lang="ts" setup>
 const searchText = ref('')
 const show = ref(false)
+const input = ref<HTMLInputElement>()
+
 const { data, refresh, pending } = useAsyncData(async () => {
   if (searchText.value.trim().length === 0)
     return
   const res = await search({ title: searchText.value.trim() })
-  return res.data
+  return [...res.data.note, ...res.data.post]
 })
 
 function handleClose() {
   show.value = false
-  searchText.value = ''
+  // searchText.value = ''
 }
-
 watch(searchText, useDebounceFn((curr, pre) => {
-  console.log(curr, pre)
   refresh()
 }, 300))
 useRouter().afterEach(() => {
@@ -28,28 +28,23 @@ useRouter().afterEach(() => {
       <div i-carbon:search />
     </button>
   </slot>
-  <CommonModal v-if="show" v-model="show" @close="handleClose">
+  <CommonModal v-model="show" @close="handleClose">
     <div class="search-container">
       <div class="input-box">
-        <input v-model="searchText" autofocus type="text" placeholder="Search..">
+        <input ref="input" v-model="searchText" type="text" placeholder="Search..">
       </div>
       <div class="content">
-        <NuxtLink v-for="i in data?.post" :key="i" :to="`/posts/${i.id}`">
-          <div class="title">
-            {{ i.title }}
-          </div>
-          <div class="category">
-            {{ i.categoryName }}
-          </div>
-        </NuxtLink>
-        <NuxtLink v-for="i in data?.note" :key="i.id" :to="`/notes/${i.id}`">
-          <div class="title">
-            {{ i.title }}
-          </div>
-          <div class="category">
-            说说
-          </div>
-        </NuxtLink>
+        <CommonEmpty v-if="!data || data.length === 0" h-full />
+        <div v-else>
+          <NuxtLink v-for="i in data" :key="i" :to="`/posts/${i.id}`">
+            <div class="title">
+              {{ i.title }}
+            </div>
+            <div class="category">
+              {{ i.categoryName || '说说' }}
+            </div>
+          </NuxtLink>
+        </div>
       </div>
     </div>
   </CommonModal>
@@ -75,7 +70,6 @@ useRouter().afterEach(() => {
   flex-direction: column;
   min-height: 12.5rem;
   backdrop-filter: blur(10px);
-  overflow-y: scroll;
   .input-box{
     border-bottom: 1px solid #2333;
     padding: 0 1rem;
@@ -91,6 +85,8 @@ useRouter().afterEach(() => {
   }
   .content{
     padding: 0.5rem;
+    height: 100%;
+    overflow-y: scroll;
     a{
       padding: 0.8rem;
       display: flex;
