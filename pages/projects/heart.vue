@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import CommonPopper from '~~/components/common/CommonPopper.vue'
+
 const canvas = $ref<HTMLCanvasElement>()
 const options = reactive({
   scale: 10,
@@ -108,7 +110,7 @@ definePageMeta({
 
 <template>
   <div>
-    <Popper placement="top" class="fixed bottom-20 right-4" :offset="10">
+    <CommonPopper placement="top" class="fixed bottom-20 right-4" :offset="10">
       <button p-2 rounded-full cursor-pointer select-none bg="#68b88e">
         <div i-ri:settings-4-line text-2xl text-gray-100 />
       </button>
@@ -141,8 +143,8 @@ definePageMeta({
           </div>
         </div>
       </template>
-    </Popper>
-    <canvas ref="canvas" @click="showOptions = false" />
+      <canvas ref="canvas" @click="showOptions = false" />
+    </CommonPopper>
   </div>
 </template>
 

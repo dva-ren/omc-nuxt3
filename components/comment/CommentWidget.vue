@@ -30,19 +30,19 @@ onMounted(() => {
     <div class="left-label" py-4>
       共有{{ total }}条评论
     </div>
-    <EditComment :ref-id="refId" :type="type" :index="total" @on-send="refresh" />
+    <CommentEdit :ref-id="refId" :type="type" :index="total" @on-send="refresh" />
     <div ref="commentRef" />
     <div v-if="visible">
-      <Loadding :loadding="pending" />
+      <CommonLoadding :loadding="pending" />
       <div v-if="!pending">
         <div v-if="total" mt-4>
           <template v-for="i, idx in comments" :key="i.id">
             <CommentItem v-if="!i.isWhispers" :data="i" :index="idx" @on-replay="refresh" />
           </template>
         </div>
-        <Empty v-else>
+        <CommonEmpty v-else>
           这里空空的，想说点什么吗...
-        </Empty>
+        </CommonEmpty>
       </div>
     </div>
   </div>

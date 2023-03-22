@@ -7,6 +7,7 @@ const showFlags = reactive({
   main: true,
   scroll: false,
 })
+
 const { init, show: playerFlag } = usePlayer()
 const { anchor, show: catelogFlag } = useCatalog()
 function toTop() {
@@ -39,6 +40,7 @@ watch(useThrottle(scroll.y, 100), (curr, pre) => {
   <Transition name="main">
     <div v-show="showFlags.main" fixed right-4 bottom-4>
       <div flex flex-col gap-2>
+        <SearchWidget />
         <Transition>
           <button v-show="showFlags.scroll" class="button" @click="toTop">
             <div i-carbon-up-to-top />

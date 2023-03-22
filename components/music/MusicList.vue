@@ -14,18 +14,18 @@ const handleClick = (song: SongInfo) => {
 </script>
 
 <template>
-  <Loadding :loadding="!playlist" />
-  <div flex gap-4 flex-col sm:flex-row pb-8>
+  <CommonLoadding :loadding="!playlist" />
+  <div v-if="playlist" flex gap-4 flex-col sm:flex-row pb-8>
     <div>
       <ClientOnly>
-        <ImageLoad m-auto :src="playlist?.coverImgUrl" w-30 h-30 rounded-full static top-10 />
+        <CommonImageLoad m-auto :src="playlist?.coverImgUrl" w-30 h-30 rounded-full static top-10 />
       </ClientOnly>
       <div py-2 text="center">
         {{ type }}
       </div>
     </div>
     <ul flex-1 :style="`--process:${process}%`">
-      <li v-for="song, idx in playlist?.data" :key="idx" class="song-item" :class="{ playing: song.name === current.name }" @click="handleClick(song)">
+      <li v-for="song, idx in playlist?.data" :key="idx" class="song-item" :class="{ playing: song.name === current?.name }" @click="handleClick(song)">
         <div class="omit">
           <span mr-2>
             {{ idx + 1 }}.

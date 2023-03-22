@@ -97,7 +97,7 @@ watch(route, () => {
       <div transition duration-500 px-4 lg:px-10 :style="{ '--opacity': bgOpacity, 'transform': `translateY(${showInfo ? '-3.5rem' : 0})` }">
         <div flex justify-between h-14>
           <nuxt-link to="/" title="home" py-2 flex items-center gap-2>
-            <Logo inline-block />
+            <CommonLogo inline-block />
             <div>
               <p>灰色と青</p>
               <p text="~ 12px gray-5">
@@ -108,7 +108,7 @@ watch(route, () => {
           <nav display-none md-display-flex items-center :class="{ nav: navIdx !== -1 }" :style="`--idx:${navIdx}`">
             <NavItem v-for="nav, idx in menus" :key="idx" :data="nav" />
           </nav>
-          <HeaderDrawer :active-index="navIdx" display-flex md-display-none :menus="menus" />
+          <NavDrawer :active-index="navIdx" display-flex md-display-none :menus="menus" />
         </div>
         <div max-w-1200px m-auto flex items-center justify-between text-sm h-14>
           <div max-w-8rem md:max-w-unset>
@@ -125,7 +125,7 @@ watch(route, () => {
               <div>分享</div>
             </button>
             <button v-if="headerInfo.like !== undefined" px-2 pr-4 h-9 bg-gray-2 rounded-full flex items-center gap-1 @click="handleLike">
-              <Heart v-model="liked" />
+              <NavHeart v-model="liked" />
               <div>喜欢</div>
             </button>
             <div>

@@ -56,7 +56,7 @@ definePageMeta({
 <template>
   <div>
     <canvas ref="canvas" @click="handleClick" />
-    <Popper placement="top" class="fixed bottom-20 right-4" :offset="10">
+    <CommonPopper placement="top" class="fixed bottom-20 right-4" :offset="10">
       <button p-2 rounded-full cursor-pointer select-none bg="#68b88e">
         <div i-ri:settings-4-line text-2xl text-gray-100 />
       </button>
@@ -92,7 +92,7 @@ definePageMeta({
           </div>
         </div>
       </template>
-    </Popper>
+    </CommonPopper>
   </div>
 </template>
 

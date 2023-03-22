@@ -180,3 +180,8 @@ export interface PictureParams {
   pageSize?: number
   labels?: string
 }
+
+export interface SearchResult {
+  post: Array<Article>
+  note: Array<Note>
+}

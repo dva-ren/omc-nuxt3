@@ -15,7 +15,7 @@ const onReplayed = () => {
 <template>
   <div class="spring" flex gap-4 text-12px p-2>
     <ClientOnly>
-      <ImageLoad w-10 h-10 rounded-full :src="`https://cravatar.cn/avatar/${md5(data.mail)}?d=monsterid`" />
+      <CommonImageLoad w-10 h-10 rounded-full :src="`https://cravatar.cn/avatar/${md5(data.mail)}?d=monsterid`" />
     </ClientOnly>
     <!-- <img w-10 h-10 rounded-full :src="`https://cravatar.cn/avatar/${md5(data.mail)}?d=monsterid`" alt=""> -->
     <div flex-1>
@@ -34,7 +34,7 @@ const onReplayed = () => {
       <button mb-2 text="gray-500" @click="visible = !visible">
         {{ visible ? '取消回复' : '回复' }}
       </button>
-      <EditComment v-if="visible" text-base :index="index" :ref-id="data.ref" :type="data.refType" :parent-id="data.id" @on-send="onReplayed" />
+      <CommentEdit v-if="visible" text-base :index="index" :ref-id="data.ref" :type="data.refType" :parent-id="data.id" @on-send="onReplayed" />
       <CommentItem v-for="child in data.children" :key="child.id" :data="child" :index="data.children.length" />
     </div>
   </div>

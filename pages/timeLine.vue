@@ -33,11 +33,11 @@ useHead({ title: '时间线' })
   <ClientOnly>
     <NuxtLayout :loading="pending">
       <p text-2xl>
-        <TextAnimation text="时间线" />
+        <CommonTextAnimation text="时间线" />
       </p>
       <p text-gray py-1>
         <ClientOnly>
-          <TextAnimation :text="`共有${total}篇文章,继续加油`" />
+          <CommonTextAnimation :text="`共有${total}篇文章,继续加油`" />
         </ClientOnly>
       </p>
       <div>
@@ -64,9 +64,9 @@ useHead({ title: '时间线' })
               </p>
               <li class="item" :class="{ 'new-year': isNewYear(item.createTime, idx) }" flex items-center>
                 <span text-sm>{{ dateFns(item.createTime).format('MM/DD') }}</span>
-                <router-link :to="`/notes/${item.id}`" class="link" mx-2 text-gray-800 text-sm>
+                <NuxtLink :to="`/notes/${item.id}`" class="link" mx-2 text-gray-800 text-sm>
                   {{ item.title }}
-                </router-link>
+                </NuxtLink>
                 <span text="12px">
                   <span>{{ item.mood }}/</span>
                   <span>{{ item.weather }}</span>

@@ -4,6 +4,7 @@ const props = defineProps(drawerProps)
 const emits = defineEmits(['update:modelValue', 'close'])
 
 const computedName = computed(() => `${props.direction}Move`)
+const { disable, display } = useScrollBar()
 
 const computedDrawerPosition = computed(() => {
   const positionObj: Record<string, any> = {
@@ -43,11 +44,13 @@ const clickMaskCloseFn = () => {
   }
 }
 const onEnter = () => {
-  document.body.style.overflow = 'hidden'
+  disable()
+  // document.body.style.overflow = 'hidden'
 }
 
 const onLeave = () => {
-  document.body.style.overflow = 'auto'
+  display()
+  // document.body.style.overflow = 'auto'
 }
 </script>
 

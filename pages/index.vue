@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import Message from '~/components/Message'
+import Message from '~~/components/message'
 import { queryTop } from '~/utils/api'
 
 const master = useMaster()
@@ -50,7 +50,7 @@ function handleClick() {
         </div>
       </div>
     </div>
-    <TextAnimation min-h-10 :text="words" class="text-sm text-gray-400 px-4 mb-4" />
+    <CommonTextAnimation min-h-10 :text="words" class="text-sm text-gray-400 px-4 mb-4" />
     <div v-if="!pending" class="spring">
       <div text-white text-sm>
         <div flex justify-between items-end class="label">
@@ -64,7 +64,7 @@ function handleClick() {
             <div i-carbon:chevron-right text-lg />
           </NuxtLink>
         </div>
-        <CardList :data="topData?.posts" />
+        <HomeCardList :data="topData?.posts" />
       </div>
       <div text-white mt-10 text-sm>
         <div flex justify-between items-end class="label">
@@ -78,7 +78,7 @@ function handleClick() {
             <div i-carbon:chevron-right text-lg />
           </NuxtLink>
         </div>
-        <CardList :data="topData?.notes" type="notes" />
+        <HomeCardList :data="topData?.notes" type="notes" />
       </div>
       <div text-white mt-10 text-sm>
         <div flex justify-between items-end class="label">
@@ -109,12 +109,12 @@ function handleClick() {
         </div>
         <div grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-8 text-sm>
           <NuxtLink to="/about">
-            <Card text="关于我" title="这里有我的小秘密" />
+            <HomeCard text="关于我" title="这里有我的小秘密" />
           </NuxtLink>
           <NuxtLink to="/gallery">
-            <Card title="记录美好瞬间" text="相册" />
+            <HomeCard title="记录美好瞬间" text="相册" />
           </NuxtLink>
-          <Card title="你的话对我很重要" text="留言" @click="handleClick" />
+          <HomeCard title="你的话对我很重要" text="留言" @click="handleClick" />
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import Message from '../Message'
+import Message from '../message'
 
 export interface Catelog {
   id: string

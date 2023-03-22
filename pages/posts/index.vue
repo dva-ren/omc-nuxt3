@@ -10,7 +10,7 @@ useHead({ title: '文章' })
 </script>
 
 <template>
-  <Loadding v-if="pending" :loadding="pending" />
+  <CommonLoadding v-if="pending" :loadding="pending" />
   <NuxtLayout v-if="!pending">
     <div v-for="p, idx in posts" :key="p.id" :style="generateSpringText({ delay: idx * 100 })" class="post-item " pb-8>
       <div>
@@ -21,9 +21,9 @@ useHead({ title: '文章' })
           {{ dateFns(p.createTime).format('MM-DD') }}
         </div>
         <div text-center text-base>
-          <router-link :to="`/posts/${p.id}`" hover:text-orange transition>
+          <NuxtLink :to="`/posts/${p.id}`" hover:text-orange transition>
             {{ p.title }}
-          </router-link>
+          </NuxtLink>
         </div>
         <div py-4 leading-8 indent-lg tracking-wider text-sm>
           <p line-clamp-5>
@@ -31,9 +31,9 @@ useHead({ title: '文章' })
           </p>
         </div>
         <p text-center>
-          <router-link :to="`/posts/${p.id}`" btn rounded-full text-sm>
+          <NuxtLink :to="`/posts/${p.id}`" btn rounded-full text-sm>
             查看原文
-          </router-link>
+          </NuxtLink>
         </p>
       </div>
     </div>

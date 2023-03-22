@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import projects from './projects.json'
+import ProjectWidget from '~~/components/project/ProjectWidget.vue'
 onMounted(() => {
   useHead({
     title: '项目',
@@ -16,7 +17,7 @@ onMounted(() => {
       一些代码片段和好玩的项目
     </div>
     <div class="spring project-grid py-2 -mx-3 gap-2">
-      <Project v-for="(p, idx) in projects" :key="idx" :data="p" />
+      <ProjectWidget v-for="(p, idx) in projects" :key="idx" :data="p" />
     </div>
     <div display-none>
       <div i-carbon-align-box-middle-left />

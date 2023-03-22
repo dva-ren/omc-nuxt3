@@ -1,4 +1,5 @@
 import { loadEnv } from 'vite'
+
 interface VITE_ENV_CONFIG {
   VITE_API_HOST: string
   VITE_PACK_ENV: string
@@ -29,5 +30,11 @@ export default defineNuxtConfig({
   runtimeConfig: {
     env: envScript[envScript.length - 1],
     public: envData,
+  },
+  postcss: {
+    plugins: {
+      'autoprefixer': {},
+      'postcss-nested': {},
+    },
   },
 })

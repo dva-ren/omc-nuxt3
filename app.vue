@@ -37,20 +37,20 @@ useHead({
 </script>
 
 <template>
-  <LoadMask v-model="loadding" @end="loadding = false" />
-  <NavBar />
+  <CommonLoadMask v-model="loadding" @end="loadding = false" />
+  <NavWidget />
   <div min-h-full>
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
   </div>
-  <Footer />
+  <CommonFooter />
   <div class="z--1 inset-0 fixed op-80 bg-fixed pointer-events-none transition-opacity duration-500 ease transform-gpu">
     <div class="bg absolute inset-0 transform-gpu" />
   </div>
   <ClientOnly>
-    <ToolsBar />
-    <Player v-if="init" />
+    <NavToolsBar />
+    <PlayerWidget v-if="init" />
   </ClientOnly>
 </template>
 

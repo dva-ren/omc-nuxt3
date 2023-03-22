@@ -1,6 +1,6 @@
 import { createVNode, render, shallowReactive } from 'vue'
 import type { ComponentInternalInstance, VNode } from 'vue'
-import Message from './message.vue'
+import Message from './index.vue'
 
 type MessageType = 'warning' | 'success' | 'error'
 interface MessageContext {

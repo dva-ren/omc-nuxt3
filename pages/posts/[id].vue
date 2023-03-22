@@ -68,7 +68,7 @@ useHead({ title })
           </button>
         </div>
       </div>
-      <Comment v-if="articleData.allowComment" :ref-id="id" type="posts" />
+      <CommentWidget v-if="articleData.allowComment" :ref-id="id" type="posts" />
     </div>
     <template #sidebar>
       <div sticky top-20 mt-20 text-sm>

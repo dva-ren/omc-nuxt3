@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { getNotes } from '~/utils/api'
+import CommentWidget from '~~/components/comment/CommentWidget.vue'
 import { useCatalog } from '~~/components/Markdown/catalog'
 
 const headerInfo = useHeaderInfo()
@@ -117,7 +118,7 @@ useHead({ title })
         </div>
       </div>
     </div>
-    <Comment v-if="note.allowComment" :ref-id="note.id" type="note" />
+    <CommentWidget v-if="note.allowComment" :ref-id="note.id" type="note" />
   </div>
 </template>
 

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import Message from './Message'
+import Message from '~~/components/message'
 import type { CommentForm } from '~/types'
 import { addComment } from '~/utils/api'
 
@@ -105,7 +105,7 @@ onMounted(() => {
     </div>
     <div p-2 flex justify-between text-sm>
       <div>
-        <Popper trigger="hover" placement="bottom-start">
+        <CommonPopper trigger="hover" placement="bottom-start">
           <button btn rounded-full py-1>
             (≧∇≦)ﾉ
           </button>
@@ -116,7 +116,7 @@ onMounted(() => {
               <span>(*^▽^*)</span>
             </div>
           </template>
-        </Popper>
+        </CommonPopper>
       </div>
       <div text-sm>
         <span select-none cursor-pointer @click="commentForm.isWhispers = Number(!commentForm.isWhispers)">

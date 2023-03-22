@@ -12,7 +12,7 @@ const { data, pending } = useAsyncData(async () => {
 <template>
   <NuxtLayout :loading="pending">
     <ClientOnly>
-      <SayList :data="data" />
+      <SayList v-if="data" :data="data" />
     </ClientOnly>
   </NuxtLayout>
 </template>

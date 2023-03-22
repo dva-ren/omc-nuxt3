@@ -3,5 +3,5 @@
 </script>
 
 <template>
-  <div><Empty>开发中...</Empty></div>
+  <div><CommonEmpty>开发中...</CommonEmpty></div>
 </template>

@@ -11,7 +11,7 @@ const handleAnimationEnd = (e: AnimationEvent) => {
 
 <template>
   <div v-if="showMask" dark:bg-black class="load-mask" @animationend="handleAnimationEnd">
-    <Logo width="6rem" />
+    <CommonLogo width="6rem" />
   </div>
 </template>
 

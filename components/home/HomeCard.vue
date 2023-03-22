@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import imgs from '../utils/images.json'
+import imgs from '~/utils/images.json'
 import { randomNumber } from '~/composables'
 
 const props = defineProps<{

@@ -12,7 +12,7 @@ const emits = defineEmits(['onSelect'])
       <div :class="data.icon" inline-block />
       <span p-l-2>{{ data.name }}</span>
     </router-link>
-    <Popper v-else trigger="hover" flex h-full>
+    <CommonPopper v-else trigger="hover" flex h-full>
       <router-link :to="data.url" flex items-center w-full @click="emits('onSelect')">
         <div :class="data.icon" inline-block />
         <span p-l-2>{{ data.name }}</span>
@@ -28,7 +28,7 @@ const emits = defineEmits(['onSelect'])
           </router-link>
         </div>
       </template>
-    </Popper>
+    </CommonPopper>
   </div>
 </template>
 

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { Say } from '../types'
+import type { Say } from '~/types'
 
 const { data = [] } = defineProps<{ data: Array<Say> }>()
 
@@ -67,7 +67,7 @@ watch(useDebounce(windowSize.width, 500), () => {
       </div>
     </div>
     <div v-else>
-      <SayCard v-for="s in data" :key="s.id" :data="s" :delay="s.delay" />
+      <SayCard v-for="s in says" :key="s.id" :data="s" :delay="s.delay" />
     </div>
   </div>
 </template>

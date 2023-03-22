@@ -1,5 +1,5 @@
 import { http } from '~/utils/request'
-import type { Article, AsyncResponse, Category, Comment, CommentForm, Master, Note, PageInfo, Picture, PictureParams, Say, SongInfo } from '~/types/api'
+import type { Article, AsyncResponse, Category, Comment, CommentForm, Master, Note, PageInfo, Picture, PictureParams, Say, SearchResult, SongInfo } from '~/types/api'
 
 export const getMaster = (): AsyncResponse<Master> => {
   return http('/master')
@@ -67,6 +67,12 @@ export const queryTop = (size?: number): AsyncResponse<{
 
 export const queryPictures = (params?: PictureParams): AsyncResponse<PageInfo<Picture>> => {
   return http('/picture', {
+    params,
+  })
+}
+
+export const search = (params: { title?: string; label?: string }): AsyncResponse<SearchResult> => {
+  return http('/search', {
     params,
   })
 }
