@@ -12,8 +12,6 @@ const active = ref('')
 
 export const useCatalog = () => {
   const parse = () => {
-    if (!process.client)
-      return
     try {
       const article = document.querySelector('.markdown-body')!
       if (!article)

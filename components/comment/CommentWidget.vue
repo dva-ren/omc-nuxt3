@@ -28,7 +28,7 @@ onMounted(() => {
 <template>
   <div>
     <div class="left-label" py-4>
-      共有{{ total }}条评论
+      共有 <span v-if="!pending">{{ total }}</span> 条评论
     </div>
     <CommentEdit :ref-id="refId" :type="type" :index="total" @on-send="refresh" />
     <div ref="commentRef" />

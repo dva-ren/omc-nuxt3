@@ -6,8 +6,6 @@ const index = ref(0)
 const router = useRouter()
 
 onMounted(() => {
-  if (!process.client)
-    return
   parse()
 })
 

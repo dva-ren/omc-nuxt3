@@ -6,7 +6,7 @@ import { useCatalog } from '~~/components/Markdown/catalog'
 const headerInfo = useHeaderInfo()
 const route = useRoute()
 const id = computed(() => route.params.id as string)
-const { anchor } = useCatalog()
+const { anchor, parse } = useCatalog()
 const { data: note, pending } = useAsyncData(async () => {
   const res = await queryNote(id.value)
   headerInfo.value.id = res.data.id
@@ -38,6 +38,9 @@ const weather = () => {
     return 'i-carbon-snow-scattered'
   return 'i-carbon-word-cloud'
 }
+onMounted(() => {
+  parse()
+})
 onBeforeUnmount(() => {
   headerInfo.value.title = ''
   anchor.value = []
