@@ -7,8 +7,10 @@ const { data, refresh, pending } = useAsyncData(async () => {
   if (searchText.value.trim().length === 0)
     return
   const res = await search({ title: searchText.value.trim() })
-  return [...res.data.note, ...res.data.post]
+  return res.data
 })
+
+const isEmpty = computed(() => !data.value || data.value.note.length === 0 || data.value.post.length === 0)
 
 function handleClose() {
   show.value = false
@@ -34,14 +36,22 @@ useRouter().afterEach(() => {
         <input ref="input" v-model="searchText" type="text" placeholder="Search..">
       </div>
       <div class="content">
-        <CommonEmpty v-if="!data || data.length === 0" h-full />
+        <CommonEmpty v-if="isEmpty" h-full />
         <div v-else>
-          <NuxtLink v-for="i in data" :key="i" :to="`/posts/${i.id}`">
+          <NuxtLink v-for="i in data?.post" :key="i" :to="`/posts/${i.id}`">
             <div class="title">
               {{ i.title }}
             </div>
             <div class="category">
-              {{ i.categoryName || '说说' }}
+              {{ i.categoryName }}
+            </div>
+          </NuxtLink>
+          <NuxtLink v-for="i in data?.note" :key="i" :to="`/notes/${i.id}`">
+            <div class="title">
+              {{ i.title }}
+            </div>
+            <div class="category">
+              说说
             </div>
           </NuxtLink>
         </div>
