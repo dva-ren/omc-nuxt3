@@ -3,7 +3,7 @@ const props = defineProps<{ src: string }>()
 const data_url = ref('')
 const loadingState = ref('')
 
-watch(props, () => {
+watch(() => props.src, () => {
   if (!props.src)
     return
   loadingState.value = 'loading'

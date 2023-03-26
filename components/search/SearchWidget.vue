@@ -10,7 +10,7 @@ const { data, refresh, pending } = useAsyncData(async () => {
   return res.data
 })
 
-const isEmpty = computed(() => !data.value || data.value.note.length === 0 || data.value.post.length === 0)
+const isEmpty = computed(() => !data.value || (data.value.note.length === 0 && data.value.post.length === 0))
 
 function handleClose() {
   show.value = false

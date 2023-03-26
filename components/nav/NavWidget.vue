@@ -71,7 +71,7 @@ const handleShare = () => {
     url: location.href,
   })
 }
-watch(useThrottle(scroll.y, 300), (pre, cur) => {
+watch(useThrottle(scroll.y, 100, true, true), (pre, cur) => {
   if (scroll.y.value > 60)
     bgOpacity.value = 1
   else
@@ -93,8 +93,8 @@ watch(route, () => {
 
 <template>
   <header h-20>
-    <div class="header" fixed top-0 w-full z-10 h-14 overflow-hidden>
-      <div transition duration-500 px-4 lg:px-10 :style="{ '--opacity': bgOpacity, 'transform': `translateY(${showInfo ? '-3.5rem' : 0})` }">
+    <div class="header" :style="{ '--opacity': bgOpacity }" fixed top-0 w-full z-10 h-14 overflow-hidden>
+      <div transition duration-500 px-4 lg:px-10 :style="{ transform: `translateY(${showInfo ? '-3.5rem' : 0})` }">
         <div flex justify-between h-14>
           <nuxt-link to="/" title="home" py-2 flex items-center gap-2>
             <CommonLogo inline-block />
@@ -163,8 +163,8 @@ watch(route, () => {
   background-color: rgba(255, 255, 255, 0.664);
   z-index: -1;
   content: "";
-  opacity: var(--opacity);
   border-bottom: 1px solid #bbb3;
+  opacity: var(--opacity);
 }
 .dark .header::before{
   background-color: rgba(255, 255, 255, 0.08);

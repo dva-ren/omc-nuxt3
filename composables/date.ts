@@ -18,7 +18,7 @@ export function formateDate(date: Date | string) {
 }
 
 export function formateToLocal(date: Date | string) {
-  return dayjs(date).format('YYYY 年 M 月 D 日 星期dd')
+  return dayjs(date).format('YYYY 年 M 月 D 日')
 }
 
 export function getOutOfDate(date: Date | string) {

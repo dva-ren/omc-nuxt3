@@ -26,7 +26,7 @@ function handleClick() {
 <template>
   <div py-10 md:py-20>
     <div pb-10 flex flex-col items-center sm="flex-row justify-unset items-unset" gap-6>
-      <img :src="master?.avatar" h-30 w-30 rounded-full object-cover p-1 bg-gray-2 shadow>
+      <CommonImageLoad :src="master?.avatar" h-30 w-30 rounded-full object-cover shadow />
       <div text-center sm:text-left>
         <p text-xl font-bold>
           {{ master?.nickname }}

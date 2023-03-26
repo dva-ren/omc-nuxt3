@@ -46,7 +46,6 @@ watch(useThrottle(scroll.y, 100), (curr, pre) => {
             <div i-carbon-up-to-top />
           </button>
         </Transition>
-        {{ anchor.length }}
         <button v-if="anchor.length" class="button" @click="showCatalog">
           <div i-ri-menu-2-fill />
         </button>

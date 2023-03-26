@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { Master } from '~/types'
-import { formateToLocal } from '~/composables'
+import { formateToLocal, formateToLocaleHasWeek } from '~/composables'
 import { useCatalog } from '~~/components/Markdown/catalog'
 
 const route = useRoute()
@@ -31,6 +31,13 @@ const title = computed(() => {
   return articleData.value?.title || '文章详情'
 })
 useHead({ title })
+
+const isOutdate = computed(() => {
+  if (!articleData.value)
+    return false
+  const df = dateFns().diff(dateFns(articleData.value?.updateTime || articleData.value.createTime), 'month')
+  return df > 3
+})
 </script>
 
 <template>
@@ -42,6 +49,10 @@ useHead({ title })
             {{ articleData?.title }}
           </div>
         </div>
+        <div v-if="isOutdate" flex justify-center items-center text="sm gray-800" min-h-20 p-4 border="1px orange-200" mb-10 gap-4 bg-orange-50 items rounded>
+          <div text-3xl lg:text-base text-orange i-carbon:warning-alt />
+          <div>这篇文章上次修改于 {{ formateToLocal(articleData.updateTime || articleData.createTime) }}，可能部分内容已经不适用，如有疑问可询问作者。</div>
+        </div>
         <div min-h-100>
           <MarkdownViewer :value="articleData.content" />
         </div>
@@ -50,11 +61,11 @@ useHead({ title })
           <p py-2>
             文章作者：{{ master?.nickname }}
           </p>
-          <p>最后修改时间：{{ formateToLocal(articleData.updateTime) || formateToLocal(articleData.createTime) }}</p>
+          <p>最后修改时间：{{ formateToLocaleHasWeek(articleData.updateTime || articleData.createTime) }}</p>
           <p w-full my-4 h-1px bg-gray-2 />
           <div flex items-center select-none>
             <i i-ri:calendar-todo-line mr-1 />
-            <span>{{ formateToLocal(articleData.createTime) }}</span>
+            <span>{{ formateToLocaleHasWeek(articleData.createTime) }}</span>
             <i ml-4 i-ri:hashtag />
             <span pl-1>{{ articleData.categoryName }}</span>
           </div>
