@@ -1,4 +1,5 @@
 import type { HeaderInfo, Master } from '~/types'
+import type { Catelog } from '~~/components/markdown/catalog'
 
 export const useMaster = () => useState<Master>('master', () => {
   return {
@@ -16,10 +17,10 @@ export const useMaster = () => useState<Master>('master', () => {
     updateTime: '',
   }
 })
-// export const useCatelog = () => useState('catelog', () => ({
-//   data: [],
-//   show: false,
-// }))
+export const useCatelogState = () => useState<{ data: Catelog[]; show: boolean }>('catelog', () => ({
+  data: [],
+  show: false,
+}))
 
 export const useHeaderInfo = () => useState<HeaderInfo>('headerInfo', () => {
   return {

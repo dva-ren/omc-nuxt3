@@ -10,6 +10,8 @@ const showFlags = reactive({
 
 const { init, show: playerFlag } = usePlayer()
 const { anchor, show: catelogFlag } = useCatalog()
+const catelog = useCatelogState()
+
 function toTop() {
   document.documentElement.scrollTo({ top: 0, behavior: 'smooth' })
 }
@@ -26,6 +28,7 @@ const changePlayerDisplay = () => {
 }
 const showCatalog = () => {
   catelogFlag.value = true
+  catelog.value.show = true
 }
 watch(useThrottle(scroll.y, 100), (curr, pre) => {
   if (curr > 500)
@@ -46,7 +49,7 @@ watch(useThrottle(scroll.y, 100), (curr, pre) => {
             <div i-carbon-up-to-top />
           </button>
         </Transition>
-        <button v-if="anchor.length" class="button" @click="showCatalog">
+        <button v-if="catelog.data.length" class="button" @click="showCatalog">
           <div i-ri-menu-2-fill />
         </button>
         <button class="button" @click="toggleDark()">

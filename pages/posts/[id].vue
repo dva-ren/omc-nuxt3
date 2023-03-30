@@ -8,8 +8,10 @@ const id = computed(() => route.params.id as string)
 const master = useState<Master>('master')
 
 const headerInfo = useHeaderInfo()
-const { anchor } = useCatalog()
-
+const { anchor, parse } = useCatalog()
+onMounted(() => {
+  parse()
+})
 const { data: articleData, pending } = useAsyncData(async () => {
   const res = await queryArticle(id.value)
   headerInfo.value.id = res.data.id

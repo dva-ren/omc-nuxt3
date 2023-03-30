@@ -34,7 +34,7 @@ img[lazy="loading"]{
   background-color: #f8f5ff;
   border: 1px solid #2333;
   opacity: 1;
-  filter: blur(6px);
+  filter: blur(12px);
 }
 img[lazy="loaded"]{
   opacity: 1;

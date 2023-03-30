@@ -186,13 +186,12 @@
 .markdown-body .image-container {
   transition: filter 0.2s;
 }
-.markdown-body .image-container:has(img[lazy="loading"]){
-  filter: blur(10px);
-  border: 1px solid #2333;
+.markdown-body .image-container:has(img[lazy="loading"]) img{
+  filter: blur(12px);
   background-color: #2333;
   opacity: 1;
 }
-.markdown-body .image-container:has(img[lazy="loaded"]){
+.markdown-body .image-container:has(img[lazy="loaded"]) img{
   opacity: 1;
   filter: none;
 }

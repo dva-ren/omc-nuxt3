@@ -24,9 +24,9 @@ router.afterEach(() => {
 })
 useHead({
   titleTemplate: (s) => {
-    if (s && s.length > 6)
-      s = `${s.slice(0, 6)}...`
-    return `${s}- 灰色と青 · 不虚光阴`
+    // if (s && s.length > 6)
+    //   s = `${s.slice(0, 30)}...`
+    return `${s} - 灰色と青 · 不虚光阴`
   },
   link: [
     {

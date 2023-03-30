@@ -4,6 +4,7 @@ import { useCatalog } from './catalog'
 const { anchor, active, show, parse } = useCatalog()
 const index = ref(0)
 const router = useRouter()
+const catelog = useCatelogState()
 
 onMounted(() => {
   parse()
@@ -23,19 +24,19 @@ const handleClick = (id: string, idx: number) => {
 <template>
   <div v-if="anchor.length" class="catalog">
     <div class="items" :style="`--top:${26 * index}px`">
-      <div v-for="i, idx in anchor" :key="i.id" class="catalog-item">
+      <div v-for="i, idx in anchor" :key="i.id" class="catalog-item" :class="i.type">
         <a :class="{ active: i.id === active }" @click="handleClick(i.id, idx)">
           {{ i.text }}
         </a>
       </div>
     </div>
     <!-- 目录 -->
-    <Drawer v-model="show" direction="bottom">
+    <Drawer v-model="catelog.show" direction="bottom">
       <template #title>
         目录
       </template>
       <div class="items" :style="`--top:${26 * index}px`" ml-4>
-        <div v-for="i, idx in anchor" :key="i.id" class="catalog-item">
+        <div v-for="i, idx in anchor" :key="i.id" class="catalog-item" :class="i.type">
           <a :class="{ active: i.id === active }" @click="handleClick(i.id, idx)">
             {{ i.text }}
           </a>

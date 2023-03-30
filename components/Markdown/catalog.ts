@@ -11,6 +11,7 @@ const anchor = ref<Catelog[]>([])
 const active = ref('')
 
 export const useCatalog = () => {
+  const catelog = useCatelogState()
   const parse = () => {
     try {
       const article = document.querySelector('.markdown-body')!
@@ -30,6 +31,7 @@ export const useCatalog = () => {
         })
       })
       anchor.value = temp
+      catelog.value.data = temp
       const addEvent = useThrottleFn(() => {
         const top = document.documentElement.scrollTop
         for (let i = 0; i < anchor.value.length; i++) {
