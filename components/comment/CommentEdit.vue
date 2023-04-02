@@ -102,6 +102,16 @@ onMounted(() => {
     </div>
     <div mt-8>
       <textarea v-model="commentForm.content" :style="{ backgroundColor: commentForm.isWhispers ? '#a3a3a329' : '' }" min-h-40 border focus:border-yellow placeholder="嘿(～￣▽￣)～，留个评论好不好" p-2 />
+      <svg
+        width="100%" height="100%" version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <rect
+          ref="inputRect"
+          class="input_rect"
+          style="fill:white;stroke:red;stroke-width:2"
+        />
+      </svg>
     </div>
     <div p-2 flex justify-between text-sm>
       <div>
@@ -192,5 +202,13 @@ textarea{
 }
 .emoji span:hover{
   color: rgba(251, 146, 60,1)
+}
+.input-rect{
+  transition: .5s;
+  shape-rendering: crispEdges;
+  stroke: var(--yellow);
+  stroke-width: 1.5px;
+  fill: #0000;
+  stroke-dashoffset: 0;
 }
 </style>
