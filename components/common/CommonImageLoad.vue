@@ -1,30 +1,47 @@
 <script lang="ts" setup>
-const props = defineProps<{ src: string }>()
+import { getImageSizeFromUrl } from '~/composables/utils'
+const props = defineProps<{
+  src: string
+  lazy?: boolean
+}>()
+
+const image = ref<HTMLImageElement>()
+
 const data_url = ref('')
 const loadingState = ref('')
+const aspectRatio = ref<string | number>('auto')
 
-watch(() => props.src, () => {
+const ob = useIntersectionObserver(image, (el) => {
+  if (el[0].isIntersecting) {
+    loadingState.value = 'loading'
+    const img = new Image()
+    img.src = props.src
+    img.onload = () => {
+      data_url.value = props.src
+      loadingState.value = 'loaded'
+      ob.stop()
+    }
+  }
+})
+
+onMounted(() => {
   if (!props.src)
     return
-  loadingState.value = 'loading'
-  const img = new Image()
-  img.src = props.src
-  img.onload = () => {
-    data_url.value = props.src
-    loadingState.value = 'loaded'
-  }
-}, { immediate: true })
+  const size = getImageSizeFromUrl(props.src)
+  if (size)
+    aspectRatio.value = size.width / size.height
+})
 </script>
 
 <template>
-  <div class="img-container">
-    <img v-bind="$attrs" :lazy="loadingState" :src="data_url">
+  <div class="img-container" :style="{ aspectRatio }">
+    <img v-bind="$attrs" ref="image" :lazy="loadingState" :src="data_url">
   </div>
 </template>
 
 <style scoped>
 img {
-  box-shadow: 0 0 10px #2333;
+  /* box-shadow: 0 0 10px #2333; */
   width: 100%;
   user-select: none;
   /* margin: 1em 0; */
@@ -32,7 +49,6 @@ img {
 }
 img[lazy="loading"]{
   background-color: #f8f5ff;
-  border: 1px solid #2333;
   opacity: 1;
   filter: blur(12px);
 }

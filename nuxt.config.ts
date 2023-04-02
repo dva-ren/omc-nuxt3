@@ -37,4 +37,7 @@ export default defineNuxtConfig({
       'postcss-nested': {},
     },
   },
+  plugins: [
+    { src: '~/plugins/masonry', mode: 'client' },
+  ],
 })

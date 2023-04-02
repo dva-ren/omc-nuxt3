@@ -36,7 +36,8 @@
     "remark-flexible-containers": "^1.0.3",
     "remove": "^0.1.5",
     "unist-util-visit": "^4.1.2",
-    "vue-lazyload": "3.0.0-rc.2"
+    "vue-lazyload": "3.0.0-rc.2",
+    "vue-masonry": "^0.16.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.35.2",
