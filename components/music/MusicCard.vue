@@ -23,7 +23,7 @@ useLazyAsyncData(async () => {
   }
   catch {
   }
-  songInfo.name = res.songs[0].al.name
+  songInfo.name = res.songs[0].name
   songInfo.pic = res.songs[0].al.picUrl
   useLazyAsyncData(async () => {
     const urlRes = await querySongurl(props.id)
@@ -52,12 +52,10 @@ const handleClick = () => {
         {{ songInfo.artist }}
       </div>
     </div>
-    <div>
-      <button @click="handleClick">
-        <div v-if="!playing" i-carbon-play-outline text-3xl />
-        <div v-else i-carbon-pause-outline text-3xl />
-      </button>
-    </div>
+    <button mr-2 @click="handleClick">
+      <div v-if="!playing" i-ri:play-circle-line text-2xl />
+      <div v-else i-ri:pause-circle-line text-2xl />
+    </button>
     <div pointer-events-none bg-gray-1 w-full h-full absolute left-0 rounded transition duration-500 :style="{ opacity: songInfo.name ? 0 : 1 }" />
   </div>
 </template>

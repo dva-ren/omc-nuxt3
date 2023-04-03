@@ -11,33 +11,39 @@ const data_url = ref('')
 const loadingState = ref('')
 const aspectRatio = ref<string | number>('auto')
 
+function loadImage() {
+  data_url.value = resizeImgUrl(props.src, 48)
+  return new Promise<void>((resolve, reject) => {
+    loadingState.value = 'loading'
+    const img = new Image()
+    img.src = props.src
+    img.onload = () => {
+      data_url.value = props.src
+      loadingState.value = 'loaded'
+      resolve()
+    }
+  })
+}
+
 watch(() => props.src, () => {
   if (!props.src)
     return
-  const size = getImageSizeFromUrl(props.src)
-  if (size)
-    aspectRatio.value = size.width / size.height
-}, { immediate: true })
-
-onMounted(() => {
   if (props.lazy) {
-    const ob = useIntersectionObserver(image, (el) => {
+    const ob = useIntersectionObserver(image, async (el) => {
       if (el[0].isIntersecting) {
-        loadingState.value = 'loading'
-        const img = new Image()
-        img.src = props.src
-        img.onload = () => {
-          data_url.value = props.src
-          loadingState.value = 'loaded'
-          ob.stop()
-        }
+        await loadImage()
+        ob.stop()
       }
     })
   }
   else {
     data_url.value = props.src
+    loadImage()
   }
-})
+  const size = getImageSizeFromUrl(props.src)
+  if (size)
+    aspectRatio.value = size.width / size.height
+}, { immediate: true })
 </script>
 
 <template>
@@ -50,14 +56,15 @@ onMounted(() => {
 img {
   /* box-shadow: 0 0 10px #2333; */
   width: 100%;
+  height: 100%;
   user-select: none;
   /* margin: 1em 0; */
   transition: all 0.2s ease-in 0.2s;
 }
 img[lazy="loading"]{
-  background-color: #f8f5ff;
+  background-color: #e9e9e9;
   opacity: 1;
-  filter: blur(12px);
+  filter: blur(8px);
 }
 img[lazy="loaded"]{
   opacity: 1;

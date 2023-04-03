@@ -1,17 +1,19 @@
 import { http } from '~/utils/request'
 import type { Article, AsyncResponse, Category, Comment, CommentForm, Master, Note, PageInfo, Picture, PictureParams, Say, SearchResult, SongInfo } from '~/types/api'
 
+interface ArticleQuery {
+  category?: string
+  pageNum?: number
+  pageSize?: number
+}
+
 export const getMaster = (): AsyncResponse<Master> => {
   return http('/master')
 }
 
-export const getArticles = (category?: string, pageNum = 1, pageSize = 15): AsyncResponse<PageInfo<Article>> => {
+export const getArticles = (query?: ArticleQuery): AsyncResponse<PageInfo<Article>> => {
   return http('/article', {
-    query: {
-      category,
-      pageNum,
-      pageSize,
-    },
+    query,
   })
 }
 
@@ -91,18 +93,18 @@ export const queryPlaylist = (id: number): Promise<SongInfo[]> => {
   })
 }
 
-export const querySongInfo = (id: string | number): AsyncResponse<any> => {
+export const querySongInfo = (id: string | number): Promise<any> => {
   return $fetch(`/song/detail?ids=${id}`, {
-    baseURL: 'https://service-007vg0f5-1257026645.cd.apigw.tencentcs.com/release/',
+    baseURL: 'https://music.dvaren.xyz',
   })
 }
-export const querySongurl = (id: string | number): AsyncResponse<any> => {
+export const querySongurl = (id: string | number): Promise<any> => {
   return $fetch(`/song/url/v1?id=${id}&level=exhigh`, {
-    baseURL: 'https://service-007vg0f5-1257026645.cd.apigw.tencentcs.com/release/',
+    baseURL: 'https://music.dvaren.xyz',
   })
 }
-export const queryLyric = (id: string | number): AsyncResponse<any> => {
+export const queryLyric = (id: string | number): Promise<any> => {
   return $fetch(`/lyric?id=${id}`, {
-    baseURL: 'https://service-007vg0f5-1257026645.cd.apigw.tencentcs.com/release/',
+    baseURL: 'https://music.dvaren.xyz',
   })
 }

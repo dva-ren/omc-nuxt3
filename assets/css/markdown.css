@@ -59,13 +59,6 @@
   line-height: 3;
   font-size: 1.4em;
 }
-.markdown-body h1 ~ p:first-of-type::first-letter {
-  color: var(--color-1);
-  float: left;
-  font-size: 2em;
-  margin-right: 0.4em;
-  font-weight: bolder;
-}
 .markdown-body h2 {
   font-size: 1.2em;
 }
@@ -186,12 +179,12 @@
 .markdown-body .image-container {
   transition: filter 0.2s;
 }
-.markdown-body .image-container:has(img[lazy="loading"]) img{
-  filter: blur(12px);
+.markdown-body .image-container:has(img[lazy="loading"]){
+  filter: blur(8px);
   background-color: #2333;
   opacity: 1;
 }
-.markdown-body .image-container:has(img[lazy="loaded"]) img{
+.markdown-body .image-container:has(img[lazy="loaded"]){
   opacity: 1;
   filter: none;
 }

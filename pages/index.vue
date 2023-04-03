@@ -86,7 +86,7 @@ function handleClick() {
             <div class="icon" bg="#12a182">
               <div i-carbon:bookmark class="v-icon" inline-block />
             </div>
-            <span px-3>朋友们</span>
+            <span px-3>友人帐</span>
           </div>
           <router-link to="/friends" class="icon" bg="#55bb8a" p-4>
             <div i-carbon:chevron-right text-lg />

@@ -1,18 +1,59 @@
 <script lang="ts" setup>
-import { dateFns } from '~/composables'
+import { dateFns, generateSpringText } from '~/composables'
 import { getArticles } from '~/utils/api'
+import { usePageHelper } from '~/hooks/usePageHelper'
 
-const { data: posts, pending } = useAsyncData(async () => {
-  const res = await getArticles()
+const page = computed(() => Number(useRoute().query.page || 1))
+const router = useRouter()
+
+const { pageNum, pageSize, hasPreviousPage, hasNextPage } = usePageHelper({
+  pageNum: page.value,
+  pageSize: 10,
+  hasNextPage: false,
+  hasPreviousPage: false,
+})
+
+const { data: posts, refresh, pending } = useAsyncData(async () => {
+  const res = await getArticles({
+    pageNum: pageNum.value,
+    pageSize: pageSize.value,
+  })
+  hasPreviousPage.value = res.data.hasPreviousPage
+  hasNextPage.value = res.data.hasNextPage
   return res.data.list
 })
 useHead({ title: '文章' })
+
+const prePage = () => {
+  router.push({
+    path: '/posts',
+    query: {
+      page: page.value - 1,
+    },
+  })
+}
+const nextPage = () => {
+  router.push({
+    path: '/posts',
+    query: {
+      page: page.value + 1,
+    },
+  })
+}
+watch(page, () => {
+  document.documentElement.scrollTo({
+    top: 0,
+    behavior: 'smooth',
+  })
+  pageNum.value = page.value
+  refresh()
+})
 </script>
 
 <template>
-  <CommonLoadding v-if="pending" :loadding="pending" />
+  <CommonLoadding v-if="!pending" :loadding="pending" />
   <NuxtLayout v-if="!pending">
-    <div v-for="p, idx in posts" :key="p.id" :style="generateSpringText({ delay: idx * 100 })" class="post-item " pb-8>
+    <div v-for="p, idx in posts" :key="p.id" :style="generateSpringText({ delay: idx * 0.1 })" class="post-item " pb-8>
       <div>
         <div class="left-label" display-none sm:display-block>
           {{ dateFns(p.createTime).format('YYYY-MM-DD') }}
@@ -31,11 +72,20 @@ useHead({ title: '文章' })
           </p>
         </div>
         <p text-center>
-          <NuxtLink :to="`/posts/${p.id}`" btn rounded-full text-sm>
+          <NuxtLink :to="`/posts/${p.id}`" btn rounded-full text-sm py-2>
             查看原文
           </NuxtLink>
         </p>
       </div>
+    </div>
+    <CommonEmpty v-if="!posts?.length" />
+    <div flex justify-center gap-4>
+      <button v-if="hasPreviousPage" btn rounded-full text-sm p-2 px-4 @click="prePage">
+        上一页
+      </button>
+      <button v-if="hasNextPage" btn rounded-full text-sm p-2 px-4 @click="nextPage">
+        下一页
+      </button>
     </div>
   </NuxtLayout>
 </template>

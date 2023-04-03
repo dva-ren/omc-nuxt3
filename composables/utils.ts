@@ -35,8 +35,17 @@ export function getImageSizeFromUrl(url: string) {
   }
 }
 interface options {
+  /**
+   * 动画名称
+   */
   name?: string
+  /**
+   * 持续时间 ms
+   */
   time?: number
+  /**
+   * 延迟 ms
+   */
   delay?: number
 }
 export function generateSpringText(options?: options) {

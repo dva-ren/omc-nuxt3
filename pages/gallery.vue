@@ -5,24 +5,30 @@ import { resizeImgUrl } from '~/composables/utils'
 
 const pictures = ref<Picture[]>([])
 const pageNum = ref(1)
-const pageSize = ref(30)
+const pageSize = ref(15)
 const pending = ref(false)
+const hasNext = ref(false)
 
 const fetchData = async () => {
   if (pending.value)
     return
-  // console.log('fetchData')
   pending.value = true
   const res = await queryPictures({
     pageNum: pageNum.value,
     pageSize: pageSize.value,
   })
-  pageSize.value = 15
+  hasNext.value = res.data.hasNextPage
+  pageSize.value = 10
   pictures.value.push(...res.data.list)
   pending.value = false
 }
 fetchData()
-
+const loadMore = () => {
+  if (!hasNext.value)
+    return
+  pageNum.value++
+  fetchData()
+}
 // const { y } = useWindowScroll()
 // watch(y, useThrottleFn(() => {
 //   const el = document.documentElement
@@ -37,7 +43,7 @@ useHead({
 </script>
 
 <template>
-  <div v-if="!pending">
+  <div>
     <ClientOnly>
       <!-- <div flex justify-center>
         <div v-for="i in 6" :key="i" class="category" :class="{ active: i === 1 }">
@@ -58,12 +64,13 @@ useHead({
                   <div>{{ item.position }}</div>
                 </template>
               </div>
-              <div i-ri:heart-3-fill />
+              <button text-red-200 i-ri:heart-3-fill />
             </div>
           </div>
         </div>
       </div>
-      <div text="sm center">
+      <LazyCommonLoadMore v-if="hasNext" :loading="pending" @load-more="loadMore" />
+      <div v-else text="sm center">
         没有更多了...
       </div>
     </ClientOnly>

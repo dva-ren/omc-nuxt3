@@ -15,7 +15,6 @@ onMounted(() => {
 })
 const { init } = usePlayer()
 const router = useRouter()
-const route = useRoute()
 
 router.beforeEach(() => {
   nprogress.start()
@@ -27,7 +26,8 @@ useHead({
   titleTemplate: (s) => {
     // if (s && s.length > 6)
     //   s = `${s.slice(0, 30)}...`
-    return `${s} - 灰色と青 · 不虚光阴`
+    const siteTitle = '灰色と青 · 不虚光阴'
+    return s ? `${s} - ${siteTitle}` : siteTitle
   },
   link: [
     {
