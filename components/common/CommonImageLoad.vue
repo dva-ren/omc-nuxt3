@@ -11,25 +11,32 @@ const data_url = ref('')
 const loadingState = ref('')
 const aspectRatio = ref<string | number>('auto')
 
-const ob = useIntersectionObserver(image, (el) => {
-  if (el[0].isIntersecting) {
-    loadingState.value = 'loading'
-    const img = new Image()
-    img.src = props.src
-    img.onload = () => {
-      data_url.value = props.src
-      loadingState.value = 'loaded'
-      ob.stop()
-    }
-  }
-})
-
-onMounted(() => {
+watch(() => props.src, () => {
   if (!props.src)
     return
   const size = getImageSizeFromUrl(props.src)
   if (size)
     aspectRatio.value = size.width / size.height
+}, { immediate: true })
+
+onMounted(() => {
+  if (props.lazy) {
+    const ob = useIntersectionObserver(image, (el) => {
+      if (el[0].isIntersecting) {
+        loadingState.value = 'loading'
+        const img = new Image()
+        img.src = props.src
+        img.onload = () => {
+          data_url.value = props.src
+          loadingState.value = 'loaded'
+          ob.stop()
+        }
+      }
+    })
+  }
+  else {
+    data_url.value = props.src
+  }
 })
 </script>
 

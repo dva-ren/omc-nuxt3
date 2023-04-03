@@ -6,6 +6,9 @@ import { addComment } from '~/utils/api'
 const { refId, type, index, parentId = '', root = false } = defineProps<{ refId: string; type: string; index: number; parentId?: string; root?: boolean }>()
 
 const emits = defineEmits(['onSend'])
+const textarea = ref<HTMLElement>()
+const svg = ref<SVGElement>()
+const rect = ref<SVGRectElement>()
 
 const mailReg = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 const urlReg = /^(https:\/\/|http:\/\/)/
@@ -68,7 +71,20 @@ const handleEmoji = (e: Event) => {
     return
   commentForm.content += e.target.innerText
 }
+const initSvg = () => {
+  svg.value!.style.height = `${textarea.value!.offsetHeight}px`
+  svg.value!.style.width = `${textarea.value!.offsetWidth}px`
+  const css = `
+    --len: ${rect.value!.getTotalLength()};
+  `
+  svg.value!.style.cssText += css
+  // rect.value!.style.cssText = css
+}
+useResizeObserver(textarea, useDebounceFn(() => {
+  initSvg()
+}, 100))
 onMounted(() => {
+  initSvg()
   const user = localStorage.getItem('user')
   if (user) {
     try {
@@ -100,17 +116,10 @@ onMounted(() => {
         <input v-model="commentForm.url" type="text" placeholder="网站(可留空)http(s)">
       </div>
     </div>
-    <div mt-8>
-      <textarea v-model="commentForm.content" :style="{ backgroundColor: commentForm.isWhispers ? '#a3a3a329' : '' }" min-h-40 border focus:border-yellow placeholder="嘿(～￣▽￣)～，留个评论好不好" p-2 />
-      <svg
-        width="100%" height="100%" version="1.1"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <rect
-          ref="inputRect"
-          class="input_rect"
-          style="fill:white;stroke:red;stroke-width:2"
-        />
+    <div mt-8 relative>
+      <textarea ref="textarea" v-model="commentForm.content" :style="{ backgroundColor: commentForm.isWhispers ? '#a3a3a329' : '' }" min-h-40 border focus:border-yellow placeholder="嘿(～￣▽￣)～，留个评论好不好" p-2 />
+      <svg ref="svg" absolute left-0 top-0>
+        <rect ref="rect" class="rect" width="100%" height="100%" />
       </svg>
     </div>
     <div p-2 flex justify-between text-sm>
@@ -166,8 +175,6 @@ textarea{
   cursor: pointer;
   width: 1rem;
   height: 1rem;
-  /* border: 1px solid gray; */
-  /* border: 1px solid gray; */
   overflow: hidden;
   vertical-align:middle;
   transition: border 0.4s;
@@ -181,8 +188,6 @@ textarea{
   width: 1rem;
   height: 1rem;
   border: 2px solid rgb(201, 95, 95);
-
-  /* border: 2px solid gray; */
   transition: all .4s ease-in-out;
 }
 .checked::before{
@@ -210,5 +215,19 @@ textarea{
   stroke-width: 1.5px;
   fill: #0000;
   stroke-dashoffset: 0;
+}
+
+svg{
+  pointer-events: none;
+}
+.rect{
+  stroke: var(--yellow);
+  fill: rgba(255,255,255,0);
+  stroke-width: 4px;
+  transition: all linear 0.8s;
+  stroke-dasharray: 0 var(--len);
+}
+textarea:focus + svg>.rect{
+  stroke-dasharray: var(--len) 0;
 }
 </style>

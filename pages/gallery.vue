@@ -18,10 +18,7 @@ const fetchData = async () => {
     pageSize: pageSize.value,
   })
   pageSize.value = 15
-  const imgs = new Array(6).fill(0).map((_, idx) => {
-    return res.data.list[idx % res.data.list.length]
-  })
-  pictures.value.push(...imgs)
+  pictures.value.push(...res.data.list)
   pending.value = false
 }
 fetchData()
@@ -47,7 +44,7 @@ useHead({
           {{ i }}
         </div>
       </div> -->
-      <div v-masonry gutter="10" fit-width="true" transition-duration="0.1s" item-selector=".img-item" class="masonry-container">
+      <div v-masonry gutter="10" fit-width="true" transition-duration="0.5s" item-selector=".img-item" class="masonry-container">
         <div v-for="item, idx in pictures" :key="idx" v-masonry-tile w-44vw md:w-60 class="img-item" overflow-hidden>
           <CommonImageLoad :src="resizeImgUrl(item.url, 720)" />
           <div p-2>
@@ -56,8 +53,10 @@ useHead({
             </div>
             <div text="gray xs" flex justify-between>
               <div flex items-center gap-1>
-                <div i-carbon:location-filled />
-                <div>{{ item.position }}</div>
+                <template v-if="item.position">
+                  <div i-carbon:location-filled />
+                  <div>{{ item.position }}</div>
+                </template>
               </div>
               <div i-ri:heart-3-fill />
             </div>

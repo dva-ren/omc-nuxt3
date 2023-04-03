@@ -46,7 +46,7 @@ useHead({
     </NuxtLayout>
   </div>
   <CommonFooter />
-  <div class="z--1 inset-0 fixed bg-fixed pointer-events-none transition-opacity duration-500 ease transform-gpu" :class="$route.path === '/' ? 'op-80' : 'op-20'">
+  <div class="z--1 inset-0 fixed bg-fixed pointer-events-none transition-opacity duration-500 ease transform-gpu" :class="$route.path === '/' ? 'op-80' : 'op-30'">
     <div class="bg absolute inset-0 transform-gpu" />
   </div>
   <ClientOnly>
