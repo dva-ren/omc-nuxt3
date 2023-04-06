@@ -65,10 +65,11 @@ const onLeave = () => {
 <style scoped>
 .modal-container{
   background-color: rgba(55,55,55,0.3);
+  backdrop-filter: blur(6px);
 }
 .modal-enter-active,
 .modal-leave-active {
-  transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease,backdrop-filter 0.2s ease;
 }
 
 .modal-enter-from,

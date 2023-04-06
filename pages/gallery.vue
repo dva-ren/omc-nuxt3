@@ -43,7 +43,7 @@ useHead({
 </script>
 
 <template>
-  <div>
+  <div v-if="pictures.length">
     <ClientOnly>
       <!-- <div flex justify-center>
         <div v-for="i in 6" :key="i" class="category" :class="{ active: i === 1 }">
@@ -104,7 +104,7 @@ useHead({
   border-radius: 10px;
   margin-bottom: 0.8rem;
   background-color: white;
-  box-shadow: 4px 4px 10px rgba(224,224,224,0.5);
+  box-shadow: 0 0 10px rgba(224,224,224,0.5);
 }
 .img-item img{
   object-fit: cover;

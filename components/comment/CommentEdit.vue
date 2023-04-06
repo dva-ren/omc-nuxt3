@@ -45,7 +45,7 @@ const handleAddComment = useThrottleFn(async () => {
     return
   }
   if (url !== '' && !urlReg.test(url)) {
-    Message.warning('网址格式不对呀')
+    Message.warning('似乎网址格式不对')
     return
   }
   processing.value = true
@@ -150,7 +150,7 @@ onMounted(() => {
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="postcss">
 .input-area input,textarea{
   width: 100%;
   outline: none;
@@ -168,6 +168,9 @@ textarea{
   padding: 0.1rem 0.5rem;
   border-width: 1px;
   gap: 4px;
+}
+.input-area:has(input:focus){
+  border: 1px solid var(--yellow);
 }
 .checkbox{
   position: relative;

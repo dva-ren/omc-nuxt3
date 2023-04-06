@@ -8,6 +8,7 @@ interface Options {
 export const http = (url: string, options?: Options): Promise<any> => {
   const env = useRuntimeConfig()
   const baseUrl = env.public.VITE_REQUEST_BASE_URL
+  const reqHeaders = useRequestHeaders()
   return $fetch(url, {
     onRequest: ({ request, options }) => {
       options.baseURL = options.baseURL === '/' ? baseUrl : options.baseURL
@@ -27,5 +28,9 @@ export const http = (url: string, options?: Options): Promise<any> => {
       throw createError(error)
     },
     ...options,
+    headers: {
+      'x-forwarded-for': reqHeaders['x-forwarded-for'] ?? '',
+      'user-agent': reqHeaders['user-agent'] ?? '',
+    },
   })
 }
