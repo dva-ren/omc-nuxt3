@@ -40,11 +40,13 @@ definePageMeta({
         </div>
       </template>
       <NuxtPage :page-key="id" />
-      <template #sidebar>
-        <div sticky top-20 mt-20 text-sm>
-          <MarkdownCatalog />
-        </div>
-      </template>
+      <ClientOnly>
+        <template #sidebar>
+          <div sticky top-20 mt-20 text-sm>
+            <MarkdownCatalog />
+          </div>
+        </template>
+      </clientonly>
     </NuxtLayout>
   </ClientOnly>
 </template>

@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-const { full, loadding } = defineProps({
+const { full, loading } = defineProps({
   full: {
     type: Boolean,
     default: false,
   },
-  loadding: {
+  loading: {
     type: Boolean,
     default: false,
   },
@@ -16,8 +16,8 @@ const { full, loadding } = defineProps({
     <div v-if="full" v-bind="$attrs">
       <slot />
     </div>
-    <CommonLoadding :loadding="loadding" />
-    <div v-if="!loadding" class="grid grid-cols-12 mx-auto p-4 sm:px-6 lg:max-w-7xl lg:px-8 lg:gap-5">
+    <CommonLoading :loading="loading" />
+    <div v-if="!loading" class="grid grid-cols-12 mx-auto p-4 sm:px-6 lg:max-w-7xl lg:px-8 lg:gap-5">
       <!-- Left sidebar -->
       <div class="hidden md:block xs-col-span-1 xl:col-span-2">
         <div min-h-100vh h-full>
@@ -39,7 +39,7 @@ const { full, loadding } = defineProps({
         </div>
       </div>
     </div>
-    <!-- <div v-if="!full && !loadding" v-spring v-bind="$attrs" flex justify-center>
+    <!-- <div v-if="!full && !loading" v-spring v-bind="$attrs" flex justify-center>
       <div display-none xl:display-block>
         <slot name="pre" />
       </div>

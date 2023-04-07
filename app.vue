@@ -4,7 +4,7 @@ import { usePlayer } from './hooks'
 
 import 'nprogress/nprogress.css'
 nprogress.configure({ showSpinner: false })
-const loadding = ref(true)
+const loading = ref(true)
 
 // useState('catelog', () => [])
 onMounted(() => {
@@ -39,7 +39,7 @@ useHead({
 
 <template>
   <NavWidget />
-  <CommonLoadMask v-model="loadding" @end="loadding = false" />
+  <CommonLoadMask v-model="loading" @end="loading = false" />
   <div min-h-full>
     <NuxtLayout>
       <NuxtPage />

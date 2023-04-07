@@ -23,14 +23,14 @@ watch(categoryId, () => {
 </script>
 
 <template>
-  <div v-if="posts" :loadding="pending">
+  <div v-if="posts" :loading="pending">
     <p text-2xl>
       <CommonTextAnimation :text="`分类 - ${posts[0]?.categoryName}`" />
     </p>
     <p text-gray text="15px" py-1>
       <CommonTextAnimation :text="`该分类下共有 ${total} 篇文章,加油!`" />
     </p>
-    <!-- <CommonLoadding :loadding="loading" /> -->
+    <!-- <CommonLoading :loading="loading" /> -->
     <div pl-8 py-4 text-sm>
       <ul class="posts" text-gray-500>
         <template v-for="item, idx in posts" :key="item.id">

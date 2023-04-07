@@ -43,7 +43,7 @@ const isOutdate = computed(() => {
 </script>
 
 <template>
-  <NuxtLayout name="post" :loadding="pending">
+  <NuxtLayout name="post" :loading="pending">
     <div v-if="articleData">
       <div w-full>
         <div flex items-center justify-between mb-4>

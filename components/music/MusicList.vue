@@ -14,7 +14,7 @@ const handleClick = (song: SongInfo) => {
 </script>
 
 <template>
-  <CommonLoadding :loadding="!playlist" />
+  <CommonLoading :loading="!playlist" />
   <div v-if="playlist" flex gap-4 flex-col sm:flex-row pb-8>
     <div>
       <ClientOnly>

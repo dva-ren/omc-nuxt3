@@ -10,11 +10,12 @@ const { data, pending } = useAsyncData(async () => {
 </script>
 
 <template>
-  <NuxtLayout :loading="pending">
+  <CommonLoading :loading="pending" />
+  <div v-if="!pending">
     <ClientOnly>
       <SayList v-if="data" :data="data" />
     </ClientOnly>
-  </NuxtLayout>
+  </div>
 </template>
 
 <style scoped>

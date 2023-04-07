@@ -33,7 +33,7 @@ onMounted(() => {
     <CommentEdit :ref-id="refId" :type="type" :index="total" @on-send="refresh" />
     <div ref="commentRef" />
     <div v-if="visible">
-      <CommonLoadding :loadding="pending" />
+      <CommonLoading :loading="pending" />
       <div v-if="!pending">
         <div v-if="total" mt-4>
           <template v-for="i, idx in comments" :key="i.id">

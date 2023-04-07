@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-const { loadding } = defineProps<{ loadding: boolean }>()
+const { loading = true } = defineProps<{ loading?: boolean }>()
 </script>
 
 <template>
-  <div v-if="loadding" class="loading">
+  <div v-if="loading" class="loading">
     <div class="ball-container">
       <div class="ball" />
     </div>

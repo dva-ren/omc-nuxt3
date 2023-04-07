@@ -51,8 +51,8 @@ watch(page, () => {
 </script>
 
 <template>
-  <CommonLoadding v-if="!pending" :loadding="pending" />
-  <NuxtLayout v-if="!pending">
+  <CommonLoading :loading="pending" />
+  <div v-if="!pending">
     <div v-for="p, idx in posts" :key="p.id" :style="generateSpringText({ delay: idx * 0.1 })" class="post-item " pb-8>
       <div>
         <div class="left-label" display-none sm:display-block>
@@ -87,7 +87,7 @@ watch(page, () => {
         下一页
       </button>
     </div>
-  </NuxtLayout>
+  </div>
 </template>
 
 <style scoped>

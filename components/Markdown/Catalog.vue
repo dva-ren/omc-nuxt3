@@ -11,6 +11,7 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
+  catelog.value.data = []
   document.body.onscroll = null
 })
 watch(active, () => {
@@ -86,10 +87,10 @@ const handleClick = (id: string, idx: number) => {
   margin-left: -0.25rem;
 }
 .catalog-h2{
-  padding-left: 1.5rem;
+  padding-left: 1rem;
 }
 .catalog-h3{
-  padding-left: 2.5rem;
+  padding-left: 2rem;
 }
 .catalog-h4{
   padding-left: 3.5rem;

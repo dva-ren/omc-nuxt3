@@ -2,6 +2,7 @@
 import { getNotes } from '~/utils/api'
 import CommentWidget from '~~/components/comment/CommentWidget.vue'
 import { useCatalog } from '~~/components/Markdown/catalog'
+import { dateFns, formateToLocal } from '~/composables'
 
 const headerInfo = useHeaderInfo()
 const route = useRoute()
@@ -54,6 +55,7 @@ useHead({ title })
 </script>
 
 <template>
+  <CommonLoading :loading="pending" />
   <div v-if="note && !pending" class="spring">
     <div class="info" border p-4 md:p-8 mb-8>
       <p class="left-label">
