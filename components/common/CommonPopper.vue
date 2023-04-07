@@ -124,13 +124,14 @@ watch(visible, () => {
 <style scoped>
 .content{
   box-shadow: 0 0 10px #7878781a, 0 5px 20px #78787833;
-  border-radius: 0.25rem;
+  border-radius: 0.675rem;
   overflow: hidden;
   padding: 0.25rem 0;
 }
 .v-enter-active,
 .v-leave-active {
-  transition: opacity 0.2s ease;
+  transform: translateY(-10px);
+  transition: opacity 0.5s ease;
 }
 .v-enter-from,
 .v-leave-to {

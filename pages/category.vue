@@ -7,7 +7,9 @@ const categoryId = computed(() => route.query.id as string)
 const total = ref(0)
 
 const { data: posts, pending, refresh } = useAsyncData(async () => {
-  const res = await getArticles(categoryId.value)
+  const res = await getArticles({
+    category: categoryId.value,
+  })
   total.value = res.data.total
   useHead({
     title: `分类 - ${res.data.list[0]?.categoryName}`,

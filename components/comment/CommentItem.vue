@@ -13,28 +13,31 @@ const onReplayed = () => {
 </script>
 
 <template>
-  <div class="spring" flex gap-4 text-12px p-2>
-    <ClientOnly>
-      <CommonImageLoad w-10 h-10 rounded-full :src="`https://cravatar.cn/avatar/${md5(data.mail)}?d=monsterid`" />
-    </ClientOnly>
-    <!-- <img w-10 h-10 rounded-full :src="`https://cravatar.cn/avatar/${md5(data.mail)}?d=monsterid`" alt=""> -->
-    <div flex-1>
-      <div>
-        <a v-if="data.url" class="link" :href="data.url" target="_blank" rel="noopener noreferrer">{{ data.author }}</a>
-        <span v-else>{{ data.author }}</span>
-        <span text="gray-500">
-          <span pl-2>{{ dateFns(data.createTime).fromNow() }}</span>
-          <span mx-2>#{{ data.commentsIndex }}</span>
-          <span v-if="data.location">来自：{{ data.location }}</span>
-        </span>
+  <div class="spring">
+    <div flex gap-4 text-12px p-2>
+      <ClientOnly>
+        <CommonImageLoad w-10 h-10 rounded-full :src="`https://cravatar.cn/avatar/${md5(data.mail)}?d=monsterid`" />
+      </ClientOnly>
+      <div flex-1>
+        <div>
+          <a v-if="data.url" class="link" :href="data.url" target="_blank" rel="noopener noreferrer">{{ data.author }}</a>
+          <span v-else>{{ data.author }}</span>
+          <span text="gray-500">
+            <span pl-2>{{ dateFns(data.createTime).fromNow() }}</span>
+            <span mx-2>#{{ data.commentsIndex }}</span>
+            <span v-if="data.location">来自：{{ data.location }}</span>
+          </span>
+        </div>
+        <div py-4 text="sm" text-black dark:text-gray-4>
+          {{ data.content }}
+        </div>
+        <button mb-2 text="gray-500" @click="visible = !visible">
+          {{ visible ? '取消回复' : '回复' }}
+        </button>
       </div>
-      <div py-4 text="sm" text-black dark:text-gray-4>
-        {{ data.content }}
-      </div>
-      <button mb-2 text="gray-500" @click="visible = !visible">
-        {{ visible ? '取消回复' : '回复' }}
-      </button>
-      <CommentEdit v-if="visible" text-base :index="index" :ref-id="data.ref" :type="data.refType" :parent-id="data.id" @on-send="onReplayed" />
+    </div>
+    <CommentEdit v-if="visible" text-base :index="index" :ref-id="data.ref" :type="data.refType" :parent-id="data.id" @on-send="onReplayed" />
+    <div ml-8>
       <CommentItem v-for="child in data.children" :key="child.id" :data="child" :index="data.children.length" />
     </div>
   </div>

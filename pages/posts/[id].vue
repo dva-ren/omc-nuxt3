@@ -74,7 +74,7 @@ const isOutdate = computed(() => {
         </div>
         <div my-10 text-gray-5>
           <button flex items-center style="color: var(--light-color);" @click="$router.go(-1)">
-            <div i-ri-arrow-left-line inline-block />
+            <div i-ri:arrow-left-s-line inline-block />
             <div text-sm>
               返回..
             </div>
