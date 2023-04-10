@@ -26,7 +26,7 @@ function handleClick() {
 <template>
   <div py-10 md:py-20>
     <div pb-10 flex flex-col items-center sm="flex-row justify-unset items-unset" gap-6>
-      <img :src="master?.avatar" h-30 w-30 rounded-full object-cover shadow>
+      <CommonImageLoad :src="master?.avatar" h-30 w-30 rounded-full object-cover shadow />
       <div text-center sm:text-left>
         <p text-xl font-bold>
           {{ master?.nickname }}
@@ -35,16 +35,16 @@ function handleClick() {
           {{ master?.introduce }}
         </p>
         <div class="spring" text-gray-1>
-          <a href="https://github.com/dva-ren" target="_blank" class="circle-icon" bg-blue-400>
+          <a href="https://github.com/dva-ren" target="_blank" class="circle-icon git-link">
             <div i-carbon:logo-github class="v-icon" inline-block />
           </a>
-          <a ml-4 href="https://y.music.163.com/m/user?id=136604471" target="_blank" class="circle-icon" bg="#ff3a3a">
+          <a ml-4 href="https://y.music.163.com/m/user?id=136604471" target="_blank" class="circle-icon netease-link">
             <div i-ri-netease-cloud-music-line class="v-icon" inline-block />
           </a>
-          <a ml-4 href="https://space.bilibili.com/60385716" target="_blank" class="circle-icon" bg="#f25d8e">
+          <a ml-4 href="https://space.bilibili.com/60385716" target="_blank" class="circle-icon bilibili-link">
             <div i-ri-bilibili-fill class="v-icon" inline-block />
           </a>
-          <a ml-4 href="mailto:473029463@qq.com" class="circle-icon" bg-teal-400>
+          <a ml-4 href="mailto:473029463@qq.com" class="circle-icon mail-link">
             <div i-ri:at-line class="v-icon" inline-block />
           </a>
         </div>
@@ -140,5 +140,21 @@ function handleClick() {
 }
 .friends::-webkit-scrollbar-thumb, .friends::-webkit-scrollbar-thum:hover {
   background-color: rgba(0,0,0,0);
+}
+.git-link{
+  background-color: rgba(96,165,250,1);
+  box-shadow:0 0 10px rgba(96,165,250,0.5);
+}
+.bilibili-link{
+  background-color: rgba(242, 93, 142,1);
+  box-shadow:0 0 10px rgba(242, 93, 142,0.5);
+}
+.netease-link{
+  background-color: rgba(255, 58, 58,1);
+  box-shadow:0 0 10px rgba(255, 58, 58,0.5);
+}
+.mail-link{
+  background-color: rgba(45,212,191,1);
+  box-shadow:0 0 10px rgba(45,212,191,0.5);
 }
 </style>

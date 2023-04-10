@@ -3,16 +3,17 @@ import { getImageSizeFromUrl } from '~/composables/utils'
 const props = defineProps<{
   src: string
   lazy?: boolean
+  blur?: boolean
 }>()
 
 const image = ref<HTMLImageElement>()
 
-const data_url = ref('')
+const data_url = ref('data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==')
 const loadingState = ref('')
 const aspectRatio = ref<string | number>('auto')
 
 function loadImage() {
-  data_url.value = resizeImgUrl(props.src, 48)
+  // data_url.value = resizeImgUrl(props.src, 48)
   return new Promise<void>((resolve, reject) => {
     loadingState.value = 'loading'
     const img = new Image()
@@ -37,7 +38,7 @@ watch(() => props.src, () => {
     })
   }
   else {
-    data_url.value = props.src
+    // data_url.value = props.src
     loadImage()
   }
   const size = getImageSizeFromUrl(props.src)
@@ -47,24 +48,22 @@ watch(() => props.src, () => {
 </script>
 
 <template>
-  <div class="img-container" :style="{ aspectRatio }">
+  <div class="img-container" :style="{ aspectRatio, '--blur': blur ? '8px' : '0' }">
     <img v-bind="$attrs" ref="image" :lazy="loadingState" :src="data_url">
   </div>
 </template>
 
 <style scoped>
 img {
-  /* box-shadow: 0 0 10px #2333; */
   width: 100%;
   height: 100%;
   user-select: none;
-  /* margin: 1em 0; */
   transition: all 0.2s ease-in 0.2s;
 }
 img[lazy="loading"]{
-  background-color: #e9e9e9;
+  /* background-color: #e9e9e9; */
   opacity: 1;
-  filter: blur(8px);
+  filter: blur(var(--blur));
 }
 img[lazy="loaded"]{
   opacity: 1;

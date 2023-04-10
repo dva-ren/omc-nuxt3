@@ -17,7 +17,7 @@ const { data: articleData, pending } = useAsyncData(async () => {
   headerInfo.value.id = res.data.id
   headerInfo.value.like = 0
   headerInfo.value.title = res.data.title
-  headerInfo.value.type = '记录生活'
+  headerInfo.value.type = res.data.categoryName
   return res.data
 })
 definePageMeta({

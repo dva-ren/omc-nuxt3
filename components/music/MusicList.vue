@@ -18,7 +18,7 @@ const handleClick = (song: SongInfo) => {
   <div v-if="playlist" flex gap-4 flex-col sm:flex-row pb-8>
     <div>
       <ClientOnly>
-        <CommonImageLoad m-auto :src="playlist?.coverImgUrl" w-30 h-30 rounded-full static top-10 />
+        <CommonImageLoad blur m-auto :src="playlist?.coverImgUrl" w-30 h-30 rounded-full static top-10 />
       </ClientOnly>
       <div py-2 text="center">
         {{ type }}

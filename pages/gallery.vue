@@ -52,7 +52,7 @@ useHead({
       </div> -->
       <div v-masonry gutter="10" fit-width="true" transition-duration="0.5s" item-selector=".img-item" class="masonry-container">
         <div v-for="item, idx in pictures" :key="idx" v-masonry-tile w-44vw md:w-60 class="img-item" overflow-hidden>
-          <CommonImageLoad :src="resizeImgUrl(item.url, 720)" />
+          <CommonImageLoad blur :src="resizeImgUrl(item.url, 720)" />
           <div p-2>
             <div break-words text-base text="14px" pb-2>
               {{ item.description }}
