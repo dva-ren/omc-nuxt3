@@ -1,5 +1,5 @@
 import { http } from '~/utils/request'
-import type { Article, AsyncResponse, Category, Comment, CommentForm, Master, Note, PageInfo, Picture, PictureParams, Say, SearchResult, SongInfo } from '~/types/api'
+import type { Article, AsyncResponse, Category, Comment, CommentForm, Friend, FriendForm, Master, Note, PageInfo, Picture, PictureParams, Say, SearchResult, SongInfo } from '~/types/api'
 
 interface ArticleQuery {
   category?: string
@@ -76,6 +76,17 @@ export const queryPictures = (params?: PictureParams): AsyncResponse<PageInfo<Pi
 export const search = (params: { title?: string; label?: string }): AsyncResponse<SearchResult> => {
   return http('/search', {
     params,
+  })
+}
+
+export const queryFriends = (): AsyncResponse<Array<Friend>> => {
+  return http('/friends')
+}
+
+export const applicationFriendLink = (data: FriendForm): AsyncResponse<Array<Friend>> => {
+  return http('/friends', {
+    method: 'post',
+    body: data,
   })
 }
 

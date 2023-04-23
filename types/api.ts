@@ -185,3 +185,17 @@ export interface SearchResult {
   post: Array<Article>
   note: Array<Note>
 }
+
+export interface FriendForm {
+  name: string
+  avatar: string
+  url: string
+  description: string
+}
+
+export interface Friend extends FriendForm {
+  id: string
+  type: string
+  isDelete: string
+  createTime: string
+}

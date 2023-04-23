@@ -34,6 +34,11 @@ const menus = ref<NavItem[]>([
     url: '/says',
   },
   {
+    name: '友',
+    icon: 'i-ri:user-heart-line',
+    url: '/friends',
+  },
+  {
     name: '项',
     icon: 'i-ri:attachment-line',
     url: '/projects',
@@ -142,6 +147,7 @@ watch(route, () => {
         <div i-ri:quill-pen-line />
         <div i-ri:attachment-line />
         <div i-ri-donut-chart-fill />
+        <div i-ri:user-heart-line />
       </div>
     </div>
   </header>

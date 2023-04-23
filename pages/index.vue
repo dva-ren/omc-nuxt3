@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import Message from '~~/components/message'
-import { queryTop } from '~/utils/api'
+import { queryFriends, queryTop } from '~/utils/api'
 
 const master = useMaster()
 const words = ref('')
@@ -8,7 +8,10 @@ const { data: topData, pending } = useAsyncData(async () => {
   const res = await queryTop(4)
   return res.data
 })
-
+const { data: friends } = useAsyncData(async () => {
+  const res = await queryFriends()
+  return res.data
+})
 fetch('https://v1.hitokoto.cn').then((response) => {
   response.json().then((res) => {
     words.value = words.value = `「 ${res.hitokoto} 」 ——${res.from}`
@@ -52,7 +55,21 @@ function handleClick() {
     </div>
     <CommonTextAnimation min-h-10 :text="words" class="text-sm text-gray-400 px-4 mb-4" />
     <div v-if="!pending" class="spring">
-      <div text-white text-sm>
+      <div text-white mt-10 text-sm>
+        <div flex justify-between items-end class="label">
+          <div class="title" flex bg="#f17666">
+            <div class="icon" bg="#ed3321">
+              <div i-carbon:bookmark class="v-icon" inline-block />
+            </div>
+            <span px-3>记录生活</span>
+          </div>
+          <NuxtLink to="/notes/latest" class="icon" bg="#f17666" p-4>
+            <div i-carbon:chevron-right text-lg />
+          </NuxtLink>
+        </div>
+        <HomeCardList :data="topData?.notes" type="notes" />
+      </div>
+      <div text-white text-sm mt-6>
         <div flex justify-between items-end class="label">
           <div class="title" flex bg="#74759b">
             <div class="icon" bg="#2e317c">
@@ -68,20 +85,6 @@ function handleClick() {
       </div>
       <div text-white mt-10 text-sm>
         <div flex justify-between items-end class="label">
-          <div class="title" flex bg="#f17666">
-            <div class="icon" bg="#ed3321">
-              <div i-carbon:bookmark class="v-icon" inline-block />
-            </div>
-            <span px-3>记录生活</span>
-          </div>
-          <NuxtLink to="/notes/latest" class="icon" bg="#f17666" p-4>
-            <div i-carbon:chevron-right text-lg />
-          </NuxtLink>
-        </div>
-        <HomeCardList :data="topData?.notes" type="notes" />
-      </div>
-      <div text-white mt-10 text-sm>
-        <div flex justify-between items-end class="label">
           <div class="title" flex bg="#55bb8a">
             <div class="icon" bg="#12a182">
               <div i-carbon:bookmark class="v-icon" inline-block />
@@ -93,9 +96,9 @@ function handleClick() {
           </router-link>
         </div>
         <div class="friends" flex gap-10 px-10 overflow-x-auto w-full>
-          <img shrink-0 shadow w-25 h-25 rounded-full object-cover src="https://image.dvaren.xyz/images/unsplash/bulksplash-jon_photos-RM5jjBIh8Hw.jpg" alt="">
-          <img shrink-0 shadow w-25 h-25 rounded-full object-cover src="https://image.dvaren.xyz/images/unsplash/173814.jpg" alt="">
-          <img shrink-0 shadow w-25 h-25 rounded-full object-cover src="https://image.dvaren.xyz/images/unsplash/bulksplash-tomofficials-WODiUmUDWGQ.jpg" alt="">
+          <template v-for="item in friends" :key="item.id">
+            <HomeFriendCard :data="item" />
+          </template>
         </div>
       </div>
       <div text-white mt-10 text-sm>
@@ -156,5 +159,8 @@ function handleClick() {
 .mail-link{
   background-color: rgba(45,212,191,1);
   box-shadow:0 0 10px rgba(45,212,191,0.5);
+}
+.img{
+  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
 }
 </style>
