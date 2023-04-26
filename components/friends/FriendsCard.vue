@@ -3,7 +3,9 @@ import type { Friend } from '~/types'
 const { data } = defineProps<{ data: Friend }>()
 const circle = ref<SVGCircleElement>()
 const len = ref(0)
-
+useHead({
+  title: '友人帐',
+})
 onMounted(() => {
   len.value = circle.value!.getTotalLength()
 })
@@ -25,7 +27,7 @@ onMounted(() => {
     </div>
     <div pl-4>
       <div>{{ data.name }}</div>
-      <div text="sm gray-4" pt-1 break-all>
+      <div text="12.25px gray-4" pt-1 break-all>
         {{ data.description }}
       </div>
     </div>

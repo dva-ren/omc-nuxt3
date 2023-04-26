@@ -69,7 +69,7 @@ defineExpose({
       <div v-if="type === 'success'" i-ri-checkbox-circle-fill class="icon" text-green />
       <div v-if="type === 'warning'" i-ri-error-warning-fill class="icon" text-orange />
       <div v-if="type === 'error'" i-ri-close-circle-fill class="icon" text-red />
-      <div inline-block>
+      <div flex-1>
         {{ msg }}
       </div>
     </div>
@@ -92,6 +92,9 @@ defineExpose({
   box-shadow: 0 3px 12px rgba(0,0,0,0.2);
   padding: 8px 12px;
   border-radius: 9999px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .dark .message{
   background-color: gray;

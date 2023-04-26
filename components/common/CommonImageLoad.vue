@@ -59,6 +59,7 @@ img {
   height: 100%;
   user-select: none;
   transition: all 0.2s ease-in 0.2s;
+  object-fit: cover;
 }
 img[lazy="loading"]{
   /* background-color: #e9e9e9; */
