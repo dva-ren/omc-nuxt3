@@ -19,7 +19,6 @@ specifiers:
   '@uvdream/bytemd-plugin-code-copy': ^0.1.0
   '@vueuse/motion': 2.0.0-beta.12
   '@vueuse/nuxt': ^9.13.0
-  VS: link:D:/Code/VS
   autoprefixer: ^10.4.14
   css-spring: ^4.1.0
   dayjs: ^1.11.7
@@ -46,7 +45,6 @@ dependencies:
   '@popperjs/core': registry.npmmirror.com/@popperjs/core/2.11.6
   '@uvdream/bytemd-plugin-code-copy': registry.npmmirror.com/@uvdream/bytemd-plugin-code-copy/0.1.0
   '@vueuse/motion': registry.npmmirror.com/@vueuse/motion/2.0.0-beta.12
-  VS: link:../../VS
   autoprefixer: registry.npmmirror.com/autoprefixer/10.4.14
   css-spring: registry.npmmirror.com/css-spring/4.1.0
   dayjs: registry.npmmirror.com/dayjs/1.11.7

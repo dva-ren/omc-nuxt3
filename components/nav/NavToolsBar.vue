@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { usePlayer } from '~/hooks'
 import { useCatalog } from '~/components/Markdown/catalog'
-
+const colorMode = useColorMode()
 const scroll = useWindowScroll()
 const showFlags = reactive({
   main: true,
@@ -42,7 +42,7 @@ watch(useThrottle(scroll.y, 100), (curr, pre) => {
 
 <template>
   <Transition name="main">
-    <div v-show="showFlags.main" fixed right-4 bottom-4>
+    <div v-show="showFlags.main" fixed right-2 bottom-2>
       <div flex flex-col gap-2>
         <SearchWidget />
         <Transition>
@@ -53,7 +53,7 @@ watch(useThrottle(scroll.y, 100), (curr, pre) => {
         <button v-if="showCatelogBtn" class="button" @click="showCatalog">
           <div i-ri-menu-2-fill />
         </button>
-        <button class="button" @click="toggleDark()">
+        <button class="button" @click="() => toggleDark()">
           <div dark:i-carbon-moon i-carbon-sun />
         </button>
         <button class="button" @click="changePlayerDisplay">
@@ -81,7 +81,7 @@ watch(useThrottle(scroll.y, 100), (curr, pre) => {
 }
 .v-enter-active,
 .v-leave-active{
-  transition: opacity 0.2s ease,transform 0.2s ease-in;
+  transition: opacity 0.4s ease,transform 0.4s ease-in;
 }
 .v-enter-from,
 .v-leave-to{

@@ -19,6 +19,10 @@ const { data: posts, pending, refresh } = useAsyncData(async () => {
 
 watch(categoryId, () => {
   refresh()
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth',
+  })
 }, { immediate: true })
 </script>
 
