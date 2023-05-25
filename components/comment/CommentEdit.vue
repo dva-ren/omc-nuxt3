@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import emojis from './emoji.json'
 import Message from '~~/components/message'
 import type { CommentForm } from '~/types'
 import { addComment } from '~/utils/api'
@@ -129,10 +130,8 @@ onMounted(() => {
             (≧∇≦)ﾉ
           </button>
           <template #content>
-            <div p-4 text-sm flex gap-2 class="emoji" @click="handleEmoji">
-              <span>( •̀ ω •́ )✧</span>
-              <span>(～￣▽￣)～</span>
-              <span>(*^▽^*)</span>
+            <div p-4 text-sm grid gap-2 grid-cols-3 class="emoji" @click="handleEmoji">
+              <span v-for="i, idx in emojis" :key="idx">{{ i }}</span>
             </div>
           </template>
         </CommonPopper>
