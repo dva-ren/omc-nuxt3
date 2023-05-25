@@ -55,7 +55,7 @@ const isOutdate = computed(() => {
           <div text-3xl lg:text-base text-orange i-carbon:warning-alt />
           <div>这篇文章上次修改于 {{ formateToLocal(articleData.updateTime || articleData.createTime) }}，可能部分内容已经不适用，如有疑问可询问作者。</div>
         </div>
-        <div min-h-100>
+        <div class="posts" min-h-100>
           <MarkdownViewer :value="articleData.content" />
         </div>
         <div mt-10 text="xs gray" md:text-sm>

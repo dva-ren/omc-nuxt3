@@ -67,7 +67,9 @@ useHead({ title })
       <div v-if="note.musicId" flex justify-center my-4>
         <MusicCard :id="note.musicId" />
       </div>
-      <MarkdownViewer :value="note.content" min-h-100 />
+      <div class="notes">
+        <MarkdownViewer :value="note.content" min-h-100 />
+      </div>
       <div class="line" />
       <div text="center sm">
         <router-link to="/timeLine?type=notes">

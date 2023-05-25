@@ -1,10 +1,12 @@
 :root{
-  --text-color: #67492e;
+  /* --text-color: #67492e; */
+  --text-color: #333;
   --color-1:  #816145;
   --color-2: #B39CD0;
   --color-3: #F6E2FD;
   --color-4: #7AA4B2;
   --color-5: rgba(40, 97, 184,0.2);
+  --color-6: #e5a5a56c;
   --gray: #d1d1d6;
   --pink: #eb445a;
 }
@@ -139,7 +141,10 @@
 .markdown-body h4::before{
   content: "H4";
 }
-
+.notes .markdown-body >p{
+  text-decoration: 1px underline var(--color-6);
+  text-underline-offset: 5px;
+}
 .markdown-body a {
   position: relative;
   display: inline-block;
@@ -172,7 +177,7 @@
   display: block;
   margin: 0 auto;
   /* transition: all 0.2s ease-in,filter 0.2s linear 0.3s !important; */
-  box-shadow: 0 0 10px #2333;
+  box-shadow: 0 0 2px #2333;
   border-radius: 0.5rem;
   opacity: 1;
 }
@@ -215,10 +220,6 @@
   bottom: 0;
   left: 50%;
   margin-left: -1.5em;
-}
-.markdown-body img:hover {
-  box-shadow: 0 0 20px #2333;
-  /* transform: translateY(-1px); */
 }
 .markdown-body blockquote {
   padding: 0.5em 1em;
@@ -294,9 +295,9 @@
   background-color: #333;
   transition: all .3s;
 }
-.markdown-body pre > code:hover {
-  box-shadow: 0 4px 12px #2333;
-}
+/* .markdown-body pre > code:hover {
+  box-shadow: 0 4px 4px #2333;
+} */
 /* 代码块滚动条样式 */
 /* .markdown-body pre > code::-webkit-scrollbar {
   height: 6px;
