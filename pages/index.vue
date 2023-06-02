@@ -117,7 +117,9 @@ function handleClick() {
           <NuxtLink to="/gallery">
             <HomeCard title="记录美好瞬间" text="相册" />
           </NuxtLink>
-          <HomeCard title="你的话对我很重要" text="留言" @click="handleClick" />
+          <NuxtLink to="/message">
+            <HomeCard title="你的话对我很重要" text="留言" />
+          </NuxtLink>
         </div>
       </div>
     </div>
