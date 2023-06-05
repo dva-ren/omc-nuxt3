@@ -7,7 +7,7 @@ import { addComment } from '~/utils/api'
 const { refId, type, index, parentId = '', root = false } = defineProps<{ refId: string; type: string; index: number; parentId?: string; root?: boolean }>()
 
 const emits = defineEmits(['onSend'])
-const textarea = ref<HTMLElement>()
+const textarea = ref<HTMLTextAreaElement>()
 const svg = ref<SVGElement>()
 const rect = ref<SVGRectElement>()
 
@@ -70,7 +70,16 @@ const handleAddComment = useThrottleFn(async () => {
 const handleEmoji = (e: Event) => {
   if (e.target === e.currentTarget)
     return
-  commentForm.content += e.target.innerText
+  const startIndex = textarea.value!.selectionStart
+  const endIndex = textarea.value!.selectionEnd
+  const pre = commentForm.content.substring(0, startIndex)
+  const last = commentForm.content.substring(endIndex)
+  const el = e.target as HTMLElement
+  commentForm.content = pre + el.innerText + last
+  textarea.value!.focus()
+  nextTick(() => {
+    textarea.value!.selectionEnd = startIndex + el.innerText.length
+  })
 }
 const initSvg = () => {
   svg.value!.style.height = `${textarea.value!.offsetHeight}px`
