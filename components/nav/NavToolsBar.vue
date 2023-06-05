@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import { usePlayer } from '~/hooks'
 import { useCatalog } from '~/components/Markdown/catalog'
+import { toggleDark } from '~/composables/dark'
+
 const colorMode = useColorMode()
 const scroll = useWindowScroll()
 const showFlags = reactive({
@@ -53,7 +55,7 @@ watch(useThrottle(scroll.y, 100), (curr, pre) => {
         <button v-if="showCatelogBtn" class="button" @click="showCatalog">
           <div i-ri-menu-2-fill />
         </button>
-        <button class="button" @click="() => toggleDark()">
+        <button class="button" @click="toggleDark">
           <div dark:i-carbon-moon i-carbon-sun />
         </button>
         <button class="button" @click="changePlayerDisplay">
