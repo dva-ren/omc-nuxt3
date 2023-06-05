@@ -90,9 +90,9 @@ const initSvg = () => {
   svg.value!.style.cssText += css
   // rect.value!.style.cssText = css
 }
-useResizeObserver(textarea, useDebounceFn(() => {
+useResizeObserver(textarea, () => {
   initSvg()
-}, 100))
+})
 onMounted(() => {
   initSvg()
   const user = localStorage.getItem('user')
