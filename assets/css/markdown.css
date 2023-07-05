@@ -186,7 +186,7 @@
 }
 .markdown-body .image-container:has(img[lazy="loading"]){
   filter: blur(8px);
-  background-color: #2333;
+  background-color: rgba(200, 200, 200, 0.2);
   opacity: 1;
 }
 .markdown-body .image-container:has(img[lazy="loaded"]){

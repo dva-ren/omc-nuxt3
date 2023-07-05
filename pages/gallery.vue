@@ -104,9 +104,13 @@ useHead({
   border-radius: 10px;
   margin-bottom: 0.8rem;
   background-color: white;
-  box-shadow: 0 0 10px rgba(224,224,224,0.5);
+  box-shadow: 0 0 10px rgba(224,224,224,0.7);
 }
 .img-item img{
   object-fit: cover;
+}
+.dark .img-item{
+  background-color: rgba(50,50,50,0.5);
+  box-shadow: 0 0 6px rgba(250,250,250,0.2);
 }
 </style>

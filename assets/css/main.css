@@ -127,7 +127,7 @@ html.dark {
 
 img[src=''],
 img:not([src]) {
-  background-color: #2333;
+  background-color: rgba(200, 200, 200, 0.2);
   border:none;
 }
 
