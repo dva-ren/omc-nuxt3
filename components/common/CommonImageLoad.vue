@@ -8,7 +8,7 @@ const props = defineProps<{
 
 const image = ref<HTMLImageElement>()
 
-const data_url = ref('data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==')
+const data_url = ref('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdj+Pr1638ACaED3/nOThIAAAAASUVORK5CYII=')
 const loadingState = ref('')
 const aspectRatio = ref<string | number>('auto')
 
