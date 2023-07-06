@@ -64,7 +64,7 @@ useHead({ title: '时间线' })
               </p>
               <li class="item" :class="{ 'new-year': isNewYear(item.createTime, idx) }" flex items-center>
                 <span text-sm>{{ dateFns(item.createTime).format('MM/DD') }}</span>
-                <NuxtLink :to="`/notes/${item.id}`" class="link" mx-2 text-gray-800 text-sm>
+                <NuxtLink :to="`/notes/${item.id}`" class="link" mx-2 text-gray-800 text-sm truncate>
                   {{ item.title }}
                 </NuxtLink>
                 <span text="12px">

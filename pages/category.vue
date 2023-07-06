@@ -19,6 +19,8 @@ const { data: posts, pending, refresh } = useAsyncData(async () => {
 
 watch(categoryId, () => {
   refresh()
+  if (!process.client)
+    return
   window.scrollTo({
     top: 0,
     behavior: 'smooth',
@@ -39,7 +41,7 @@ watch(categoryId, () => {
       <ul class="posts" text-gray-500>
         <template v-for="item, idx in posts" :key="item.id">
           <li class="item fade_in_up" :style="`--delay:${idx * 0.1}s`" flex items-center tracking-wider>
-            <Nuxt-link :to="`/posts/${item.id}`" class="link" px-2 text-gray-800>
+            <Nuxt-link :to="`/posts/${item.id}`" class="link" px-2 text-gray-800 truncate>
               {{ item.title }}
             </Nuxt-link>
             <span text="12px gray-600">{{ dateFns(item.createTime).format('M/D/YYYY') }}</span>
@@ -84,7 +86,6 @@ watch(categoryId, () => {
   transform: translateY(-90%);
 }
 .link{
-
 }
 .dark .link{
   color: rgba(255,255,255,0.8);
