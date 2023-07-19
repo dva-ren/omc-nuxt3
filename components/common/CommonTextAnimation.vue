@@ -3,7 +3,7 @@ const { text } = defineProps<{ text: string | string[] }>()
 </script>
 
 <template>
-  <div v-bind="$attrs">
+  <div v-bind="$attrs" data-cursor="text">
     <span v-for="char, idx in text" :key="char" class="char" :style="`animation-delay:${idx * 0.1}s`">{{ char }}</span>
   </div>
 </template>

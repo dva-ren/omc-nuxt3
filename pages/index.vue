@@ -1,7 +1,8 @@
 <script lang="ts" setup>
+import { disposeCursor, initCursor, updateCursor } from 'ipad-cursor'
 import Message from '~~/components/message'
 import { queryFriends, queryTop } from '~/utils/api'
-
+initCursor()
 const master = useMaster()
 const words = ref('')
 const { data: topData, pending } = useAsyncData(async () => {
@@ -24,30 +25,38 @@ useHead({
 function handleClick() {
   Message.warning('开发中~')
 }
+onMounted(() => {
+  if (!process.client)
+    return
+  updateCursor()
+})
+onBeforeUnmount(() => {
+  disposeCursor()
+})
 </script>
 
 <template>
   <div py-10 md:py-20>
     <div pb-10 flex flex-col items-center sm="flex-row justify-unset items-unset" gap-6>
-      <CommonImageLoad :src="master?.avatar" h-30 w-30 rounded-full object-cover shadow />
+      <CommonImageLoad data-cursor="block" :src="master?.avatar" h-30 w-30 rounded-full object-cover shadow />
       <div text-center sm:text-left>
-        <p text-xl font-bold>
+        <p text-xl font-bold data-cursor="text">
           {{ master?.nickname }}
         </p>
-        <p text="sm gray-6" py-4>
+        <p text="sm gray-6" py-4 data-cursor="text">
           {{ master?.introduce }}
         </p>
         <div class="spring" text-gray-1>
-          <a href="https://github.com/dva-ren" target="_blank" class="circle-icon git-link">
+          <a data-cursor="block" href="https://github.com/dva-ren" target="_blank" class="circle-icon git-link">
             <div i-carbon:logo-github class="v-icon" inline-block />
           </a>
-          <a ml-4 href="https://y.music.163.com/m/user?id=136604471" target="_blank" class="circle-icon netease-link">
+          <a data-cursor="block" ml-4 href="https://y.music.163.com/m/user?id=136604471" target="_blank" class="circle-icon netease-link">
             <div i-ri-netease-cloud-music-line class="v-icon" inline-block />
           </a>
-          <a ml-4 href="https://space.bilibili.com/60385716" target="_blank" class="circle-icon bilibili-link">
+          <a data-cursor="block" ml-4 href="https://space.bilibili.com/60385716" target="_blank" class="circle-icon bilibili-link">
             <div i-ri-bilibili-fill class="v-icon" inline-block />
           </a>
-          <a ml-4 href="mailto:473029463@qq.com" class="circle-icon mail-link">
+          <a data-cursor="block" ml-4 href="mailto:473029463@qq.com" class="circle-icon mail-link">
             <div i-ri:at-line class="v-icon" inline-block />
           </a>
         </div>
