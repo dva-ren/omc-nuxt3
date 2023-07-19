@@ -5,7 +5,7 @@
 - Live Demo: [https://dvaren.xyz](https://dvaren.xyz)
 
 
-![](https://iiu.oss-cn-chengdu.aliyuncs.com/imgs/ByDrrp_1687930013125w_1771x1279_.png)
+![](https://github.com/dva-ren/omc-nuxt3/tree/main/assets/image/main.png)
 
 
 ----
