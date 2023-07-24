@@ -130,8 +130,7 @@ watch(visible, () => {
 }
 .v-enter-active,
 .v-leave-active {
-  transform: translateY(-10px);
-  transition: opacity 0.5s ease;
+  transition: opacity 0.2s ease-in-out;
 }
 .v-enter-from,
 .v-leave-to {

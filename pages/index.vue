@@ -2,9 +2,21 @@
 import { disposeCursor, initCursor, updateCursor } from 'ipad-cursor'
 import Message from '~~/components/message'
 import { queryFriends, queryTop } from '~/utils/api'
-initCursor()
-const master = useMaster()
+
 const words = ref('')
+const isMobile = computed(() => useWindowSize().width.value <= 690)
+
+onMounted(() => {
+  if (process.client && !isMobile.value) {
+    initCursor()
+    updateCursor()
+  }
+})
+onBeforeUnmount(() => {
+  disposeCursor()
+})
+
+const master = useMaster()
 const { data: topData, pending } = useAsyncData(async () => {
   const res = await queryTop(4)
   return res.data
@@ -25,14 +37,6 @@ useHead({
 function handleClick() {
   Message.warning('开发中~')
 }
-onMounted(() => {
-  if (!process.client)
-    return
-  updateCursor()
-})
-onBeforeUnmount(() => {
-  disposeCursor()
-})
 </script>
 
 <template>
