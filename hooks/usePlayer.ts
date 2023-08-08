@@ -1,4 +1,4 @@
-import Player from '~~/components/Player/MusicPlayer'
+import Player from '~/components/player/MusicPlayer'
 let playerInstance: Player
 const init = ref(false)
 const show = ref(false)
