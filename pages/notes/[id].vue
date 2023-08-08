@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { getNotes } from '~/utils/api'
-import CommentWidget from '~~/components/comment/CommentWidget.vue'
-import { useCatalog } from '~~/components/Markdown/catalog'
+import CommentWidget from '~/components/comment/CommentWidget.vue'
+import { useCatalog } from '~/hooks/useCatalog'
 import { dateFns, formateToLocal } from '~/composables'
 
 const headerInfo = useHeaderInfo()

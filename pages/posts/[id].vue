@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { Master } from '~/types'
 import { formateToLocal, formateToLocaleHasWeek } from '~/composables'
-import { useCatalog } from '~~/components/Markdown/catalog'
+import { useCatalog } from '~/hooks/useCatalog'
 
 const route = useRoute()
 const id = computed(() => route.params.id as string)

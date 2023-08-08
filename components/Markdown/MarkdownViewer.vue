@@ -6,11 +6,11 @@ import highlight from '@bytemd/plugin-highlight-ssr'
 import gemoji from '@bytemd/plugin-gemoji'
 import mediumZoom from '@bytemd/plugin-medium-zoom'
 import codeCopy from '@uvdream/bytemd-plugin-code-copy'
-import Message from '../message'
 import lazyload from './plugin-lazyload'
 import 'highlight.js/styles/atom-one-light.css'
 import './styles/figure.css'
 import { clearEffect, init } from './looper'
+import Message from '~/composables/message'
 
 const { value } = defineProps<{ value: string }>()
 

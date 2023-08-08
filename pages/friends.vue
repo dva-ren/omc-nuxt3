@@ -2,7 +2,7 @@
 import { generateSpringText } from '~/composables'
 import { applicationFriendLink } from '~/utils/api'
 import type { FriendForm } from '~/types'
-import message from '~/components/message'
+import message from '~/composables/message'
 
 const { data: friends, pending } = useAsyncData(async () => {
   const res = await queryFriends()

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { usePlayer } from '~/hooks'
-import { useCatalog } from '~/components/Markdown/catalog'
+import { useCatalog } from '~/hooks/useCatalog'
 import { toggleDark } from '~/composables/dark'
 
 const colorMode = useColorMode()

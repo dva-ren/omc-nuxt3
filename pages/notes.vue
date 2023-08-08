@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { getNotes } from '~/utils/api'
-import { useCatalog } from '~/components/Markdown/catalog'
+import { useCatalog } from '~/hooks/useCatalog'
 
 const route = useRoute()
 const id = computed(() => route.params.id as string)

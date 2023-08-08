@@ -1,5 +1,5 @@
 import type { HeaderInfo, Master } from '~/types'
-import type { Catelog } from '~~/components/markdown/catalog'
+import type { Catelog } from '~/hooks/useCatalog'
 
 export const useMaster = () => useState<Master>('master', () => {
   return {

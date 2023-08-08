@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useCatalog } from './catalog'
+import { useCatalog } from '~/hooks/useCatalog'
 
 const { anchor, active, show, parse } = useCatalog()
 const index = ref(0)
@@ -101,3 +101,4 @@ const handleClick = (id: string, idx: number) => {
   margin-left: -0.25rem;
 }
 </style>
+~~/hooks/useCatalog

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import emojis from './emoji.json'
-import Message from '~~/components/message'
+import Message from '~/composables/message'
 import type { CommentForm } from '~/types'
 import { addComment } from '~/utils/api'
 

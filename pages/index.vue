@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { disposeCursor, initCursor, updateCursor } from 'ipad-cursor'
-import Message from '~~/components/message'
+import Message from '~/composables/message'
 import { queryFriends, queryTop } from '~/utils/api'
 
 const words = ref('')
