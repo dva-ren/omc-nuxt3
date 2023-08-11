@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+const master = useMaster()
 </script>
 
 <template>
@@ -17,6 +18,7 @@
         <span px-1>•</span>
         <a href="https://github.com/dva-ren/ohmycat">ohmycat</a>
       </p>
+      <a href="http://beian.miit.gov.cn/" target="_blank">{{ master.icp }}</a>
     </div>
   </footer>
 </template>

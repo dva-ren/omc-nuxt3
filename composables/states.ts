@@ -9,6 +9,8 @@ export const useMaster = () => useState<Master>('master', () => {
     mail: '',
     username: '',
     nickname: '',
+    siteName: '',
+    icp: '',
     socialIds: [],
     url: '',
     lastLoginIp: '',

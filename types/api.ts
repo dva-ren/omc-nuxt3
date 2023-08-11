@@ -106,6 +106,8 @@ export interface Master {
   url: string
   username: string
   nickname: string
+  siteName: string
+  icp: string
   avatar: string
   socialIds: Array<{ key: string; value: string }>
   lastLoginIp: string
