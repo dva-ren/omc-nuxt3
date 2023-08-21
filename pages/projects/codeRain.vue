@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { adaptDPR } from '~/composables'
-const canvas = $ref<HTMLCanvasElement>()
+const canvas = ref<HTMLCanvasElement>()
 
 const numArray = ref<number[]>([])
 const totalX = ref(0)
@@ -25,11 +25,11 @@ function getRandomColor() {
 }
 
 function start() {
-  const ctx = canvas.getContext('2d')!
+  const ctx = canvas.value!.getContext('2d')!
   const gap = 18
-  canvas.width = clientWidth
-  canvas.height = clientHeight
-  adaptDPR(canvas, ctx)
+  canvas.value!.width = clientWidth.value
+  canvas.value!.height = clientHeight.value
+  adaptDPR(canvas.value!, ctx)
   totalX.value = Math.round(clientWidth.value / gap) + 2
   totalY.value = Math.round(clientHeight.value / gap)
   numArray.value = new Array(totalX.value).fill(1)

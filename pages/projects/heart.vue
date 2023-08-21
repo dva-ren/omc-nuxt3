@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import CommonPopper from '~~/components/common/CommonPopper.vue'
+import CommonPopper from '~/components/common/CommonPopper.vue'
 
-const canvas = $ref<HTMLCanvasElement>()
+const canvas = ref<HTMLCanvasElement>()
 const options = reactive({
   scale: 10,
   pointCount: 520,
@@ -16,12 +16,12 @@ interface Point {
 }
 
 const start = () => {
-  const ctx = canvas.getContext('2d')!
-  canvas.width = document.documentElement.clientWidth
-  canvas.height = document.documentElement.clientHeight - 72 - 80
-  adaptDPR(canvas, ctx)
-  ctx.clearRect(0, 0, canvas.width, canvas.height)
-  const p = generatePoints(options.pointCount, options.scale, { x: canvas.width / 2 / (window.devicePixelRatio), y: canvas.height / 2 / (window.devicePixelRatio) })
+  const ctx = canvas.value!.getContext('2d')!
+  canvas.value!.width = document.documentElement.clientWidth
+  canvas.value!.height = document.documentElement.clientHeight - 72 - 80
+  adaptDPR(canvas.value!, ctx)
+  ctx.clearRect(0, 0, canvas.value!.width, canvas.value!.height)
+  const p = generatePoints(options.pointCount, options.scale, { x: canvas.value!.width / 2 / (window.devicePixelRatio), y: canvas.value!.height / 2 / (window.devicePixelRatio) })
   delayShow(ctx, p, options.drawSpeed)
 }
 
