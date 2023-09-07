@@ -2,15 +2,31 @@
 const searchText = ref('')
 const show = ref(false)
 const input = ref<HTMLInputElement>()
+const selectIndex = ref(0)
+const router = useRouter()
 
 const { data, refresh, pending } = useAsyncData(async () => {
+  const temp: Array<{ link: string; title: string; type: string }> = []
+  selectIndex.value = 0
   if (searchText.value.trim().length === 0)
-    return
+    return temp
   const res = await search({ title: searchText.value.trim() })
-  return res.data
+  res.data.note.forEach((i) => {
+    temp.push({
+      link: `/notes/${i.id}`,
+      type: '说说',
+      title: i.title,
+    })
+  })
+  res.data.post.forEach((i) => {
+    temp.push({
+      link: `/posts/${i.id}`,
+      title: i.title,
+      type: i.categoryName,
+    })
+  })
+  return temp
 })
-
-const isEmpty = computed(() => !data.value || (data.value.note.length === 0 && data.value.post.length === 0))
 
 function handleClose() {
   show.value = false
@@ -22,36 +38,57 @@ watch(searchText, useDebounceFn((curr, pre) => {
 useRouter().afterEach(() => {
   handleClose()
 })
+
+function handleKeyDown(e: KeyboardEvent) {
+  const { code } = e
+  if (!data.value!.length)
+    return
+  switch (code) {
+    case 'ArrowDown':
+      e.preventDefault()
+      selectIndex.value = (selectIndex.value + 1) % data.value!.length
+      break
+    case 'ArrowUp':
+      e.preventDefault()
+      if (selectIndex.value === 0) {
+        selectIndex.value = data.value!.length - 1
+        break
+      }
+      selectIndex.value = (selectIndex.value - 1) % data.value!.length
+      break
+    case 'Enter':
+      router.push(data.value![selectIndex.value].link)
+  }
+}
+
+function showModal() {
+  show.value = true
+  nextTick(() => {
+    input.value?.focus()
+  })
+}
 </script>
 
 <template>
   <slot>
-    <button class="button" @click="show = !show">
+    <button class="button" @click="showModal">
       <div i-carbon:search />
     </button>
   </slot>
   <CommonModal v-model="show" @close="handleClose">
-    <div class="search-container">
+    <div class="search-container" @keydown="handleKeyDown">
       <div class="input-box">
         <input ref="input" v-model="searchText" type="text" placeholder="Search..">
       </div>
       <div class="content">
-        <CommonEmpty v-if="isEmpty" h-full />
+        <CommonEmpty v-if="!data?.length" h-full />
         <div v-else>
-          <NuxtLink v-for="i in data?.post" :key="i" :to="`/posts/${i.id}`">
+          <NuxtLink v-for="i, idx in data" :key="i" :class="{ 'bg-gray-2': selectIndex === idx }" :to="i.link">
             <div class="title">
               {{ i.title }}
             </div>
             <div class="category">
-              {{ i.categoryName }}
-            </div>
-          </NuxtLink>
-          <NuxtLink v-for="i in data?.note" :key="i" :to="`/notes/${i.id}`">
-            <div class="title">
-              {{ i.title }}
-            </div>
-            <div class="category">
-              说说
+              {{ i.type }}
             </div>
           </NuxtLink>
         </div>
