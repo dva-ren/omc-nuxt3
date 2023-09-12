@@ -105,6 +105,10 @@ function showModal() {
   border-radius: 9999px;
   box-shadow: 0 0 10px #7878781a, 0 5px 20px #78787833;
 }
+.dark .button{
+  color: white;
+  background-color: rgba(0,0,0,0.8);
+}
 .search-container{
   color: rgb(53,53,53);
   height: 600px;
