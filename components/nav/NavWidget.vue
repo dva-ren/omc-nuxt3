@@ -110,10 +110,10 @@ watch(route, () => {
               </p>
             </div>
           </nuxt-link>
-          <nav display-none md-display-flex items-center :class="{ nav: navIdx !== -1 }" :style="`--idx:${navIdx}`">
+          <nav hidden md-flex items-center :class="{ nav: navIdx !== -1 }" :style="`--idx:${navIdx}`">
             <NavItem v-for="nav, idx in menus" :key="idx" :data="nav" />
           </nav>
-          <NavDrawer :active-index="navIdx" display-flex md-display-none :menus="menus" />
+          <NavDrawer :active-index="navIdx" display-flex md-hidden :menus="menus" />
         </div>
         <div max-w-1200px m-auto flex items-center justify-between text-sm h-14>
           <div max-w-8rem md:max-w-unset>
@@ -142,7 +142,7 @@ watch(route, () => {
           </div>
         </div>
       </div>
-      <div display-none>
+      <div hidden>
         <div i-ri:mastodon-line />
         <div i-ri:quill-pen-line />
         <div i-ri:attachment-line />

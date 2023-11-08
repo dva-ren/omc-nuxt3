@@ -40,13 +40,13 @@ const { full, loading } = defineProps({
       </div>
     </div>
     <!-- <div v-if="!full && !loading" v-spring v-bind="$attrs" flex justify-center>
-      <div display-none xl:display-block>
+      <div hidden xl:display-block>
         <slot name="pre" />
       </div>
       <div p-4 max-w-750px min-w-0 sm:max-w-850px flex-1 class="layout-post">
         <slot />
       </div>
-      <div display-none md:display-block>
+      <div hidden md:display-block>
         <slot name="sidebar" />
       </div>
     </div> -->

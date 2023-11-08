@@ -107,7 +107,7 @@ useHead({ title })
             <div :class="weather()" />
             <div>{{ note.weather }}</div>
           </div>
-          <div display-none>
+          <div hidden>
             <div i-carbon-sun />
             <div i-carbon-rain-heavy />
             <div i-carbon-cloud />

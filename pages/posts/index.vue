@@ -55,10 +55,10 @@ watch(page, () => {
   <div v-if="!pending">
     <div v-for="p, idx in posts" :key="p.id" :style="generateSpringText({ delay: idx * 0.1 })" class="post-item " pb-8>
       <div>
-        <div class="left-label" display-none sm:display-block>
+        <div class="left-label" hidden sm:display-block>
           {{ dateFns(p.createTime).format('YYYY-MM-DD') }}
         </div>
-        <div class="left-label" display-block sm:display-none>
+        <div class="left-label" display-block sm:hidden>
           {{ dateFns(p.createTime).format('MM-DD') }}
         </div>
         <div text-center text-base>

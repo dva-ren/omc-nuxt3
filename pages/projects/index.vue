@@ -19,7 +19,7 @@ onMounted(() => {
     <div class="spring project-grid py-2 -mx-3 gap-2">
       <ProjectWidget v-for="(p, idx) in projects" :key="idx" :data="p" />
     </div>
-    <div display-none>
+    <div hidden>
       <div i-carbon-align-box-middle-left />
       <div i-ri:heart-pulse-fill />
       <div i-ri-code-box-line />
