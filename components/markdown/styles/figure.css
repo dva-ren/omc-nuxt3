@@ -80,3 +80,30 @@
 .image-group img{
   object-fit: cover;
 }
+
+.warning{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(31 41 55);
+  min-height: 5rem;
+  padding: 1rem;
+  border: 1px solid rgb(254,215,170);
+  margin-bottom: 2.5rem;
+  gap: 1rem;
+  border-radius: 0.25rem;
+  background-color: rgb(255 247 237)
+}
+.error{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(31 41 55);
+  min-height: 5rem;
+  padding: 1rem;
+  border: 1px solid rgba(236, 109, 109, 0.6);
+  margin-bottom: 2.5rem;
+  gap: 1rem;
+  border-radius: 0.25rem;
+  background-color: rgba(236, 109, 109, 0.2);
+}

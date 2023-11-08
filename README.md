@@ -17,3 +17,8 @@
 
 # template
 [vitesse-lite](https://github.com/antfu/vitesse-lite)
+
+
+::: tip{.warning}
+This is warning message.
+:::

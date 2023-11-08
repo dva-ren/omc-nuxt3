@@ -25,7 +25,6 @@
     "autoprefixer": "^10.4.16",
     "css-spring": "^4.1.0",
     "dayjs": "^1.11.10",
-    "hastscript": "^8.0.0",
     "ipad-cursor": "^0.5.2",
     "js-md5": "^0.8.3",
     "lyric-parser": "^1.0.1",
@@ -35,7 +34,6 @@
     "rehype-image-group": "^1.0.5",
     "remark-flexible-containers": "^1.0.6",
     "remove": "^0.1.5",
-    "unist-util-visit": "^5.0.0",
     "vue-lazyload": "3.0.0",
     "vue-masonry": "^0.16.0"
   },

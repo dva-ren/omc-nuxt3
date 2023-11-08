@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import type { BytemdPlugin } from 'bytemd'
 import { Viewer } from '@bytemd/vue-next'
 import gfm from '@bytemd/plugin-gfm'
 import math from '@bytemd/plugin-math'
@@ -11,15 +12,18 @@ import 'highlight.js/styles/atom-one-light.css'
 import './styles/figure.css'
 import { clearEffect, init } from './looper'
 import Message from '~/composables/message'
+import notice from './plugin-notice'
+
 
 const { value } = defineProps<{ value: string }>()
 
-const plugins = [
+const plugins:BytemdPlugin[] = [
   gfm(),
   highlight(),
   mediumZoom(),
   math(),
   gemoji(),
+  notice(),
   codeCopy({
     // 拷贝按钮文字
     copyText: 'COPY',
