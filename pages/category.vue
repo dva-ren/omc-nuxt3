@@ -69,23 +69,14 @@ watch(categoryId, () => {
   transform: translateY(-50%);
   background-color: var(--yellow);
 }
-.item::after{
+.posts > .item:not(:last-child)::after{
   content: '';
   position: absolute;
   width: 1px;
   height: 30px;
   top: 50%;
   left: -0.1rem;
-  transform: translateY(-50%);
   background-color: var(--yellow);
-}
-.posts .item:first-child::after{
-  transform: translateY(10%);
-}
-.posts .item:last-child::after{
-  transform: translateY(-90%);
-}
-.link{
 }
 .dark .link{
   color: rgba(255,255,255,0.8);
