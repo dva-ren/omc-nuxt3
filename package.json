@@ -1,17 +1,11 @@
 {
   "private": true,
   "packageManager": "pnpm@8.10.2",
-  "config": {
-    "nuxt": {
-      "host": "0.0.0.0",
-      "port": "8080"
-    }
-  },
   "scripts": {
     "build": "nuxi build",
-    "dev": "nuxi dev --port=3000 --mode dev",
-    "production": "nuxi dev --port=3000 --mode prod",
-    "start": "node .output/server/index.mjs",
+    "dev": "nuxi dev --port=5050 --mode dev",
+    "production": "nuxi dev --port=5050 --mode prod",
+    "start": "cross-env PORT=5050 node .output/server/index.mjs",
     "lint": "eslint .",
     "postinstall": "nuxi prepare",
     "generate": "nuxi generate"

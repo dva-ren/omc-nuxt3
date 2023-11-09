@@ -40,4 +40,7 @@ export default defineNuxtConfig({
   plugins: [
     { src: '~/plugins/masonry', mode: 'client' },
   ],
+  devServer:{
+    port: 6000
+  }
 })
