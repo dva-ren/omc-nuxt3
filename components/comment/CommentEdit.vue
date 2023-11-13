@@ -111,23 +111,14 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
+  <div text-sm>
     <div flex gap-4 flex-col sm:flex-row>
-      <div class="input-area">
-        <span class="icon" i-ri-user-heart-line />
-        <input v-model="commentForm.author" type="text" placeholder="昵称 *">
-      </div>
-      <div class="input-area">
-        <div class="icon" i-ri-mail-send-line inline-block />
-        <input v-model="commentForm.mail" type="text" placeholder="邮箱 *">
-      </div>
-      <div class="input-area">
-        <div class="icon" i-ri-earth-line />
-        <input v-model="commentForm.url" type="text" placeholder="网站(可留空)http(s)">
-      </div>
+      <input class="input" v-model="commentForm.author" type="text" placeholder="昵称 *">
+      <input class="input" v-model="commentForm.mail" type="text" placeholder="邮箱 *">
+      <input class="input" v-model="commentForm.url" type="text" placeholder="网址">
     </div>
     <div mt-8 relative>
-      <textarea ref="textarea" v-model="commentForm.content" :style="{ backgroundColor: commentForm.isWhispers ? '#a3a3a329' : '' }" min-h-40 border focus:border-yellow placeholder="嘿(～￣▽￣)～，留个评论好不好" p-2 />
+      <textarea ref="textarea" v-model="commentForm.content" :style="{ backgroundColor: commentForm.isWhispers ? '#cad7f180' : '#e5e7eb80' }" min-h-40 focus:border-pink-2 placeholder="嘿(～￣▽￣)～，留个评论好不好" p-2 />
       <svg ref="svg" absolute left-0 top-0>
         <rect ref="rect" class="rect" width="100%" height="100%" />
       </svg>
@@ -169,13 +160,16 @@ textarea{
   min-width: 0;
   transition: background-color .2s;
 }
-.input-area{
-  flex-grow: 1;
-  display: flex;
-  align-items: center;
-  padding: 0.1rem 0.5rem;
-  border-width: 1px;
-  gap: 4px;
+.input{
+  flex: 1;
+  outline: none;
+  background-color: rgba(229,231,235,.5);
+  padding: 0.25rem 1rem;
+  border-radius: 0.4rem;
+  transition: outline 0.2s;
+}
+.input:focus{
+  outline: 2px solid rgba(255, 158, 169,0.2);
 }
 .input-area:has(input:focus){
   border: 1px solid var(--yellow);
@@ -198,7 +192,7 @@ textarea{
   content: '';
   width: 1rem;
   height: 1rem;
-  border: 2px solid rgb(201, 95, 95);
+  border: 2px solid #c95f5f;
   transition: all .4s ease-in-out;
 }
 .checked::before{

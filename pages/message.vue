@@ -28,7 +28,7 @@ const url = `${location.host}/friends`
       </p>
     </div>
     <div mt-10>
-      <CommentEdit />
+      <CommentWidget ref-id="1723963802837524482" type="note" :observer="false"/>
     </div>
   </ClientOnly>
 </template>

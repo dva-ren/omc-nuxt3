@@ -1,7 +1,11 @@
 <script lang="ts" setup>
 import { queryComment } from '~/utils/api'
 
-const { refId, type } = defineProps<{ refId: string; type: 'note' | 'posts' }>()
+const { 
+  refId,
+  type,
+  observer = true
+} = defineProps<{ refId: string; type: 'note' | 'posts', observer: boolean }>()
 const visible = ref(false)
 const commentRef = ref<HTMLElement>()
 const total = ref(0)
@@ -13,15 +17,20 @@ const { data: comments, pending, refresh } = useAsyncData(async () => {
 })
 
 onMounted(() => {
-  let flag = false
-  const { stop } = useIntersectionObserver(commentRef, () => {
-    if (flag) {
-      visible.value = true
-      refresh()
-      stop()
-    }
-    flag = true
-  })
+  if(observer){
+    let flag = false
+    const { stop } = useIntersectionObserver(commentRef, () => {
+      if (flag) {
+        visible.value = true
+        refresh()
+        stop()
+      }
+      flag = true
+    })
+  }
+  else{
+    visible.value = true
+  }
 })
 </script>
 
