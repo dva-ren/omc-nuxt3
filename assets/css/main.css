@@ -30,8 +30,7 @@ html.dark {
 
 .fade_in_up{
   opacity: 0;
-  transform: translateY(3rem);
-  animation: fade-in .3s forwards ;
+  animation: bottom-up-spring 1s forwards;
   animation-delay: var(--delay);
 }
 @keyframes fade-in {
