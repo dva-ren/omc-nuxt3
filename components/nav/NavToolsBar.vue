@@ -46,12 +46,12 @@ watch(useThrottle(scroll.y, 100), (curr, pre) => {
   <Transition name="main">
     <div v-show="showFlags.main" fixed right-2 bottom-2>
       <div flex flex-col gap-2>
-        <SearchWidget />
         <Transition>
           <button v-show="showFlags.scroll" class="button" @click="toTop">
             <div i-carbon-up-to-top />
           </button>
         </Transition>
+        <SearchWidget />
         <button v-if="showCatelogBtn" class="button" @click="showCatalog">
           <div i-ri-menu-2-fill />
         </button>
