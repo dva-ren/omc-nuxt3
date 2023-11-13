@@ -113,7 +113,7 @@ watch(route, () => {
           <nav hidden md-flex items-center :class="{ nav: navIdx !== -1 }" :style="`--idx:${navIdx}`">
             <NavItem v-for="nav, idx in menus" :key="idx" :data="nav" />
           </nav>
-          <NavDrawer :active-index="navIdx" display-flex md-hidden :menus="menus" />
+          <NavDrawer :active-index="navIdx" flex md-hidden :menus="menus" />
         </div>
         <div max-w-1200px m-auto flex items-center justify-between text-sm h-14>
           <div max-w-8rem md:max-w-unset>
