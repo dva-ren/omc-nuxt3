@@ -30,7 +30,7 @@ definePageMeta({
       <template #pre>
         <div class="list-container">
           <ul class="note-list">
-            <li v-for="i, idx in notes" :key="i.id" class="item" :class="{ active: idx === index }">
+            <li v-for="i, idx in notes" :key="i.id" class="item bounceInLeft" :style="{'--delay': `${idx*0.05}s`}" :class="{ active: idx === index }">
               <div v-if="idx === index" i-ri:record-circle-line text-base text-pink class="point" />
               <NuxtLink :to="`/notes/${i.id}`">
                 {{ i.title }}
