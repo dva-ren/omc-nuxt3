@@ -17,15 +17,15 @@ export const http = (url: string, options?: Options): Promise<any> => {
       const { code, msg } = response._data
       if (code !== 200) {
         // eslint-disable-next-line no-console
-        console.log(url, request, response._data)
-        // throw createError({ statusCode: code, statusMessage: msg })
+        // console.log(url, request, response._data)
       }
       return response._data
     },
     onRequestError: ({ request, options, error }) => {
       // eslint-disable-next-line no-console
       console.log('FetchError=>', error)
-      throw createError(error)
+      showError({statusCode: 500, message: '服务器错误'})
+      throw createError({ statusCode: 500, statusMessage: error.message })
     },
     ...options,
     headers: {

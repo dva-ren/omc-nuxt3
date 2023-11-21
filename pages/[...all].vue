@@ -1,17 +1,18 @@
-<script setup lang="ts">
+<script setup>
 const router = useRouter()
 </script>
 
 <template>
-  <main p="x4 y10" text="center teal-700 dark:gray-200">
-    <div text-4xl>
-      <div i-carbon-warning inline-block />
-    </div>
-    <div>Not found</div>
+  <div p-10 flex-center h-full>
     <div>
-      <button btn text-sm m="3 t8" @click="router.back()">
-        Back
-      </button>
+      <div>
+        <img src="../assets/image/404.svg" alt="404" w-100>
+      </div>
+      <div flex-center>
+        <button btn @click="router.replace('/')">
+          返回首页
+        </button>
+      </div>
     </div>
-  </main>
+  </div>
 </template>
