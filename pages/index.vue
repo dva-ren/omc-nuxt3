@@ -21,7 +21,7 @@ const { data: topData, pending } = useAsyncData(async () => {
   const res = await queryTop(4)
   return res.data
 })
-const { data: friends } = useAsyncData(async () => {
+const { data: friends,pending: fPending } = useAsyncData(async () => {
   const res = await queryFriends()
   return res.data
 })
@@ -67,7 +67,7 @@ function handleClick() {
       </div>
     </div>
     <CommonTextAnimation min-h-10 :text="words" class="text-sm text-gray-400 px-4 mb-4" />
-    <div v-if="!pending" class="spring">
+    <div class="spring">
       <div text-white mt-10 text-sm>
         <div flex justify-between items-end class="label">
           <div class="title" flex bg="#f17666">
@@ -80,7 +80,7 @@ function handleClick() {
             <div i-carbon:chevron-right text-lg />
           </NuxtLink>
         </div>
-        <HomeCardList :data="topData?.notes" type="notes" />
+        <HomeCardList :data="topData?.notes" type="notes"/>
       </div>
       <div text-white text-sm mt-6>
         <div flex justify-between items-end class="label">
@@ -94,7 +94,7 @@ function handleClick() {
             <div i-carbon:chevron-right text-lg />
           </NuxtLink>
         </div>
-        <HomeCardList :data="topData?.posts" />
+        <HomeCardList :data="topData?.posts"/>
       </div>
       <div text-white mt-10 text-sm>
         <div flex justify-between items-end class="label">
@@ -109,8 +109,11 @@ function handleClick() {
           </router-link>
         </div>
         <div class="friends" flex gap-10 px-10 overflow-x-auto w-full>
-          <template v-for="item in friends" :key="item.id">
+          <template v-if="friends?.length" v-for="item in friends" :key="item.id">
             <HomeFriendCard :data="item" />
+          </template>
+          <template v-if="!friends" v-for="i in 3" :key="i">
+            <CommonSkeleton w-20 h-20 rounded-full></CommonSkeleton>
           </template>
         </div>
       </div>
@@ -118,7 +121,7 @@ function handleClick() {
         <div flex justify-between items-end class="label">
           <div class="title" flex bg="#2376b7">
             <div class="icon" bg="#144a74">
-              <div i-carbon:bookmark class="v-icon" inline-block />
+              <div i-carbon-collapse-all class="v-icon" inline-block />
             </div>
             <span px-3>了解更多</span>
           </div>
