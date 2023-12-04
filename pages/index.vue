@@ -34,9 +34,6 @@ useHead({
   titleTemplate: '',
   title: '灰色と青 · 不虚光阴',
 })
-function handleClick() {
-  Message.warning('开发中~')
-}
 </script>
 
 <template>
